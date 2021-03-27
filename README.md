@@ -1,2 +1,3 @@
 # SAPCAD
-# Sistema automatizado para el control de asistencia 
+## Sistema automatizado para el control de asistencia
+Fase Inicial... 
