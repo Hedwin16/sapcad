@@ -5,13 +5,9 @@
  */
 package com.hk.views;
 
-import com.hk.connection.Conexion;
 import com.sun.awt.AWTUtilities;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.applet.Main;
 
 
 /**
@@ -118,7 +114,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
             try {
                 Thread.sleep(5000);
                 this.dispose();
-                //new Main().setVisible(true);
+                new Main().setVisible(true);
                 Thread.sleep(3000);
                 break;
             } catch (InterruptedException ex) {
