@@ -44,4 +44,12 @@ public class Conexion {
     public Connection getConnection() {
         return cnx;
     }
+    
+    public void closeConnection(){
+        try {
+            cnx.close();
+        } catch (Exception e) {
+            System.out.println("error de cierre de conexion: "+e);
+        }
+    }
 }

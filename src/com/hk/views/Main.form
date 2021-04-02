@@ -132,13 +132,13 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="rSPassFieldShade1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rSTextFieldShade1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_clave" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_usuario" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="rSButtonMetro1" min="-2" pref="339" max="-2" attributes="0"/>
+                                  <Component id="btn_ingresar" min="-2" pref="339" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
@@ -153,16 +153,16 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="rSTextFieldShade1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_usuario" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="rSPassFieldShade1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_clave" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="rSButtonMetro1" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="btn_ingresar" min="-2" pref="53" max="-2" attributes="0"/>
                           <EmptySpace pref="34" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -185,18 +185,24 @@
                     <Property name="text" type="java.lang.String" value="Contrase&#xf1;a: "/>
                   </Properties>
                 </Component>
-                <Component class="rscomponentshade.RSTextFieldShade" name="rSTextFieldShade1">
+                <Component class="rscomponentshade.RSTextFieldShade" name="txt_usuario">
                   <Properties>
                     <Property name="placeholder" type="java.lang.String" value="   Nombre: "/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSTextFieldShade1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_usuarioActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
-                <Component class="rscomponentshade.RSPassFieldShade" name="rSPassFieldShade1">
+                <Component class="rscomponentshade.RSPassFieldShade" name="txt_clave">
                   <Properties>
                     <Property name="placeholder" type="java.lang.String" value="   *****"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
@@ -216,10 +222,13 @@
                     <Property name="text" type="java.lang.String" value="Usuario: "/>
                   </Properties>
                 </Component>
-                <Component class="rojerusan.RSButtonMetro" name="rSButtonMetro1">
+                <Component class="rojerusan.RSButtonMetro" name="btn_ingresar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="INGRESAR"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
