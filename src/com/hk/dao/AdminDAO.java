@@ -59,5 +59,20 @@ public class AdminDAO implements IAdmin{
         
         return false;
     }
+
+    @Override
+    public boolean existeAdministrador() {
+        sql = "SELECT * FROM administradores";
+        try {
+            ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                return true;
+            }  
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al Verificar Administradores: "+e);
+        }
+        return false;
+    }
     
 }
