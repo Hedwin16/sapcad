@@ -13,10 +13,10 @@ import java.awt.Toolkit;
  *
  * @author pc
  */
-public class Main extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
     AdminController aController;
     
-    public Main() {
+    public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -61,13 +61,13 @@ public class Main extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 4));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(156, 16, 16), 4, true));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Contraseña: ");
 
-        txt_usuario.setBgShadeHover(new java.awt.Color(153, 0, 0));
+        txt_usuario.setBgShadeHover(new java.awt.Color(121, 6, 6));
         txt_usuario.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txt_usuario.setPlaceholder("   Nombre: ");
         txt_usuario.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +76,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        txt_clave.setBgShadeHover(new java.awt.Color(153, 0, 0));
+        txt_clave.setBgShadeHover(new java.awt.Color(121, 6, 6));
         txt_clave.setPlaceholder("   *****");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -87,7 +87,7 @@ public class Main extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Usuario: ");
 
-        btn_ingresar.setBackground(new java.awt.Color(153, 0, 0));
+        btn_ingresar.setBackground(new java.awt.Color(156, 16, 16));
         btn_ingresar.setText("INGRESAR");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

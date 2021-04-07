@@ -24,6 +24,11 @@ public class Admin {
         this.estado = estado;
     }
 
+    public Admin() {
+    }
+    
+    
+
     public int getId_admin() {
         return id_admin;
     }

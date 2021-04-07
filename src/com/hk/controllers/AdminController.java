@@ -2,7 +2,9 @@ package com.hk.controllers;
 
 import com.hk.dao.AdminDAO;
 import com.hk.interfaces.IAdmin;
-import com.hk.views.Main;
+import com.hk.models.Admin;
+import com.hk.views.Login;
+import com.hk.views.MenuPrincipal;
 import com.hk.views.RegistroAdminPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,22 +14,33 @@ import javax.swing.JOptionPane;
 
 public class AdminController implements ActionListener{
     IAdmin adao = new AdminDAO();
-    Main main;
+    Login main;
+    RegistroAdminPrincipal vistaRegistroAdmin;
+    Admin admin;
     
-    public AdminController(Main main) {
+    public AdminController(Login main) {
         this.main = main;
         this.main.btn_ingresar.addActionListener(this);
     }
 
     public AdminController() {
+        this.main = null;
+        this.vistaRegistroAdmin = null;
+    }
+    
+    public AdminController(RegistroAdminPrincipal vista){
+        this.vistaRegistroAdmin = vista;
+        this.vistaRegistroAdmin.btn_registrar.addActionListener(this);
+        this.main = null;
+        this.admin = new Admin();
     }
     
     public void verificarAdmin(){
         
         if(adao.existeAdministrador()){
-            new Main().setVisible(true);
+            new Login().setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(null, "No existe admin, hay que registrar");
+            JOptionPane.showMessageDialog(null, "No se ha detectado administrador, se procede a registrar");
             new RegistroAdminPrincipal().setVisible(true);
         }
     }
@@ -65,10 +78,34 @@ public class AdminController implements ActionListener{
     public boolean validarCampos(){
         return main.txt_usuario.getText().equals("") || main.txt_clave.getText().equals("");
     }
+    
+    public boolean validarCamposRegistro(){
+        return vistaRegistroAdmin.txt_usuario.getText().equals("") || 
+                vistaRegistroAdmin.txt_clave.getText().equals("") ||
+                vistaRegistroAdmin.txt_clave_confirmar.getText().equals("");
+    }
+    
+    public void registrarAdministradorPrincipal(){
+        String usuario = vistaRegistroAdmin.txt_usuario.getText();
+        String clave = vistaRegistroAdmin.txt_clave.getText();
+        
+        admin.setUsuario(usuario);
+        admin.setClave(clave);
+        admin.setTipo(4);     
+        if(adao.insertar(this.admin)){
+            JOptionPane.showMessageDialog(vistaRegistroAdmin, "Registrado con Éxito");
+            MenuPrincipal m = new MenuPrincipal(4);
+            m.setVisible(true);
+            vistaRegistroAdmin.dispose();
+        }else{
+            JOptionPane.showMessageDialog(vistaRegistroAdmin, "No se ha podido registrar");
+        }
+        
+    }
  
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(this.main.btn_ingresar == e.getSource()){
+        if(this.main != null && this.main.btn_ingresar == e.getSource()){
             boolean rs = false;
             if(validarCampos()){
                 JOptionPane.showMessageDialog(main, "LLene todos los campos");
@@ -79,7 +116,17 @@ public class AdminController implements ActionListener{
                     JOptionPane.showMessageDialog(main, "Combinación Usuario/Contraseña iválida.");
                 }else{
                     JOptionPane.showMessageDialog(main, "Correcto!");
+                    
                 }
+            }
+        }
+        
+        if(this.vistaRegistroAdmin != null && this.vistaRegistroAdmin.btn_registrar == e.getSource()){
+            if(validarCamposRegistro()){
+                JOptionPane.showMessageDialog(main, "LLene todos los campos");
+            }else{
+                JOptionPane.showMessageDialog(main, "Ok los campos están llenos :O");
+                registrarAdministradorPrincipal();
             }
         }
     }

@@ -20,7 +20,19 @@ public class AdminDAO implements IAdmin{
 
     @Override
     public boolean insertar(Admin t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sql = "INSERT INTO administradores(usuario,clave,tipo,estado) VALUES(?,?,?,1)";
+        try {
+            ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+            ps.setString(1, t.getUsuario());
+            ps.setString(2, t.getClave());
+            ps.setInt(3, t.getTipo());
+            
+            System.out.println(ps.executeUpdate()); 
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al insertar administrador: "+ e);
+        }
+        return false;
     }
 
     @Override
@@ -62,7 +74,7 @@ public class AdminDAO implements IAdmin{
 
     @Override
     public boolean existeAdministrador() {
-        sql = "SELECT * FROM administradores";
+        sql = "SELECT * FROM administradores where tipo=2";
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             rs = ps.executeQuery();

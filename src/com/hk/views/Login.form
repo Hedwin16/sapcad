@@ -111,8 +111,8 @@
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder thickness="4">
-                      <Color PropertyName="color" blue="0" green="0" red="99" type="rgb"/>
+                    <LineBorder roundedCorners="true" thickness="4">
+                      <Color PropertyName="color" blue="10" green="10" red="9c" type="rgb"/>
                     </LineBorder>
                   </Border>
                 </Property>
@@ -191,7 +191,7 @@
                 <Component class="rscomponentshade.RSTextFieldShade" name="txt_usuario">
                   <Properties>
                     <Property name="bgShadeHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="99" type="rgb"/>
+                      <Color blue="6" green="6" red="79" type="rgb"/>
                     </Property>
                     <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>
@@ -208,7 +208,7 @@
                 <Component class="rscomponentshade.RSPassFieldShade" name="txt_clave">
                   <Properties>
                     <Property name="bgShadeHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="99" type="rgb"/>
+                      <Color blue="6" green="6" red="79" type="rgb"/>
                     </Property>
                     <Property name="placeholder" type="java.lang.String" value="   *****"/>
                   </Properties>
@@ -237,7 +237,7 @@
                 <Component class="rojerusan.RSButtonMetro" name="btn_ingresar">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="99" type="rgb"/>
+                      <Color blue="10" green="10" red="9c" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="INGRESAR"/>
                   </Properties>
