@@ -28,6 +28,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         pcontroller = new PrincipalController(this);
+        pcontroller.setMenuBar(tipo);
         
         
     }
@@ -49,11 +50,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         fondo = new javax.swing.JPanel();
         SideBar = new javax.swing.JPanel();
-        reportes_btn = new rojerusan.RSButtonMetro();
+        capturarBtn = new rojerusan.RSButtonMetro();
         jLabel2 = new javax.swing.JLabel();
         contenedorPanel = new javax.swing.JPanel();
         contenedorScroll = new javax.swing.JScrollPane();
         barraMenu = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -78,8 +83,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         SideBar.setBackground(new java.awt.Color(156, 16, 16));
 
-        reportes_btn.setBackground(new java.awt.Color(156, 16, 16));
-        reportes_btn.setText("Reportes");
+        capturarBtn.setBackground(new java.awt.Color(156, 16, 16));
+        capturarBtn.setText("Registrar Hora de Asistencia");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/logo_small.png"))); // NOI18N
 
@@ -87,7 +92,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         SideBar.setLayout(SideBarLayout);
         SideBarLayout.setHorizontalGroup(
             SideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(reportes_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(capturarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(SideBarLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jLabel2)
@@ -99,7 +104,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2)
                 .addGap(26, 26, 26)
-                .addComponent(reportes_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(capturarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(318, Short.MAX_VALUE))
         );
 
@@ -123,6 +128,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addComponent(SideBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(contenedorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jMenu2.setText("Archivo");
+
+        jMenuItem10.setText("Registrar Hora");
+        jMenu2.add(jMenuItem10);
+        jMenu2.add(jSeparator1);
+
+        jMenuItem11.setText("Salir");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem11);
+
+        barraMenu.add(jMenu2);
 
         jMenu1.setText("Reportes");
 
@@ -221,12 +242,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5ActionPerformed
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-        int dialogue = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "¿Desea salir de la aplicación?", "Confirmación", dialogue);
-        if(result == 0){
-            System.exit(1);
-        }
+        pcontroller.confirmarSalir();
     }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        pcontroller.confirmarSalir();
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,16 +257,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SideBar;
     private javax.swing.JMenuBar barraMenu;
+    public rojerusan.RSButtonMetro capturarBtn;
     private javax.swing.JPanel contenedorPanel;
     private javax.swing.JScrollPane contenedorScroll;
     private javax.swing.JMenu empMenu;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -254,6 +279,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
-    public rojerusan.RSButtonMetro reportes_btn;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

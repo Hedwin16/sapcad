@@ -12,6 +12,7 @@ public class AdminDAO implements IAdmin{
     String sql = "";
     PreparedStatement ps;
     ResultSet rs;
+    int tipoAdmin = 0;
 
     @Override
     public Admin buscar(int id) {
@@ -49,6 +50,7 @@ public class AdminDAO implements IAdmin{
     public boolean eliminar(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 
     @Override
     public boolean validarSesion(String usuario, String clave) {
@@ -62,7 +64,9 @@ public class AdminDAO implements IAdmin{
             rs = ps.executeQuery();
             if(rs.next()){
                 //Conexion.getInstance().closeConnection();
+                this.tipoAdmin = rs.getInt("tipo");
                 return true;
+                
             }
         } catch (Exception e) {
             System.out.println("error: "+e);
@@ -74,7 +78,7 @@ public class AdminDAO implements IAdmin{
 
     @Override
     public boolean existeAdministrador() {
-        sql = "SELECT * FROM administradores where tipo=2";
+        sql = "SELECT * FROM administradores";
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             rs = ps.executeQuery();
@@ -87,4 +91,8 @@ public class AdminDAO implements IAdmin{
         return false;
     }
     
+    @Override
+    public int getTipoAdmin(){
+        return this.tipoAdmin;
+    }
 }

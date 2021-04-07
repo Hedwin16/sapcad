@@ -116,7 +116,10 @@ public class AdminController implements ActionListener{
                     JOptionPane.showMessageDialog(main, "Combinación Usuario/Contraseña iválida.");
                 }else{
                     JOptionPane.showMessageDialog(main, "Correcto!");
-                    
+                    int tipo = adao.getTipoAdmin();
+                    MenuPrincipal menu = new MenuPrincipal(tipo);
+                    menu.setVisible(true);
+                    this.main.dispose();
                 }
             }
         }
