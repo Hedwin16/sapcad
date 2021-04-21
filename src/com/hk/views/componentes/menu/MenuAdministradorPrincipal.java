@@ -6,7 +6,6 @@
 package com.hk.views.componentes.menu;
 
 import com.hk.controllers.PrincipalController;
-
 import javax.swing.JMenuBar;
 
 /**
@@ -43,7 +42,6 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
@@ -93,6 +91,11 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         jMenu3.setText("Empleados");
 
         jMenuItem6.setText("Registrar Empleado");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem6);
 
         jMenuItem7.setText("Editar/Eliminar Empleado");
@@ -102,10 +105,7 @@ public class MenuAdministradorPrincipal extends JMenuBar{
 
         jMenu4.setText("Administradores");
 
-        jMenuItem9.setText("Registrar Administrador");
-        jMenu4.add(jMenuItem9);
-
-        jMenuItem8.setText("Editar/Eliminar Administrador");
+        jMenuItem8.setText("Gestión de Administradores");
         jMenu4.add(jMenuItem8);
 
         add(jMenu4);
@@ -142,6 +142,10 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         pcontroller.cerrarSesion();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        pcontroller.setRegistrarEmpleado();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -161,7 +165,6 @@ public class MenuAdministradorPrincipal extends JMenuBar{
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables

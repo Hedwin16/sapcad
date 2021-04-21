@@ -7,6 +7,8 @@ package com.hk.views;
 
 import com.hk.controllers.AdminController;
 import com.sun.awt.AWTUtilities;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,9 +19,7 @@ import java.util.logging.Logger;
  */
 public class Splash extends javax.swing.JFrame implements Runnable {
 
-    /**
-     * Creates new form Splash
-     */
+    
     private Thread tiempo = null; 
     
     public Splash() {
@@ -30,11 +30,11 @@ public class Splash extends javax.swing.JFrame implements Runnable {
         tiempo.start();  
         this.inicio();
     }
-    /*
+    
     public Image getIconImage(){
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("com/hk/img/logo.png"));
         return retValue;
-    }*/
+    }
 
     public void verificarAdmin(){
         AdminController acontroller = new AdminController();
@@ -49,6 +49,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro De Entrada y Salida");
+        setIconImage(getIconImage());
         setUndecorated(true);
         setResizable(false);
 

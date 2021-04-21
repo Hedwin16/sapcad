@@ -5,25 +5,23 @@ public class Empleado {
     private String nombres;
     private String apellidos;
     private int ci;
-    private String cargos;
-    private String hora_entrada;
-    private String hora_salida;
+    private int id_departamento;
+    private String cargo;
     private boolean estado;
-
+    
     public Empleado() {
     }
 
-    public Empleado(int id_empleado, String nombres, String apellidos, int ci, String cargos, String hora_entrada, String hora_salida, boolean estado) {
+    public Empleado(int id_empleado, String nombres, String apellidos, int ci, int id_departamento, String cargo, boolean estado) {
         this.id_empleado = id_empleado;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.ci = ci;
-        this.cargos = cargos;
-        this.hora_entrada = hora_entrada;
-        this.hora_salida = hora_salida;
+        this.id_departamento = id_departamento;
+        this.cargo = cargo;
         this.estado = estado;
     }
-
+    
     public boolean isEstado() {
         return estado;
     }
@@ -62,31 +60,21 @@ public class Empleado {
 
     public void setCi(int ci) {
         this.ci = ci;
-    }
-
-    public String getCargos() {
-        return cargos;
-    }
-
-    public void setCargos(String cargos) {
-        this.cargos = cargos;
-    }
-
-    public String getHora_entrada() {
-        return hora_entrada;
-    }
-
-    public void setHora_entrada(String hora_entrada) {
-        this.hora_entrada = hora_entrada;
-    }
-
-    public String getHora_salida() {
-        return hora_salida;
-    }
-
-    public void setHora_salida(String hora_salida) {
-        this.hora_salida = hora_salida;
-    }
+    }   
     
-    
+    public int getId_departamento() {
+        return id_departamento;
+    }
+
+    public void setId_departamento(int id_departamento) {
+        this.id_departamento = id_departamento;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 }

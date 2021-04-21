@@ -1,6 +1,5 @@
 package com.hk.controllers;
 
-import com.hk.connection.Conexion;
 import com.hk.dao.AdminDAO;
 import com.hk.interfaces.IAdmin;
 import com.hk.models.Admin;
@@ -11,6 +10,9 @@ import com.hk.views.componentes.menu.MenuAdministrador1;
 import com.hk.views.componentes.menu.MenuAdministrador2;
 import com.hk.views.componentes.menu.MenuAdministrador3;
 import com.hk.views.componentes.menu.MenuAdministradorPrincipal;
+import com.hk.views.componentes.panel.DefaultPanel;
+import com.hk.views.componentes.panel.RegistrarAdministrador;
+import com.hk.views.componentes.panel.RegistrarEmpleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -21,6 +23,11 @@ public class PrincipalController implements ActionListener{
     Login main;
     RegistroAdminPrincipal vistaRegistroAdmin;
     Admin admin;
+    
+    //Components
+    RegistrarAdministrador regAdmin = new RegistrarAdministrador();
+    DefaultPanel defaultPanel = new DefaultPanel();
+    RegistrarEmpleado regEmpleados;
    
     public PrincipalController() {
     }
@@ -28,6 +35,28 @@ public class PrincipalController implements ActionListener{
     public PrincipalController(MenuPrincipal menu) {
         this.menu = menu;
         this.menu.capturarBtn.addActionListener(this);
+        
+        
+        
+        /*
+        this.menu.addComponentListener(new java.awt.event.ComponentAdapter(){
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent evt){
+                if(menu.getSize().width <= 950){
+                    System.out.println("Cambio a una columna");
+                    
+                }
+                if(menu.getSize().width >= 951){
+                    System.out.println("cambio a dos columnas");
+                }
+            }
+        });*/
+    }
+    
+    public PrincipalController(MenuPrincipal menu, DefaultPanel p) {
+        this.menu = menu;
+        this.menu.capturarBtn.addActionListener(this);
+
     }
     
     public void confirmarSalir(){
@@ -51,14 +80,34 @@ public class PrincipalController implements ActionListener{
     }
     
     public void cerrarSesion(){
-        try {
-            Conexion.getInstance().closeConnection();
-        } catch (Exception e) {
-            System.out.println("Error Cerrar Conexion: "+e);
-        }
+        
         this.menu.dispose();
         new Login().setVisible(true);
 
+    }
+    
+    public void setRegistrarEmpleado(){
+        regEmpleados = new RegistrarEmpleado();
+        this.menu.contenedorPanel.add(regEmpleados);
+        
+        regEmpleados.setVisible(true);
+        regAdmin.setVisible(false);
+        defaultPanel.setVisible(false);
+    }
+    
+    public void setRegistrarAdministrador(){
+  
+        this.menu.contenedorPanel.add(regAdmin);
+        regAdmin.setVisible(true);
+        if(regEmpleados != null){
+            regEmpleados.setVisible(false);
+        }
+        defaultPanel.setVisible(false);
+    }
+    
+    public void setDefaultPanel(){
+        defaultPanel.setVisible(true);
+        menu.contenedorPanel.add(defaultPanel);
     }
 
     @Override

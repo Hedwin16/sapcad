@@ -1,0 +1,230 @@
+
+package com.hk.views.componentes.panel;
+
+//Importando I.A
+import com.hk.controllers.ReconocimientoController;
+import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.opencv.opencv_core.Mat;
+import org.bytedeco.opencv.opencv_core.RectVector;
+import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
+import org.bytedeco.opencv.opencv_videoio.VideoCapture;
+/**
+ *
+ * @author pc
+ */
+public final class RegistrarEmpleado extends javax.swing.JPanel {
+    
+    ReconocimientoController rcController;
+    //JavaCV
+    VideoCapture cam = null;
+    
+    Mat cameraImage = new Mat();
+    //"C://photos//haarcascade_frontalface_alt.xml"
+    CascadeClassifier cascade = new CascadeClassifier("recursos/fotos/haarcascade_frontalface_alt.xml");
+
+    BytePointer mem = new BytePointer();
+    RectVector detectedFaces = new RectVector();
+
+    int numSamples = 200, sample = 1, idPerson;
+    
+    public RegistrarEmpleado() {
+        initComponents();
+        getIdUser();
+        rcController = new ReconocimientoController(this);
+        
+    }
+    
+    void getIdUser(){
+        System.out.println("cambiar el label id");
+    }
+    
+   
+    
+
+
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        Panel_foto2 = new javax.swing.JPanel();
+        recuadro_cam = new javax.swing.JLabel();
+        btn_activarYregistrar = new rojerusan.RSButtonMetro();
+        txt_id_label = new javax.swing.JLabel();
+        counterLabel1 = new javax.swing.JLabel();
+        counterLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txt_nombres = new rscomponentshade.RSTextFieldShade();
+        txt_cedula = new rscomponentshade.RSTextFieldShade();
+        txt_apellidos = new rscomponentshade.RSTextFieldShade();
+        txt_cargo = new rscomponentshade.RSTextFieldShade();
+        jLabel11 = new javax.swing.JLabel();
+        txt_departamento = new rojerusan.RSComboMetro();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(520, 560));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setMinimumSize(new java.awt.Dimension(350, 100));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(122, 0, 1), 4));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Nuevo Empleado");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 4, 780, 90));
+
+        Panel_foto2.setBackground(new java.awt.Color(122, 0, 1));
+        Panel_foto2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        recuadro_cam.setBackground(new java.awt.Color(255, 255, 255));
+        recuadro_cam.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 4, true));
+        Panel_foto2.add(recuadro_cam, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 300, 270));
+
+        jPanel3.add(Panel_foto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 320, 290));
+
+        btn_activarYregistrar.setBackground(new java.awt.Color(122, 0, 1));
+        btn_activarYregistrar.setText("Activar Cámara y Guardar Datos");
+        btn_activarYregistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_activarYregistrarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btn_activarYregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 320, 40));
+
+        txt_id_label.setBackground(new java.awt.Color(255, 255, 255));
+        txt_id_label.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txt_id_label.setForeground(new java.awt.Color(121, 6, 6));
+        txt_id_label.setText("1");
+        txt_id_label.setOpaque(true);
+        jPanel3.add(txt_id_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 50, 20));
+
+        counterLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        counterLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        counterLabel1.setForeground(new java.awt.Color(121, 6, 6));
+        counterLabel1.setText("00/200");
+        counterLabel1.setOpaque(true);
+        jPanel3.add(counterLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 50, 30));
+
+        counterLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        counterLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        counterLabel2.setForeground(new java.awt.Color(121, 6, 6));
+        counterLabel2.setText("Id Empleado:");
+        counterLabel2.setOpaque(true);
+        jPanel3.add(counterLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, 90, 20));
+
+        jScrollPane1.setBorder(null);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText(" Apellidos: ");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 333, 50));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setText(" Cédula: ");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 328, 51));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText(" Nombres: ");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 328, 51));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText(" Cargo: ");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 328, 50));
+
+        txt_nombres.setBgShadeHover(new java.awt.Color(121, 6, 6));
+        txt_nombres.setPlaceholder("  Nombres...");
+        jPanel1.add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 330, -1));
+
+        txt_cedula.setBgShadeHover(new java.awt.Color(121, 6, 6));
+        txt_cedula.setPlaceholder("  Cédula...");
+        jPanel1.add(txt_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 328, -1));
+
+        txt_apellidos.setBgShadeHover(new java.awt.Color(121, 6, 6));
+        txt_apellidos.setPlaceholder("  Apellidos...");
+        jPanel1.add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 330, -1));
+
+        txt_cargo.setBgShadeHover(new java.awt.Color(121, 6, 6));
+        txt_cargo.setPlaceholder("  Cargo...");
+        jPanel1.add(txt_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 328, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setText(" Departamento: ");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 328, 51));
+
+        txt_departamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar Departamentos...", "Departamento 1", "Departamento 2", "Departamento 3" }));
+        txt_departamento.setColorArrow(new java.awt.Color(122, 0, 1));
+        txt_departamento.setColorBorde(new java.awt.Color(122, 0, 1));
+        txt_departamento.setColorFondo(new java.awt.Color(122, 0, 1));
+        txt_departamento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jPanel1.add(txt_departamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 330, 40));
+
+        jScrollPane1.setViewportView(jPanel1);
+
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 390, 410));
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 13;
+        gridBagConstraints.ipady = 62;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 10, 11, 10);
+        jPanel2.add(jPanel3, gridBagConstraints);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_activarYregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_activarYregistrarActionPerformed
+        //startCamera();
+        rcController.startCamera();
+    }//GEN-LAST:event_btn_activarYregistrarActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JPanel Panel_foto2;
+    private rojerusan.RSButtonMetro btn_activarYregistrar;
+    public javax.swing.JLabel counterLabel1;
+    private javax.swing.JLabel counterLabel2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel recuadro_cam;
+    public rscomponentshade.RSTextFieldShade txt_apellidos;
+    public rscomponentshade.RSTextFieldShade txt_cargo;
+    public rscomponentshade.RSTextFieldShade txt_cedula;
+    public rojerusan.RSComboMetro txt_departamento;
+    public javax.swing.JLabel txt_id_label;
+    public rscomponentshade.RSTextFieldShade txt_nombres;
+    // End of variables declaration//GEN-END:variables
+}

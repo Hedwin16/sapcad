@@ -17,6 +17,7 @@ public class AdminController implements ActionListener{
     Login main;
     RegistroAdminPrincipal vistaRegistroAdmin;
     Admin admin;
+    Validaciones val = new Validaciones();
     
     public AdminController(Login main) {
         this.main = main;
@@ -44,8 +45,6 @@ public class AdminController implements ActionListener{
             new RegistroAdminPrincipal().setVisible(true);
         }
     }
-    
-    
     
     public boolean verificarRegex(String campo){
         Pattern regex = Pattern.compile("[a-zA-Z]+");
@@ -76,6 +75,11 @@ public class AdminController implements ActionListener{
     }
     
     public boolean validarCampos(){
+        String usuario = main.txt_usuario.getText();
+        String contras = main.txt_clave.getText();
+        
+        val.contieneEspaciosOCaracteresEspeciales(usuario);
+        val.contieneEspaciosOCaracteresEspeciales(contras);
         return main.txt_usuario.getText().equals("") || main.txt_clave.getText().equals("");
     }
     

@@ -6,9 +6,9 @@
 package com.hk.views;
 
 import com.hk.controllers.PrincipalController;
+import com.hk.views.componentes.panel.DefaultPanel;
 import java.awt.Image;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,19 +18,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     int tipo;
     PrincipalController pcontroller;
     
+    
     public MenuPrincipal() {
         initComponents();
     }
 
     public MenuPrincipal(int tipo) {
-        this.tipo = tipo;
         initComponents();
+        this.tipo = tipo;
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         pcontroller = new PrincipalController(this);
         pcontroller.setMenuBar(tipo);
-        
-        
+        pcontroller.setDefaultPanel();
+        //this.contenedorScroll1.setViewportView(new RegistrarEmpleado());
     }
     
     public Image getIconImage(){
@@ -53,37 +54,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         capturarBtn = new rojerusan.RSButtonMetro();
         jLabel2 = new javax.swing.JLabel();
         contenedorPanel = new javax.swing.JPanel();
-        contenedorScroll = new javax.swing.JScrollPane();
-        barraMenu = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        empMenu = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal - Sistema de Control de Asistencia");
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(752, 548));
+        setMinimumSize(new java.awt.Dimension(1080, 800));
 
         fondo.setBackground(new java.awt.Color(255, 255, 255));
 
-        SideBar.setBackground(new java.awt.Color(156, 16, 16));
+        SideBar.setBackground(new java.awt.Color(122, 0, 1));
 
-        capturarBtn.setBackground(new java.awt.Color(156, 16, 16));
+        capturarBtn.setBackground(new java.awt.Color(122, 0, 1));
         capturarBtn.setText("Registrar Hora de Asistencia");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/logo_small.png"))); // NOI18N
@@ -105,14 +86,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(26, 26, 26)
                 .addComponent(capturarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
 
+        contenedorPanel.setBackground(new java.awt.Color(153, 153, 153));
         contenedorPanel.setLayout(new java.awt.CardLayout());
-
-        contenedorScroll.setBackground(new java.awt.Color(255, 255, 255));
-        contenedorScroll.setBorder(null);
-        contenedorPanel.add(contenedorScroll, "card2");
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
@@ -128,90 +106,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addComponent(SideBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(contenedorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        jMenu2.setText("Archivo");
-
-        jMenuItem10.setText("Registrar Hora");
-        jMenu2.add(jMenuItem10);
-        jMenu2.add(jSeparator1);
-
-        jMenuItem11.setText("Salir");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem11);
-
-        barraMenu.add(jMenu2);
-
-        jMenu1.setText("Reportes");
-
-        jMenuItem1.setText("Reporte Diario");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Reporte Mensual");
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Reporte por Empleado");
-        jMenu1.add(jMenuItem3);
-
-        barraMenu.add(jMenu1);
-
-        empMenu.setText("Empleados");
-
-        jMenuItem4.setText("Registrar Empleado");
-        empMenu.add(jMenuItem4);
-
-        jMenuItem5.setText("Editar/Eliminar Empleado");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        empMenu.add(jMenuItem5);
-
-        barraMenu.add(empMenu);
-
-        jMenu3.setText("Administradores");
-
-        jMenuItem6.setText("Registrar Administrador");
-        jMenu3.add(jMenuItem6);
-
-        jMenuItem7.setText("Editar/Eliminar Administrador");
-        jMenu3.add(jMenuItem7);
-
-        barraMenu.add(jMenu3);
-
-        jMenu4.setText("Seguridad");
-
-        jMenuItem8.setText("Respaldo de Base de Datos");
-        jMenu4.add(jMenuItem8);
-
-        jMenuItem9.setText("Perfil Administrador Principal");
-        jMenu4.add(jMenuItem9);
-
-        barraMenu.add(jMenu4);
-
-        jMenu5.setText("Salir");
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu5MouseClicked(evt);
-            }
-        });
-        jMenu5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu5ActionPerformed(evt);
-            }
-        });
-        barraMenu.add(jMenu5);
-
-        setJMenuBar(barraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,26 +123,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
-        
-    }//GEN-LAST:event_jMenu5ActionPerformed
-
-    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-        pcontroller.confirmarSalir();
-    }//GEN-LAST:event_jMenu5MouseClicked
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        pcontroller.confirmarSalir();
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -256,29 +130,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SideBar;
-    private javax.swing.JMenuBar barraMenu;
     public rojerusan.RSButtonMetro capturarBtn;
-    private javax.swing.JPanel contenedorPanel;
-    private javax.swing.JScrollPane contenedorScroll;
-    private javax.swing.JMenu empMenu;
+    public javax.swing.JPanel contenedorPanel;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

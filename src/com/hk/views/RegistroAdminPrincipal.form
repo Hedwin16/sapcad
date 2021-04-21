@@ -57,7 +57,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder thickness="4">
-                  <Color PropertyName="color" blue="10" green="10" red="9c" type="rgb"/>
+                  <Color PropertyName="color" blue="1" green="0" red="7a" type="rgb"/>
                 </LineBorder>
               </Border>
             </Property>
@@ -155,7 +155,7 @@
             <Component class="rojerusan.RSButtonMetro" name="btn_registrar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="10" green="10" red="9c" type="rgb"/>
+                  <Color blue="1" green="0" red="7a" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="REGISTRAR"/>
               </Properties>

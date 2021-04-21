@@ -84,6 +84,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Registrar Empleado"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
+          </Events>
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
           <Properties>
@@ -97,14 +100,9 @@
         <Property name="text" type="java.lang.String" value="Administradores"/>
       </Properties>
       <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Registrar Administrador"/>
-          </Properties>
-        </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Editar/Eliminar Administrador"/>
+            <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Administradores"/>
           </Properties>
         </MenuItem>
       </SubComponents>

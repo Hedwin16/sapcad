@@ -52,7 +52,7 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         Background.setLayout(new java.awt.GridBagLayout());
 
         Formulario.setBackground(new java.awt.Color(255, 255, 255));
-        Formulario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(156, 16, 16), 4));
+        Formulario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(122, 0, 1), 4));
         Formulario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -84,7 +84,7 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Formulario.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 420, 39));
 
-        btn_registrar.setBackground(new java.awt.Color(156, 16, 16));
+        btn_registrar.setBackground(new java.awt.Color(122, 0, 1));
         btn_registrar.setText("REGISTRAR");
         btn_registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
