@@ -3,6 +3,7 @@ package com.hk.controllers;
 import com.hk.dao.AdminDAO;
 import com.hk.interfaces.IAdmin;
 import com.hk.models.Admin;
+import com.hk.views.RegistrarHoraVista;
 import com.hk.views.Login;
 import com.hk.views.MenuPrincipal;
 import com.hk.views.RegistroAdminPrincipal;
@@ -11,11 +12,14 @@ import com.hk.views.componentes.menu.MenuAdministrador2;
 import com.hk.views.componentes.menu.MenuAdministrador3;
 import com.hk.views.componentes.menu.MenuAdministradorPrincipal;
 import com.hk.views.componentes.panel.DefaultPanel;
-import com.hk.views.componentes.panel.RegistrarAdministrador;
+import com.hk.views.componentes.panel.GestionAdmin;
+import com.hk.views.componentes.panel.GestionDepartamentos;
+import com.hk.views.componentes.panel.GestionEmpleados;
 import com.hk.views.componentes.panel.RegistrarEmpleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class PrincipalController implements ActionListener{
     MenuPrincipal menu;
@@ -25,9 +29,13 @@ public class PrincipalController implements ActionListener{
     Admin admin;
     
     //Components
-    RegistrarAdministrador regAdmin = new RegistrarAdministrador();
     DefaultPanel defaultPanel = new DefaultPanel();
+    GestionAdmin adminPanel;
+    GestionEmpleados empleadosPanel;
+    RegistrarHoraVista vistaRegistroHora;
     RegistrarEmpleado regEmpleados;
+    ReconocimientoController rcController;
+    GestionDepartamentos gestionDepartamentos;
    
     public PrincipalController() {
     }
@@ -35,28 +43,6 @@ public class PrincipalController implements ActionListener{
     public PrincipalController(MenuPrincipal menu) {
         this.menu = menu;
         this.menu.capturarBtn.addActionListener(this);
-        
-        
-        
-        /*
-        this.menu.addComponentListener(new java.awt.event.ComponentAdapter(){
-            @Override
-            public void componentResized(java.awt.event.ComponentEvent evt){
-                if(menu.getSize().width <= 950){
-                    System.out.println("Cambio a una columna");
-                    
-                }
-                if(menu.getSize().width >= 951){
-                    System.out.println("cambio a dos columnas");
-                }
-            }
-        });*/
-    }
-    
-    public PrincipalController(MenuPrincipal menu, DefaultPanel p) {
-        this.menu = menu;
-        this.menu.capturarBtn.addActionListener(this);
-
     }
     
     public void confirmarSalir(){
@@ -80,45 +66,51 @@ public class PrincipalController implements ActionListener{
     }
     
     public void cerrarSesion(){
-        
         this.menu.dispose();
         new Login().setVisible(true);
-
     }
     
     public void setRegistrarEmpleado(){
         regEmpleados = new RegistrarEmpleado();
-        this.menu.contenedorPanel.add(regEmpleados);
-        
-        regEmpleados.setVisible(true);
-        regAdmin.setVisible(false);
-        defaultPanel.setVisible(false);
-    }
-    
-    public void setRegistrarAdministrador(){
-  
-        this.menu.contenedorPanel.add(regAdmin);
-        regAdmin.setVisible(true);
-        if(regEmpleados != null){
-            regEmpleados.setVisible(false);
-        }
-        defaultPanel.setVisible(false);
+        rcController = new ReconocimientoController(regEmpleados, this);
+        SwingUtilities.updateComponentTreeUI(regEmpleados.Panel_foto2);
+        this.menu.contenedor.setViewportView(regEmpleados);
     }
     
     public void setDefaultPanel(){
-        defaultPanel.setVisible(true);
-        menu.contenedorPanel.add(defaultPanel);
+        this.menu.contenedor.setViewportView(defaultPanel);
     }
+    
+    public void showRegistrarYCapturarVista(){
+        if(vistaRegistroHora != null){
+            vistaRegistroHora.dispose();
+        }
+        
+        vistaRegistroHora = new RegistrarHoraVista();
+        rcController = new ReconocimientoController(vistaRegistroHora, this);
+        this.vistaRegistroHora.setVisible(true);
+    }
+    
+    public void setGestionAdmin(){
+        adminPanel = new GestionAdmin();
+        this.menu.contenedor.setViewportView(adminPanel);
+    }
+    
+    public void setGestionEmpleados(){
+        empleadosPanel = new GestionEmpleados();
+        this.menu.contenedor.setViewportView(empleadosPanel);
+    }
+    
+    public void setGestionDepartamentos() {
+        gestionDepartamentos = new GestionDepartamentos();
+        this.menu.contenedor.setViewportView(gestionDepartamentos);
+    }    
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(this.menu != null && this.menu.capturarBtn == e.getSource()){
-            System.out.println("Boton Registro Presionado.... ");
+            showRegistrarYCapturarVista();
         }
     }
-    
-    
-    
-    
     
 }

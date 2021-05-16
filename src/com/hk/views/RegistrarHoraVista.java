@@ -12,6 +12,7 @@ public class RegistrarHoraVista extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setResizable(false);
+        this.label_nombreEmpleado.setText("Empleado");
     }
     
     public Image getIconImage(){

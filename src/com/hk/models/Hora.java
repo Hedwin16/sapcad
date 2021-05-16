@@ -2,10 +2,9 @@
 package com.hk.models;
 
 public class Hora {
-    private int id_hora;
+    private Integer id_hora;
     private String hora_entrada;
     private String hora_salida;
-    private int ci;
     private String fecha;
     private int t_horas;
     private int t_minutos;
@@ -13,17 +12,16 @@ public class Hora {
     public Hora() {
     }
 
-    public Hora(int id_hora, String hora_entrada, String hora_salida, int ci, String fecha, int t_horas, int t_minutos) {
+    public Hora(Integer id_hora, String hora_entrada, String hora_salida, String fecha, int t_horas, int t_minutos) {
         this.id_hora = id_hora;
         this.hora_entrada = hora_entrada;
         this.hora_salida = hora_salida;
-        this.ci = ci;
         this.fecha = fecha;
         this.t_horas = t_horas;
         this.t_minutos = t_minutos;
     }
 
-    public int getId_hora() {
+    public Integer getId_hora() {
         return id_hora;
     }
 
@@ -45,14 +43,6 @@ public class Hora {
 
     public void setHora_salida(String hora_salida) {
         this.hora_salida = hora_salida;
-    }
-
-    public int getCi() {
-        return ci;
-    }
-
-    public void setCi(int ci) {
-        this.ci = ci;
     }
 
     public String getFecha() {

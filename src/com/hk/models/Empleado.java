@@ -1,36 +1,26 @@
 package com.hk.models;
 
 public class Empleado {
-    private int id_empleado;
+    private Integer id_empleado;
     private String nombres;
     private String apellidos;
     private int ci;
     private int id_departamento;
     private String cargo;
-    private boolean estado;
     
     public Empleado() {
     }
 
-    public Empleado(int id_empleado, String nombres, String apellidos, int ci, int id_departamento, String cargo, boolean estado) {
+    public Empleado(Integer id_empleado, String nombres, String apellidos, int ci, int id_departamento, String cargo) {
         this.id_empleado = id_empleado;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.ci = ci;
         this.id_departamento = id_departamento;
         this.cargo = cargo;
-        this.estado = estado;
     }
     
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    public int getId_empleado() {
+    public Integer getId_empleado() {
         return id_empleado;
     }
 

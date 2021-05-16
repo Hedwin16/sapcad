@@ -3,25 +3,22 @@ package com.hk.models;
 
 
 public class Admin {
-    private int id_admin;
+    private Integer id_admin;
     private String usuario;
     private String clave;
     private int tipo;
-    private int estado;
 
-    public Admin(int id_admin, String usuario, String clave, int tipo, int estado) {
+    public Admin(Integer id_admin, String usuario, String clave, int tipo) {
         this.id_admin = id_admin;
         this.usuario = usuario;
         this.clave = clave;
         this.tipo = tipo;
-        this.estado = estado;
     }
 
     public Admin(String usuario, String clave, int tipo, int estado) {
         this.usuario = usuario;
         this.clave = clave;
         this.tipo = tipo;
-        this.estado = estado;
     }
 
     public Admin() {
@@ -29,7 +26,7 @@ public class Admin {
     
     
 
-    public int getId_admin() {
+    public Integer getId_admin() {
         return id_admin;
     }
 
@@ -60,14 +57,5 @@ public class Admin {
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-    
     
 }

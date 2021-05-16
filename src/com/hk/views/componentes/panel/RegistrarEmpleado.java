@@ -2,6 +2,7 @@
 package com.hk.views.componentes.panel;
 
 //Importando I.A
+import com.hk.controllers.PrincipalController;
 import com.hk.controllers.ReconocimientoController;
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.opencv.opencv_core.Mat;
@@ -13,34 +14,11 @@ import org.bytedeco.opencv.opencv_videoio.VideoCapture;
  * @author pc
  */
 public final class RegistrarEmpleado extends javax.swing.JPanel {
-    
-    ReconocimientoController rcController;
-    //JavaCV
-    VideoCapture cam = null;
-    
-    Mat cameraImage = new Mat();
-    //"C://photos//haarcascade_frontalface_alt.xml"
-    CascadeClassifier cascade = new CascadeClassifier("recursos/fotos/haarcascade_frontalface_alt.xml");
-
-    BytePointer mem = new BytePointer();
-    RectVector detectedFaces = new RectVector();
-
-    int numSamples = 200, sample = 1, idPerson;
-    
+       
     public RegistrarEmpleado() {
         initComponents();
-        getIdUser();
-        rcController = new ReconocimientoController(this);
-        
+        txt_departamento.removeAllItems();
     }
-    
-    void getIdUser(){
-        System.out.println("cambiar el label id");
-    }
-    
-   
-    
-
 
 
     @SuppressWarnings("unchecked")
@@ -70,10 +48,8 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         txt_departamento = new rojerusan.RSComboMetro();
 
-        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(520, 560));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setMinimumSize(new java.awt.Dimension(350, 100));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -200,13 +176,12 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
 
     private void btn_activarYregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_activarYregistrarActionPerformed
         //startCamera();
-        rcController.startCamera();
     }//GEN-LAST:event_btn_activarYregistrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel Panel_foto2;
-    private rojerusan.RSButtonMetro btn_activarYregistrar;
+    public rojerusan.RSButtonMetro btn_activarYregistrar;
     public javax.swing.JLabel counterLabel1;
     private javax.swing.JLabel counterLabel2;
     private javax.swing.JLabel jLabel10;

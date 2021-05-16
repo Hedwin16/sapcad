@@ -53,7 +53,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         SideBar = new javax.swing.JPanel();
         capturarBtn = new rojerusan.RSButtonMetro();
         jLabel2 = new javax.swing.JLabel();
-        contenedorPanel = new javax.swing.JPanel();
+        contenedor = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal - Sistema de Control de Asistencia");
@@ -89,8 +89,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(348, Short.MAX_VALUE))
         );
 
-        contenedorPanel.setBackground(new java.awt.Color(153, 153, 153));
-        contenedorPanel.setLayout(new java.awt.CardLayout());
+        contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        contenedor.setBorder(null);
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
@@ -99,12 +99,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(fondoLayout.createSequentialGroup()
                 .addComponent(SideBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(contenedorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE))
+                .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE))
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(SideBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(contenedorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(contenedor)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,7 +131,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SideBar;
     public rojerusan.RSButtonMetro capturarBtn;
-    public javax.swing.JPanel contenedorPanel;
+    public javax.swing.JScrollPane contenedor;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

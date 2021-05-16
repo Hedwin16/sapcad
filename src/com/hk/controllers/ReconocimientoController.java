@@ -1,15 +1,30 @@
 package com.hk.controllers;
 
+import com.hk.dao.DepartamentoDAO;
+import com.hk.dao.HoraDAO;
+import com.hk.interfaces.IHora;
+import com.hk.models.Departamento;
+import com.hk.models.Empleado;
 import com.hk.models.EntrenamientoLBPH;
+import com.hk.models.Hora;
+import com.hk.views.RegistrarHoraVista;
 import com.hk.views.componentes.panel.RegistrarEmpleado;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.DoublePointer;
+import org.bytedeco.javacpp.IntPointer;
 import static org.bytedeco.opencv.global.opencv_imgcodecs.imencode;
 import static org.bytedeco.opencv.global.opencv_imgcodecs.imwrite;
 import org.bytedeco.opencv.global.opencv_imgproc;
@@ -21,14 +36,16 @@ import org.bytedeco.opencv.opencv_core.Rect;
 import org.bytedeco.opencv.opencv_core.RectVector;
 import org.bytedeco.opencv.opencv_core.Scalar;
 import org.bytedeco.opencv.opencv_core.Size;
+import org.bytedeco.opencv.opencv_face.LBPHFaceRecognizer;
 import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
 import org.bytedeco.opencv.opencv_videoio.VideoCapture;
 
-public class ReconocimientoController {
-    private final RegistrarEmpleado panelRegistrar;
+public class ReconocimientoController implements ActionListener{
+    private RegistrarEmpleado panelRegistrar;
     private ReconocimientoController.DaemonThread myThread = null;
     private EmpleadoController eController;
-    private PrincipalController pController = new PrincipalController();
+    private PrincipalController pController;
+    private RegistrarHoraVista vistaRegistroHora;
     
     CascadeClassifier cascade = new CascadeClassifier("recursos/fotos/haarcascade_frontalface_alt.xml");
     VideoCapture cam = null;
@@ -37,12 +54,54 @@ public class ReconocimientoController {
     RectVector detectedFaces = new RectVector();
     int numSamples = 200, sample = 1, idPerson;
     boolean cap = false;
+    boolean activo = false;
+    LBPHFaceRecognizer recognizer = LBPHFaceRecognizer.create();
     
-    public ReconocimientoController(RegistrarEmpleado panelRegistrar) {
+    private Hora hora;
+    private Empleado empleado;
+    int ci_identificada = 0;
+    int cont_ = 0;
+    
+    List<Departamento> departamentos;
+    DepartamentoDAO depDao = new DepartamentoDAO();
+    
+    public ReconocimientoController(RegistrarEmpleado panelRegistrar, PrincipalController pController) {
         this.eController = new EmpleadoController(panelRegistrar);
         this.panelRegistrar = panelRegistrar;
         this.eController = new EmpleadoController(panelRegistrar);
+        this.pController = pController;
+        this.panelRegistrar.btn_activarYregistrar.addActionListener(this);
         setUltimoIdEmpleado();
+        cargarListaDepartamentos(panelRegistrar);
+    }
+    public ReconocimientoController(RegistrarHoraVista vistaRegistroHora,PrincipalController pController) {
+        this.eController = new EmpleadoController(vistaRegistroHora);
+        this.vistaRegistroHora = vistaRegistroHora;
+        this.pController = pController;
+        this.vistaRegistroHora.btn_activarCamara.addActionListener(this);
+        this.vistaRegistroHora.btn_desactivarCamara.addActionListener(this);
+        this.vistaRegistroHora.btn_backdoor.addActionListener(this);
+        vistaRegistroHora.addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.out.println("Estoy cerrando ventana de captura de rostro");
+            if(activo){
+                stopCamera();
+            }
+            
+        }
+ });
+    }
+    
+    public void cargarListaDepartamentos(RegistrarEmpleado empleadosPanel) {
+        departamentos = depDao.mostrar();
+        if(departamentos == null ||departamentos.isEmpty()){
+            System.out.println("No hay departamentos registrados");
+        }else{
+            for (int i = 0; i < departamentos.size(); i++) {
+                empleadosPanel.txt_departamento.addItem(departamentos.get(i).getNombre_departamento());
+            }
+        }
     }
     
     public ReconocimientoController(){
@@ -62,6 +121,44 @@ public class ReconocimientoController {
             this.numSamples = 200;
             sample = 1;
         }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(this.panelRegistrar != null && this.panelRegistrar.btn_activarYregistrar == e.getSource()){
+            System.out.println("Click");
+            this.startCamera();
+        }
+        if(this.vistaRegistroHora != null && this.vistaRegistroHora.btn_activarCamara == e.getSource()){
+            recognizer.read("recursos/fotos/clasificador.yml");
+            recognizer.setThreshold(80);
+            this.startCamera();
+        }
+        if(this.vistaRegistroHora != null && this.vistaRegistroHora.btn_desactivarCamara == e.getSource()){
+            this.stopCamera();
+        }
+        if(this.vistaRegistroHora != null && this.vistaRegistroHora.btn_backdoor == e.getSource()){
+            if(vistaRegistroHora.label_nombreEmpleado.getText().equals("No Identificado") || vistaRegistroHora.label_nombreEmpleado.getText().equalsIgnoreCase("Empleado")){
+                System.out.println("No puedo registrar");
+                
+            }else{
+                System.out.println("Si puedo registrar");
+                registrarHora();
+            }
+        }
+    }
+    
+    void registrarHora(){
+        IHora hdao = new HoraDAO();
+        this.hora = new Hora();
+        int id_hora = 0;
+        id_hora = hdao.idHoraRegistrada(ci_identificada);
+        if(id_hora > 0){
+            this.hora.setId_hora(id_hora);
+        }
+        
+        hdao.insertarHoras(this.hora, ci_identificada);
+        
+    }
     
     class DaemonThread implements Runnable {
 
@@ -72,7 +169,9 @@ public class ReconocimientoController {
             synchronized (this) {
                     while (runnable) {
                         try {
-                            if (cam.grab()) {
+                            if(vistaRegistroHora == null){//vista registro
+                               if (cam.grab()) {
+                                activo = true;
                                 cam.retrieve(cameraImage);
                                 Graphics g = panelRegistrar.recuadro_cam.getGraphics(); 
                                 Mat imageColor = new Mat(); 
@@ -103,6 +202,7 @@ public class ReconocimientoController {
                                                 //guardar();
                                                 eController.insertarNuevoEmpleado();
                                                 stopCamera();
+                                                panelRegistrar.recuadro_cam.setIcon(null);
                                                 pController.setRegistrarEmpleado();
                                             }                                
                                 }
@@ -120,7 +220,69 @@ public class ReconocimientoController {
                                 } catch (Exception e) {
                                     System.out.println("Exception: "+e);
                                 }
+                            } 
+                            }else{//Vista Reconocimiento
+                                if (cam.grab()) {
+                                    activo = true;
+                                    cam.retrieve(cameraImage);
+                                    Graphics g = vistaRegistroHora.recuadro_cam.getGraphics();
+
+                                    Mat imageGray = new Mat();
+                                    cvtColor(cameraImage, imageGray, COLOR_BGRA2GRAY);
+
+                                    RectVector detectedFace = new RectVector();
+                                    cascade.detectMultiScale(imageGray, detectedFace, 1.1, 2, 0, new Size(150, 150), new Size(500, 500));
+
+                                    for (int i = 0; i < detectedFace.size(); i++) {
+                                        Rect dadosFace = detectedFace.get(i);
+                                        rectangle(cameraImage, dadosFace, new Scalar(0, 255, 0, 3), 3, 0, 0);
+                                        Mat faceCapturada = new Mat(imageGray, dadosFace);
+                                        opencv_imgproc.resize(faceCapturada, faceCapturada, new Size(160, 160));
+
+                                        IntPointer rotulo = new IntPointer(1);
+                                        DoublePointer confidence = new DoublePointer(1);
+                                        recognizer.predict(faceCapturada, rotulo, confidence);
+                                        int prediction = rotulo.get(0);
+
+                                        if (prediction == -1) {
+                                            if(confidence.get(0)>75){
+                                                rectangle(cameraImage, dadosFace, new Scalar(0, 0, 255, 3), 3, 0, 0);
+                                                idPerson = 0;
+                                                vistaRegistroHora.label_nombreEmpleado.setText("No Identificado");
+                                            }
+
+                                        } else {
+                                            if(confidence.get(0)>65){
+                                                rectangle(cameraImage, dadosFace, new Scalar(0, 0, 255, 3), 3, 0, 0);
+                                                idPerson = 0;
+                                                vistaRegistroHora.label_nombreEmpleado.setText("No Identificado");
+
+                                            }else{
+                                                rectangle(cameraImage, dadosFace, new Scalar(0, 255, 0, 3), 3, 0, 0);
+                                                System.out.println(confidence.get(0));
+                                                idPerson = prediction;
+                                                System.out.println("Persona Reconocida como: " + idPerson);
+                                                rec();
+                                            }
+                                        }
+                                    }
+
+                            imencode(".bmp", cameraImage, mem);
+                            Image im = ImageIO.read(new ByteArrayInputStream(mem.getStringBytes()));
+                            BufferedImage buff = (BufferedImage) im;
+
+                            try {
+                                if (g.drawImage(buff, 0, 0, 340, 250, 0, 0, buff.getWidth(), buff.getHeight(), null)) {
+                                    if (runnable == false) {
+                                        this.wait();
+                                    }
+                                }
+                            } catch (Exception e) {
+                                System.out.println("reconociendo: "+e);
                             }
+                        }
+                            }
+                            
 
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -131,45 +293,27 @@ public class ReconocimientoController {
 
         
     }
-    /*
+    
     private void rec() {
         new Thread() {
             @Override
             public void run() {
-                
-                try {
-                    System.out.println("Ahora aqui");
-                    Connection cnx =  Conexiones.obtener();
-                    PreparedStatement consulta;
-                    consulta = cnx.prepareStatement("SELECT * FROM person WHERE id = " + String.valueOf(idPerson));
-                    ResultSet r = consulta.executeQuery();
-                    while (r.next()) {
-                        System.out.println("Estoy Aqui");
-                        firstNamePerson = r.getString("first_name");
-                        
-                        label_name.setText(r.getString("first_name") + " " + r.getString("last_name"));
-                        ci_identificada = Integer.parseInt(r.getString("ci"));
-
-
-                        Array ident = r.getArray("first_name");
-                        String[] person = (String[]) ident.getArray();
-
-                        for (String person1 : person) {
-                            System.out.println(person1+"eeee");
-                        }
-
-                    }
-                    //cnx.close();
-                } catch (Exception e) {
+                empleado = eController.getEmpleadoPorId(idPerson);
+                if(idPerson != 0){
+                    ci_identificada = empleado.getCi();
+                    vistaRegistroHora.label_nombreEmpleado.setText(empleado.getNombres());
+                }else{
+                    ci_identificada = 0;
                 }
                 
             }
         }.start();
     }
-    */
+    
     public void stopCamera() {
         myThread.runnable = false;
         cam.release();
+        activo = false;
     }
     
     

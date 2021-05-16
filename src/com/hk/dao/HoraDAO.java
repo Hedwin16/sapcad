@@ -41,44 +41,6 @@ public class HoraDAO implements IHora{
     }
 
     @Override
-    public int[] contarHoras(String start, String finish) {
-        int[] startHour = {0,0,0};
-        int[] finishHour = {0,0,0};
-        
-        startHour = separarValores(startHour, start);
-        finishHour = separarValores(finishHour, finish);
-        
-        for(int elemento:startHour){
-            System.out.print(elemento);
-            
-        }
-        System.out.println(" ");
-        for(int elemento:finishHour){
-            System.out.print(elemento);
-            
-        }
-        System.out.println(" ");
-        
-        int total_h = finishHour[0] - startHour[0];
-        int total_m = finishHour[1] - startHour[1];
-        int total_s = finishHour[2] - startHour[2];
-        
-        if(total_s < 0){
-            total_m--;
-            total_s = total_s + 60;
-        }
-        
-        if(total_m < 0){
-            total_h--;
-            total_m = total_m + 60;
-        }
-        
-        int[] h = {total_h, total_m};
-        
-        return h;
-    }
-
-    @Override
     public List<Hora> mostrar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -95,12 +57,11 @@ public class HoraDAO implements IHora{
 
     @Override
     public boolean insertarHoras(Hora hora, int cedula) {
-        sql = "INSERT INTO horas(hora_entrada, hora_salida, fecha, t_horas, t_minutos) VALUES(?, ?, CURRENT_DATE, 0, 0)";
+        sql = "INSERT INTO horas(hora_entrada, fecha) VALUES(CURRENT_TIME,CURRENT_DATE)";
+        System.out.println("Id de la hora que entra en insertarHoras: "+hora.getId_hora());
         try {
             if(hora.getId_hora() == null){
                 ps = Conexion.getInstance().getConnection().prepareStatement(sql);
-                ps.setString(1, hora.getHora_entrada());
-                ps.setString(2, "no");
                 if(ps.executeUpdate() > 0){
                     if(insertarEmpleadoHora(cedula)){
                         JOptionPane.showMessageDialog(null, "Registrada Hora de Entrada");
@@ -109,17 +70,15 @@ public class HoraDAO implements IHora{
                 }
                 
             }else{
-                if(setTotalHorasDiarias(hora, cedula)){ //Insertaron total de horas
-                    // Insertar Hora de Salida en la BD
-                    System.out.println("Condicion 2.1 - Fecha = null -> Insertando Hora de Salida");
-                    
-                    ps = Conexion.getInstance().getConnection().prepareStatement("UPDATE horas SET hora_salida= ? WHERE id_hora = ?");
-                    ps.setString(1, hora.getHora_salida());
-                    ps.setInt(2, hora.getId_hora());
-                    JOptionPane.showMessageDialog(null, "Registrada Hora de Salida");
-                    return ps.executeUpdate() > 0;
-                    
-                }
+                // Insertar Hora de Salida en la BD
+                System.out.println("Condicion 2.1 - Fecha = null -> Insertando Hora de Salida");
+                sql= "UPDATE horas SET hora_salida=CURRENT_TIME, t_horas=TIMEDIFF(CURRENT_TIME, hora_entrada) WHERE id_hora = ?";
+                ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+                System.out.println("sql: "+sql);
+                ps.setInt(1, hora.getId_hora());
+                //JOptionPane.showMessageDialog(null, "Registrada Hora de Salida");
+                return ps.executeUpdate() > 0;
+                
             }
             
         } catch (Exception e) {
@@ -142,6 +101,7 @@ public class HoraDAO implements IHora{
                 ps = Conexion.getInstance().getConnection().prepareStatement(sql);
                 ps.setInt(1, id);
                 ps.setInt(2, ced);
+                System.out.println("insertando en la tabla empleados_horas");
                 return ps.executeUpdate() > 0;
             }
             
@@ -151,83 +111,42 @@ public class HoraDAO implements IHora{
         return false;
     }
     
-    boolean setTotalHorasDiarias(Hora hora, int ced){
-        //Captura de hora para calcular el total
-        String entrada = "1";
-        String salida = "1";
-        
-        salida = salida+"hola";
-        
-        System.out.println(salida);
-        try {
-            ps = Conexion.getInstance().getConnection().prepareStatement("SELECT * FROM horas WHERE id_hour = ?");
-            ps.setInt(1, ced);
-            ps.setInt(2, hora.getId_hora());
-            rs = ps.executeQuery();
-            while(rs.next()){
-                entrada  = rs.getString("hora_entrada");
-                System.out.println("Entradaaa: "+entrada);
-                System.out.println("SAlidaaaa : "+salida);
-            }
-            
-            int[] horas = contarHoras(entrada, hora.getHora_salida());
-            for(int hor:horas){
-                System.out.println("hora: "+hor);
-            }
-
-            ps = Conexion.getInstance().getConnection().prepareStatement("UPDATE horas SET t_horas=? , t_minutos=? WHERE id_hour = ?");
-            ps.setInt(1, horas[0]);
-            ps.setInt(2, horas[1]);
-            ps.setInt(3, hora.getId_hora());
-            return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-                System.out.println("setTotalHoraDiarias: "+e);
-            }
-        return false;
-        
-    }
-    
-    public int[] separarValores(int[] array, String entrada){
-        int a = -3;
-        int b = -1;
-        for (int i = 0; i < 3; i++) {
-            array[i] = Integer.parseInt(entrada.substring(a+=3, b+=3));
-        }
-        return array;
-    }
-    
     @Override
     public boolean insertar(Hora t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
+    public int idHoraRegistrada(int ced) {
+            int id=0;
+            String hora_salida = "";
+            System.out.println("Buscando si hay una hora registrada...");
+            sql = "SELECT horas.id_hora, horas.hora_salida FROM horas,empleados_horas WHERE empleados_horas.ci_empleado=? AND empleados_horas.id_hora=horas.id_hora ORDER BY horas.id_hora DESC LIMIT 1";
+        try {
+            ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+            ps.setInt(1, ced);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                hora_salida = rs.getString("hora_salida");
+                id = rs.getInt("id_hora");
+                System.out.println("hora de salida: "+hora_salida);
+                System.out.println("id: "+id);
+            }
+        } catch (Exception e) {
+            System.out.println("Exception ExisteHoraRegistrada(): "+e);
+        }
+        
+        if(hora_salida != null){//aquí es donde está fallando
+            id = 0;
+            System.out.println("Entro en salida != null");
+            System.out.println("Es una hora nueva");
+        }
+        return id;
+    }
+
+    @Override
     public String obtenerHora() {
-        int hr, min, sg; 
-        String a,b,c;
-        a=""; b=""; c="";
-        Calendar calendario = new GregorianCalendar();
-        
-        hr = calendario.get(Calendar.HOUR_OF_DAY); 
-        min = calendario.get(Calendar.MINUTE);
-        sg = calendario.get(Calendar.SECOND);
-        
-        a = String.valueOf(hr);
-        b = String.valueOf(min);
-        c = String.valueOf(sg);
-        
-        if(hr < 10){
-            a = "0"+String.valueOf(hr);
-        }
-        if(min < 10){
-            b = "0"+String.valueOf(min);
-        }
-        if(sg < 10){
-            c = "0"+String.valueOf(sg);
-        }
-        String hour = a+":"+b+":"+c;
-        System.out.println("hora: "+hour);
-        return hour;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
