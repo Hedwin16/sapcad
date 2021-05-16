@@ -3,6 +3,8 @@ package com.hk.dao;
 import com.hk.connection.Conexion;
 import com.hk.interfaces.IEmpleado;
 import com.hk.models.Empleado;
+import com.hk.models.EntrenamientoLBPH;
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -86,7 +88,31 @@ public class EmpleadoDAO implements IEmpleado{
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             ps.setInt(1, id);
-            return ps.executeUpdate()>0;
+            if(ps.executeUpdate()>0){
+                System.out.println("Borrando Fotos");
+                int cont = 1;
+                for (int i = 0; i < 200; i++) {
+                    File photo = new File("recursos/fotos/persona."+id+"."+cont+".jpg");
+                    System.out.println(photo.toString());
+                    photo.delete();
+                    cont++;
+                }
+                //Entrenamiento
+                File clasificador = new File("recursos/fotos/clasificador.yml");
+                clasificador.delete();
+                sql = "SELECT * FROM empleados";
+                ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+                rs = ps.executeQuery();
+                if(rs.next()){
+                    System.out.println("Reentrenando");
+                    new EntrenamientoLBPH().trainPhotos();
+                    return true;
+                }else{
+                    System.out.println("Último empleado eliminado..");
+                    return true;
+                }
+                
+            }
         } catch (Exception e) {
             System.out.println("Eliminar Empleado exception: "+e);
         }
@@ -156,6 +182,22 @@ public class EmpleadoDAO implements IEmpleado{
             System.out.println("buscarEmpleados exception: "+e);
         }
         return empleadosEncontrados;
+    }
+
+    @Override
+    public boolean existeCedula(int cedula) {
+        sql ="SELECT * FROM empleados WHERE ci_empleado=?";
+        try {
+            ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+            ps.setInt(1, cedula);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error buscando cedula: "+e);
+        }
+        return false;
     }
     
 }

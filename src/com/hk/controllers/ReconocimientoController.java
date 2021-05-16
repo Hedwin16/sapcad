@@ -18,6 +18,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -61,6 +62,7 @@ public class ReconocimientoController implements ActionListener{
     private Empleado empleado;
     int ci_identificada = 0;
     int cont_ = 0;
+    int idUltimoEmpleado = 0;
     
     List<Departamento> departamentos;
     DepartamentoDAO depDao = new DepartamentoDAO();
@@ -71,7 +73,6 @@ public class ReconocimientoController implements ActionListener{
         this.eController = new EmpleadoController(panelRegistrar);
         this.pController = pController;
         this.panelRegistrar.btn_activarYregistrar.addActionListener(this);
-        setUltimoIdEmpleado();
         cargarListaDepartamentos(panelRegistrar);
     }
     public ReconocimientoController(RegistrarHoraVista vistaRegistroHora,PrincipalController pController) {
@@ -110,13 +111,9 @@ public class ReconocimientoController implements ActionListener{
         this.eController = new EmpleadoController(panelRegistrar);
     }
     
-    public void setUltimoIdEmpleado(){
-        this.panelRegistrar.txt_id_label.setText(""+this.eController.getIdEmpleado());
-    }
     
     void actualizarVista() {
             panelRegistrar.recuadro_cam.setBackground(Color.red);
-            setUltimoIdEmpleado();
             SwingUtilities.updateComponentTreeUI(panelRegistrar);
             this.numSamples = 200;
             sample = 1;
@@ -126,15 +123,29 @@ public class ReconocimientoController implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(this.panelRegistrar != null && this.panelRegistrar.btn_activarYregistrar == e.getSource()){
             System.out.println("Click");
-            this.startCamera();
+            if(eController.insertarNuevoEmpleado()){
+                this.idUltimoEmpleado = eController.getIdEmpleado();
+                this.startCamera();
+            }else{
+                System.out.println("No se va a registrar");
+            }
         }
         if(this.vistaRegistroHora != null && this.vistaRegistroHora.btn_activarCamara == e.getSource()){
-            recognizer.read("recursos/fotos/clasificador.yml");
-            recognizer.setThreshold(80);
-            this.startCamera();
+            File clasificador = new File("recursos/fotos/clasificador.yml");
+            if(!clasificador.exists()){
+                JOptionPane.showMessageDialog(vistaRegistroHora, "No hay empleados registrados para el reconocimiento");
+            }else{
+                recognizer.read("recursos/fotos/clasificador.yml");
+                recognizer.setThreshold(80);
+                this.startCamera();
+            }
+            
         }
         if(this.vistaRegistroHora != null && this.vistaRegistroHora.btn_desactivarCamara == e.getSource()){
-            this.stopCamera();
+            if(activo){
+                this.stopCamera();
+            }
+            
         }
         if(this.vistaRegistroHora != null && this.vistaRegistroHora.btn_backdoor == e.getSource()){
             if(vistaRegistroHora.label_nombreEmpleado.getText().equals("No Identificado") || vistaRegistroHora.label_nombreEmpleado.getText().equalsIgnoreCase("Empleado")){
@@ -190,7 +201,8 @@ public class ReconocimientoController implements ActionListener{
                                     Mat face = new Mat(imageGray, dadosFace);
                                     opencv_imgproc.resize(face, face, new Size(160, 160));
                                             if (sample <= numSamples) {
-                                                String cropped = "recursos/fotos/persona." + panelRegistrar.txt_id_label.getText() + "." + sample + ".jpg";
+                                                System.out.println("El id del último empleado: "+idUltimoEmpleado);
+                                                String cropped = "recursos/fotos/persona." + idUltimoEmpleado + "." + sample + ".jpg";
                                                 imwrite(cropped, face);
                                                 panelRegistrar.counterLabel1.setText(String.valueOf(sample) + "/200");
                                                 sample++;
@@ -200,7 +212,7 @@ public class ReconocimientoController implements ActionListener{
                                                 new EntrenamientoLBPH().trainPhotos();
                                                 System.out.println("File Generated");
                                                 //guardar();
-                                                eController.insertarNuevoEmpleado();
+                                                JOptionPane.showMessageDialog(panelRegistrar, "Registrado con Éxito");
                                                 stopCamera();
                                                 panelRegistrar.recuadro_cam.setIcon(null);
                                                 pController.setRegistrarEmpleado();

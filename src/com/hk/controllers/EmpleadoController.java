@@ -47,14 +47,17 @@ public class EmpleadoController implements ActionListener{
         
     }
     
-    public void insertarNuevoEmpleado(){
+    public boolean insertarNuevoEmpleado(){
         if(!estaValidado()){
             JOptionPane.showMessageDialog(panelRegistro, "Los datos introducidos no son correctos");
+        }else if(existeCedula()){
+            JOptionPane.showMessageDialog(panelRegistro, "Ya existe un empleado con la cédula introducida");
         }else{
-            agregarEmpleado();
+            return agregarEmpleado();
         }
+        return false;
     }
-    public void agregarEmpleado(){
+    public boolean agregarEmpleado(){
         String nombres = panelRegistro.txt_nombres.getText();
         String apellidos = panelRegistro.txt_apellidos.getText();
         int cedula = Integer.parseInt(panelRegistro.txt_cedula.getText());
@@ -71,18 +74,31 @@ public class EmpleadoController implements ActionListener{
         empleado.setId_departamento(depart);
         empleado.setCargo(cargo);
         if(edao.insertar(this.empleado)){
-            JOptionPane.showMessageDialog(panelRegistro, "Registrado con Éxito");
-            vaciarCampos();
+            JOptionPane.showMessageDialog(panelRegistro, "Registrado con Éxito...Activando Cámara para guardar fotos....");
+            bloquearCampos();
+            return true;
         }else{
             JOptionPane.showMessageDialog(panelRegistro, "No se ha podido registrar");
+            return false;
         }
     }
     
-    public int getIdEmpleado(){
-       return edao.getIdNuevoEmpleado()+1;
+    boolean existeCedula(){
+        int cedula = Integer.parseInt(panelRegistro.txt_cedula.getText());
+        return edao.existeCedula(cedula);
     }
     
-    void vaciarCampos(){
+    public int getIdEmpleado(){
+       return edao.getIdNuevoEmpleado();
+    }
+    void bloquearCampos(){
+        panelRegistro.txt_nombres.setEnabled(false);
+        panelRegistro.txt_apellidos.setEnabled(false);
+        panelRegistro.txt_cedula.setEnabled(false);
+        panelRegistro.txt_cargo.setEnabled(false);
+        panelRegistro.txt_departamento.setEnabled(false);
+    }
+    public void vaciarCampos(){
         panelRegistro.txt_nombres.setText("");
         panelRegistro.txt_apellidos.setText("");
         panelRegistro.txt_cedula.setText("");
@@ -134,7 +150,7 @@ public class EmpleadoController implements ActionListener{
             int fila_seleccionada = empleadosPanel.TABLE.getSelectedRow();
             if(fila_seleccionada >= 0){
                 this.empleado = this.empleados.get(fila_seleccionada);
-                int decision = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar este administrador?", "Confirmación", JOptionPane.YES_NO_OPTION);            
+                int decision = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar este empleado?", "Confirmación", JOptionPane.YES_NO_OPTION);            
                 if(decision == 0){
                     if(edao.eliminar(empleado.getId_empleado())){
                         empleadosPanel.desabilitarYVaciarCampos();
@@ -213,6 +229,8 @@ public class EmpleadoController implements ActionListener{
        empleados = edao.mostrar();
         if(empleados == null || empleados.isEmpty()){
             System.out.println("No hay empleados registrados");
+            DefaultTableModel dtm = (DefaultTableModel) this.empleadosPanel.TABLE.getModel();
+            dtm.setRowCount(0);
         }else{
             DefaultTableModel dtm = (DefaultTableModel) this.empleadosPanel.TABLE.getModel();
             dtm.setRowCount(0);

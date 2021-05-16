@@ -32,9 +32,7 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         Panel_foto2 = new javax.swing.JPanel();
         recuadro_cam = new javax.swing.JLabel();
         btn_activarYregistrar = new rojerusan.RSButtonMetro();
-        txt_id_label = new javax.swing.JLabel();
         counterLabel1 = new javax.swing.JLabel();
-        counterLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -80,26 +78,12 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         });
         jPanel3.add(btn_activarYregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 320, 40));
 
-        txt_id_label.setBackground(new java.awt.Color(255, 255, 255));
-        txt_id_label.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txt_id_label.setForeground(new java.awt.Color(121, 6, 6));
-        txt_id_label.setText("1");
-        txt_id_label.setOpaque(true);
-        jPanel3.add(txt_id_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, 50, 20));
-
         counterLabel1.setBackground(new java.awt.Color(255, 255, 255));
         counterLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         counterLabel1.setForeground(new java.awt.Color(121, 6, 6));
         counterLabel1.setText("00/200");
         counterLabel1.setOpaque(true);
         jPanel3.add(counterLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 50, 30));
-
-        counterLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        counterLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        counterLabel2.setForeground(new java.awt.Color(121, 6, 6));
-        counterLabel2.setText("Id Empleado:");
-        counterLabel2.setOpaque(true);
-        jPanel3.add(counterLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, 90, 20));
 
         jScrollPane1.setBorder(null);
 
@@ -183,7 +167,6 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
     public javax.swing.JPanel Panel_foto2;
     public rojerusan.RSButtonMetro btn_activarYregistrar;
     public javax.swing.JLabel counterLabel1;
-    private javax.swing.JLabel counterLabel2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel6;
@@ -199,7 +182,6 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
     public rscomponentshade.RSTextFieldShade txt_cargo;
     public rscomponentshade.RSTextFieldShade txt_cedula;
     public rojerusan.RSComboMetro txt_departamento;
-    public javax.swing.JLabel txt_id_label;
     public rscomponentshade.RSTextFieldShade txt_nombres;
     // End of variables declaration//GEN-END:variables
 }

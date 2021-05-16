@@ -7,4 +7,5 @@ public interface IEmpleado extends CRUD<Empleado>{
     public int getIdNuevoEmpleado();
     public Empleado getEmpleadoPorId(int id);
     public List<Empleado> buscarEmpleados(String busqueda);
+    public boolean existeCedula(int cedula);
 }
