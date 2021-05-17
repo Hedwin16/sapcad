@@ -6,6 +6,7 @@
 package com.hk.views;
 
 import com.hk.controllers.AdminController;
+import com.hk.controllers.PdfController;
 import com.sun.awt.AWTUtilities;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -19,7 +20,6 @@ import java.util.logging.Logger;
  */
 public class Splash extends javax.swing.JFrame implements Runnable {
 
-    
     private Thread tiempo = null; 
     
     public Splash() {
