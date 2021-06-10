@@ -5,6 +5,8 @@ import com.hk.interfaces.IHora;
 import com.hk.models.Hora;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -27,7 +29,25 @@ public class HoraDAO implements IHora{
 
     @Override
     public List<Hora> recuperarHorasDiarias() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Hora> listaHoras = new ArrayList<>();
+        sql = "SELECT * FROM horas WHERE date=CURRENT_DATE";
+        try{
+            PreparedStatement consulta = Conexion.getInstance().getConnection().prepareStatement(sql);
+            ResultSet resultado = consulta.executeQuery();
+            while(resultado.next()){
+                listaHoras.add(new Hora(resultado.getInt("id_hora"),
+                                        resultado.getString("hora_entrada"), 
+                                        resultado.getString("hora_salida"), 
+                                        resultado.getString("fecha"),   
+                                        resultado.getString("total_horas")));
+            }
+            return listaHoras;
+
+        }catch(SQLException ex){
+            System.out.println("Horas diarias error: "+ex);
+        }
+        
+        return null;
     }
 
     @Override
@@ -77,8 +97,10 @@ public class HoraDAO implements IHora{
                 System.out.println("sql: "+sql);
                 ps.setInt(1, hora.getId_hora());
                 //JOptionPane.showMessageDialog(null, "Registrada Hora de Salida");
-                return ps.executeUpdate() > 0;
-                
+                if(ps.executeUpdate() > 0){
+                    JOptionPane.showMessageDialog(null, "Registrada Hora de Salida");
+                    return true;
+                }
             }
             
         } catch (Exception e) {

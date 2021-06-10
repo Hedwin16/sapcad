@@ -12,7 +12,7 @@ public class Conexion {
     
     private static String DB_URL = "jdbc:mysql://localhost:3306/bd_sapcad";
     private static String USER = "root";
-    private static String PASS = "1234";
+    private static String PASS = "";
     private static Connection cnx = null;
     
     private Conexion(){

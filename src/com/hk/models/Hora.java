@@ -6,19 +6,17 @@ public class Hora {
     private String hora_entrada;
     private String hora_salida;
     private String fecha;
-    private int t_horas;
-    private int t_minutos;
+    private String t_horas;
 
     public Hora() {
     }
 
-    public Hora(Integer id_hora, String hora_entrada, String hora_salida, String fecha, int t_horas, int t_minutos) {
+    public Hora(Integer id_hora, String hora_entrada, String hora_salida, String fecha, String t_horas) {
         this.id_hora = id_hora;
         this.hora_entrada = hora_entrada;
         this.hora_salida = hora_salida;
         this.fecha = fecha;
         this.t_horas = t_horas;
-        this.t_minutos = t_minutos;
     }
 
     public Integer getId_hora() {
@@ -53,21 +51,14 @@ public class Hora {
         this.fecha = fecha;
     }
 
-    public int getT_horas() {
+    public String getT_horas() {
         return t_horas;
     }
 
-    public void setT_horas(int t_horas) {
+    public void setT_horas(String t_horas) {
         this.t_horas = t_horas;
     }
 
-    public int getT_minutos() {
-        return t_minutos;
-    }
-
-    public void setT_minutos(int t_minutos) {
-        this.t_minutos = t_minutos;
-    }
     
     
     

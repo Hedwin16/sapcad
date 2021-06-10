@@ -204,7 +204,6 @@ public class AdminController implements ActionListener{
         clave = this.gestionAdmin.txt_clave.getText();
         int tipo = this.gestionAdmin.txt_privilegios.getSelectedIndex()+1;
         if(validarCamposGA(usuario,clave,tipo)){
-            System.out.println("validarCampos es true");
             admin.setUsuario(usuario);
             admin.setClave(clave);
             admin.setTipo(tipo);
@@ -218,7 +217,7 @@ public class AdminController implements ActionListener{
     }
 
     private void actualizarAdmin() {
-        System.out.println("actualizando...");
+        //System.out.println("actualizando...");
         String usuario, clave;
         usuario = this.gestionAdmin.txt_usuario.getText();
         clave = this.gestionAdmin.txt_clave.getText();
