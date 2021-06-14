@@ -63,6 +63,8 @@ public class ReconocimientoController implements ActionListener{
     int ci_identificada = 0;
     int cont_ = 0;
     int idUltimoEmpleado = 0;
+    int captureId = 0;
+    int counter = 0;
     
     List<Departamento> departamentos;
     DepartamentoDAO depDao = new DepartamentoDAO();
@@ -270,10 +272,18 @@ public class ReconocimientoController implements ActionListener{
                                                 vistaRegistroHora.label_nombreEmpleado.setText("No Identificado");
 
                                             }else{
+                                                if(captureId > 0 && captureId == idPerson){
+                                                    counter++;
+                                                    System.out.println("counter: "+counter);
+                                                }else{
+                                                    counter = 0;
+                                                    captureId = idPerson;
+                                                }
                                                 rectangle(cameraImage, dadosFace, new Scalar(0, 255, 0, 3), 3, 0, 0);
                                                 System.out.println(confidence.get(0));
                                                 idPerson = prediction;
                                                 System.out.println("Persona Reconocida como: " + idPerson);
+                                                captureId = idPerson;
                                                 rec();
                                             }
                                         }
@@ -314,6 +324,22 @@ public class ReconocimientoController implements ActionListener{
                 if(idPerson != 0){
                     ci_identificada = empleado.getCi();
                     vistaRegistroHora.label_nombreEmpleado.setText(empleado.getNombres());
+                    if(counter > 50){
+                        System.out.println("I can capture the hour");
+                        counter = 0;
+                        //Registro de Hora
+                        if(vistaRegistroHora.label_nombreEmpleado.getText().equals("No Identificado") || 
+                        vistaRegistroHora.label_nombreEmpleado.getText().equalsIgnoreCase("Empleado")){
+                        System.out.println("No puedo registrar");
+                        }else{
+                            System.out.println("Si puedo registrar");
+                            stopCamera();
+                            registrarHora();
+                            startCamera();
+                            
+                            
+                        }
+                    }
                 }else{
                     ci_identificada = 0;
                 }

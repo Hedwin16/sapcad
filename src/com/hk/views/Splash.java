@@ -7,6 +7,12 @@ package com.hk.views;
 
 import com.hk.controllers.AdminController;
 import com.hk.controllers.PdfController;
+import com.hk.controllers.ReconocimientoController;
+import com.hk.views.componentes.panel.DefaultPanel;
+import com.hk.views.componentes.panel.GestionAdmin;
+import com.hk.views.componentes.panel.GestionDepartamentos;
+import com.hk.views.componentes.panel.GestionEmpleados;
+import com.hk.views.componentes.panel.RegistrarEmpleado;
 import com.sun.awt.AWTUtilities;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -39,6 +45,17 @@ public class Splash extends javax.swing.JFrame implements Runnable {
     public void verificarAdmin(){
         AdminController acontroller = new AdminController();
         acontroller.verificarAdmin();
+    }
+    
+    void initWeightComponents(){
+        //Components
+        DefaultPanel defaultPanel = new DefaultPanel();
+        GestionAdmin adminPanel = new GestionAdmin();
+        GestionEmpleados empleadosPanel = new GestionEmpleados();
+        RegistrarHoraVista vistaRegistroHora = new RegistrarHoraVista();
+        RegistrarEmpleado regEmpleados = new RegistrarEmpleado();
+        ReconocimientoController rcController = new ReconocimientoController();
+        GestionDepartamentos gestionDepartamentos = new GestionDepartamentos();
     }
    
     @SuppressWarnings("unchecked")
@@ -112,6 +129,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
                 Thread.sleep(5000);
                 this.dispose();
                 verificarAdmin();
+                //initWeightComponents();
                 Thread.sleep(3000);
                 break;
             } catch (InterruptedException ex) {

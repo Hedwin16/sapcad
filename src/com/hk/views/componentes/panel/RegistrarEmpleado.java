@@ -17,7 +17,10 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
        
     public RegistrarEmpleado() {
         initComponents();
-        txt_departamento.removeAllItems();
+        if(txt_departamento != null){
+            txt_departamento.removeAllItems();
+        }
+        
     }
 
 
