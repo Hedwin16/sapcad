@@ -19,7 +19,7 @@ public class EmpleadoDAO implements IEmpleado{
     
     @Override
     public boolean insertar(Empleado t) {
-        sql = "INSERT INTO empleados(nombres,apellidos,ci_empleado,id_departamento,cargo) VALUES(?,?,?,?,?)";
+        sql = "INSERT INTO empleados(nombres,apellidos,ci_empleado,id_departamento,cargo, id_nomina) VALUES(?,?,?,?,?,?)";
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             ps.setString(1, t.getNombres());
@@ -27,6 +27,7 @@ public class EmpleadoDAO implements IEmpleado{
             ps.setInt(3, t.getCi());
             ps.setInt(4, t.getId_departamento());
             ps.setString(5, t.getCargo());
+            ps.setInt(6, t.getId_nomina());
             
             if(ps.executeUpdate() == 1){
                 return true;
@@ -52,7 +53,9 @@ public class EmpleadoDAO implements IEmpleado{
                                         rs.getString(3),
                                         rs.getInt(4),
                                         rs.getInt(5),
-                                        rs.getString(6)));
+                                        rs.getString(6),
+                                        rs.getInt(7)));
+                                        
             }
             
             return list;
@@ -65,7 +68,7 @@ public class EmpleadoDAO implements IEmpleado{
 
     @Override
     public boolean actualizar(Empleado t) {
-        sql ="UPDATE empleados SET nombres=?, apellidos=?, ci_empleado=?, id_departamento=?, cargo=? WHERE id_empleado=?";
+        sql ="UPDATE empleados SET nombres=?, apellidos=?, ci_empleado=?, id_departamento=?, cargo=?, id_nomina=? WHERE id_empleado=?";
         try {
             ps = Conexion.getInstance().getConnection().prepareCall(sql);
             ps.setString(1, t.getNombres());
@@ -73,7 +76,8 @@ public class EmpleadoDAO implements IEmpleado{
             ps.setInt(3, t.getCi());
             ps.setInt(4, t.getId_departamento());
             ps.setString(5, t.getCargo());
-            ps.setInt(6, t.getId_empleado());
+            ps.setInt(6, t.getId_nomina());
+            ps.setInt(7, t.getId_empleado());
             return ps.executeUpdate()>0;
             
         } catch (Exception e) {
@@ -150,7 +154,8 @@ public class EmpleadoDAO implements IEmpleado{
                         rs.getString(3),
                         rs.getInt(4),
                         rs.getInt(5),
-                        rs.getString(6)
+                        rs.getString(6),
+                        rs.getInt(7)
                 );
             }
         } catch (Exception e) {
@@ -175,7 +180,8 @@ public class EmpleadoDAO implements IEmpleado{
                                         rs.getString(3),
                                         rs.getInt(4),
                                         rs.getInt(5),
-                                        rs.getString(6)));
+                                        rs.getString(6),
+                                        rs.getInt(7)));
             }
             return empleadosEncontrados;
         } catch (Exception e) {

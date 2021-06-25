@@ -2,9 +2,11 @@ package com.hk.controllers;
 
 import com.hk.dao.DepartamentoDAO;
 import com.hk.dao.EmpleadoDAO;
+import com.hk.dao.TipoNominaDAO;
 import com.hk.interfaces.IEmpleado;
 import com.hk.models.Departamento;
 import com.hk.models.Empleado;
+import com.hk.models.TipoNomina;
 import com.hk.views.RegistrarHoraVista;
 import com.hk.views.componentes.panel.GestionEmpleados;
 import com.hk.views.componentes.panel.RegistrarEmpleado;
@@ -26,6 +28,8 @@ public class EmpleadoController implements ActionListener{
     DepartamentoController dController = new DepartamentoController();
     List<Departamento> departamentos = new ArrayList<>();
     DepartamentoDAO depDao = new DepartamentoDAO();
+    List<TipoNomina> nominas = new ArrayList<>();
+    TipoNominaDAO nomDao = new TipoNominaDAO();
     
     public EmpleadoController(RegistrarEmpleado panelRegistro){
         this.panelRegistro = panelRegistro;
@@ -43,6 +47,7 @@ public class EmpleadoController implements ActionListener{
         this.empleadosPanel.btn_guardar.addActionListener(this);
         this.cargarListaEmpleados();
         this.cargarListaDepartamentos(empleadosPanel);
+        this.cargarListaNominas(empleadosPanel);
         System.out.println("No entra aquí");
         
     }
@@ -62,17 +67,24 @@ public class EmpleadoController implements ActionListener{
         String apellidos = panelRegistro.txt_apellidos.getText();
         int cedula = Integer.parseInt(panelRegistro.txt_cedula.getText());
         int index = panelRegistro.txt_departamento.getSelectedIndex();
+        int indexNomina = panelRegistro.txt_nomina.getSelectedIndex();
         departamentos = depDao.mostrar();
-        System.out.println("Index : "+index);
+        nominas = nomDao.mostrar();
+        //System.out.println("Index : "+index); Departamentos
         int depart = departamentos.get(index).getId_departamento();
         System.out.println("Id departamento: "+depart);
+        //Tipo Nómina
+        int nom = nominas.get(indexNomina).getId_nomina();
+        System.out.println("Id Nómina: "+nom);
         String cargo = panelRegistro.txt_cargo.getText();
         
         empleado.setNombres(nombres);
         empleado.setApellidos(apellidos);
         empleado.setCi(cedula);
         empleado.setId_departamento(depart);
+        empleado.setId_nomina(nom);
         empleado.setCargo(cargo);
+        
         if(edao.insertar(this.empleado)){
             JOptionPane.showMessageDialog(panelRegistro, "Registrado con Éxito...Activando Cámara para guardar fotos....");
             bloquearCampos();
@@ -97,12 +109,14 @@ public class EmpleadoController implements ActionListener{
         panelRegistro.txt_cedula.setEnabled(false);
         panelRegistro.txt_cargo.setEnabled(false);
         panelRegistro.txt_departamento.setEnabled(false);
+        panelRegistro.txt_nomina.setEnabled(false);
     }
     public void vaciarCampos(){
         panelRegistro.txt_nombres.setText("");
         panelRegistro.txt_apellidos.setText("");
         panelRegistro.txt_cedula.setText("");
         panelRegistro.txt_departamento.setSelectedIndex(-1);
+        panelRegistro.txt_nomina.setSelectedIndex(-1);
         panelRegistro.txt_cargo.setText("");
         
         panelRegistro.txt_nombres.requestFocus();
@@ -134,13 +148,21 @@ public class EmpleadoController implements ActionListener{
                 empleadosPanel.txt_apellidos.setText(empleado.getApellidos());
                 empleadosPanel.txt_cedula.setText(empleado.getCi()+"");
                 empleadosPanel.txt_cargo.setText(empleado.getCargo());
+                //Lista de departamentos
                 int index = 0;
                 for (int i = 0; i < departamentos.size(); i++) {
                     if(departamentos.get(i).getId_departamento() == empleado.getId_departamento()){
                         index = i;
                     }
                 }
+                int indexNom = 0;
+                for (int i = 0; i < nominas.size(); i++) {
+                    if(nominas.get(i).getId_nomina() == empleado.getId_nomina()){
+                        indexNom = i;
+                    }
+                }
                 empleadosPanel.txt_departamento.setSelectedIndex(index);
+                empleadosPanel.txt_nomina.setSelectedIndex(indexNom);
             }else{
                 JOptionPane.showMessageDialog(empleadosPanel, "Por favor seleccione una fila.");
             }
@@ -168,7 +190,7 @@ public class EmpleadoController implements ActionListener{
         if(empleadosPanel != null && this.empleadosPanel.btn_guardar == e.getSource()){
             String nombres,apellidos,cedula,cargo;
             int id_departamento = empleadosPanel.txt_departamento.getSelectedIndex();
-            
+            int id_nomina = empleadosPanel.txt_nomina.getSelectedIndex();
             nombres = empleadosPanel.txt_nombres.getText();
             apellidos = empleadosPanel.txt_apellidos.getText();
             cedula = empleadosPanel.txt_cedula.getText();
@@ -177,11 +199,13 @@ public class EmpleadoController implements ActionListener{
                 empleado.setNombres(nombres);
                 empleado.setApellidos(apellidos);
                 empleado.setCi(Integer.parseInt(cedula));
-                int index = empleadosPanel.txt_departamento.getSelectedIndex();
+                
                 departamentos = depDao.mostrar();
-                System.out.println("Index : "+index);
-                int depart = departamentos.get(index).getId_departamento();
+                System.out.println("Index : "+id_departamento);
+                int depart = departamentos.get(id_departamento).getId_departamento();
                 empleado.setId_departamento(depart);
+                int nomina = nominas.get(id_nomina).getId_nomina();
+                empleado.setId_nomina(nomina);
                 empleado.setCargo(cargo);
                 if(edao.actualizar(empleado)){
                     JOptionPane.showMessageDialog(empleadosPanel, "Registrado con éxito");
@@ -197,12 +221,12 @@ public class EmpleadoController implements ActionListener{
                 cargarListaEmpleados();
             }else{
                 if(busqueda.equals("ejee")){
-                    JOptionPane.showMessageDialog(panelRegistro, "Ingrese valores adecuados en el campo de búsqueda");
+                    JOptionPane.showMessageDialog(null, "Ingrese valores adecuados en el campo de búsqueda");
                 }else{
                     this.empleados = new ArrayList<>();
                     this.empleados = edao.buscarEmpleados(busqueda);
                     if(empleados == null || empleados.isEmpty()){
-                        JOptionPane.showMessageDialog(panelRegistro, "No se han encontrado coincidencias");
+                        JOptionPane.showMessageDialog(null, "No se han encontrado coincidencias");
                     }else{
                         DefaultTableModel dtm = (DefaultTableModel) this.empleadosPanel.TABLE.getModel();
                         dtm.setRowCount(0);
@@ -213,7 +237,8 @@ public class EmpleadoController implements ActionListener{
                                 emp.getApellidos(),
                                 emp.getCi(),
                                 emp.getId_departamento(),
-                                emp.getCargo()
+                                emp.getCargo(),
+                                emp.getId_nomina()
                             })        
                         );
                        
@@ -241,7 +266,8 @@ public class EmpleadoController implements ActionListener{
                     emp.getApellidos(),
                     emp.getCi(),
                     emp.getId_departamento(),
-                    emp.getCargo()
+                    emp.getCargo(),
+                    emp.getId_nomina()
                 })        
             );
         }
@@ -291,6 +317,26 @@ public class EmpleadoController implements ActionListener{
         }else{
             for (int i = 0; i < departamentos.size(); i++) {
                 empleadosPanel.txt_departamento.addItem(departamentos.get(i).getNombre_departamento());
+            }
+        }
+    }
+    private void cargarListaNominas(GestionEmpleados empleadosPanel) {
+        nominas = nomDao.mostrar();
+        if(nominas == null ||nominas.isEmpty()){
+            System.out.println("No hay tipos de nomina registrados");
+        }else{
+            for (int i = 0; i < nominas.size(); i++) {
+                empleadosPanel.txt_nomina.addItem(nominas.get(i).getNombre_nomina());
+            }
+        }
+    }
+    private void cargarListaNominas(RegistrarEmpleado empleadosPanel) {
+        nominas = nomDao.mostrar();
+        if(nominas == null ||nominas.isEmpty()){
+            System.out.println("No hay tipos de nomina registrados");
+        }else{
+            for (int i = 0; i < nominas.size(); i++) {
+                empleadosPanel.txt_nomina.addItem(nominas.get(i).getNombre_nomina());
             }
         }
     }

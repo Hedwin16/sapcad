@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IHora extends CRUD<Hora>{
     
-    public boolean insertarHoras(Hora hora, int cedula);
+    public int insertarHoras(Hora hora, int cedula);
     public List<Hora> recuperarHorasEmpleado(int ced, String desde, String hasta);
     public List<Hora> recuperarHorasMensuales(int mes, int anio);
     public List<Hora> recuperarHorasDiarias();

@@ -40,6 +40,7 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         jMenuItem8 = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -129,6 +130,14 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         });
         jMenu4.add(jMenuItem9);
 
+        jMenuItem13.setText("Gestión de Tipos de Nómina");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem13);
+
         add(jMenu4);
 
         jMenu5.setText("Seguridad");
@@ -183,6 +192,10 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         pcontroller.setGestionDepartamentos();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        pcontroller.setGestionTipoNomina();
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -195,6 +208,7 @@ public class MenuAdministradorPrincipal extends JMenuBar{
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

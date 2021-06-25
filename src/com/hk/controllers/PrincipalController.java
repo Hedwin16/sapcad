@@ -15,6 +15,7 @@ import com.hk.views.componentes.panel.DefaultPanel;
 import com.hk.views.componentes.panel.GestionAdmin;
 import com.hk.views.componentes.panel.GestionDepartamentos;
 import com.hk.views.componentes.panel.GestionEmpleados;
+import com.hk.views.componentes.panel.GestionTipoNomina;
 import com.hk.views.componentes.panel.RegistrarEmpleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ public class PrincipalController implements ActionListener{
     RegistrarEmpleado regEmpleados;
     ReconocimientoController rcController;
     GestionDepartamentos gestionDepartamentos;
+    GestionTipoNomina gestionTipoNomina;
    
     public PrincipalController() {
     }
@@ -104,7 +106,12 @@ public class PrincipalController implements ActionListener{
     public void setGestionDepartamentos() {
         gestionDepartamentos = new GestionDepartamentos();
         this.menu.contenedor.setViewportView(gestionDepartamentos);
-    }    
+    }
+    
+    public void setGestionTipoNomina(){
+        gestionTipoNomina = new GestionTipoNomina();
+        this.menu.contenedor.setViewportView(gestionTipoNomina);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

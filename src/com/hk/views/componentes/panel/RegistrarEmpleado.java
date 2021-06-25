@@ -20,6 +20,9 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         if(txt_departamento != null){
             txt_departamento.removeAllItems();
         }
+        if(txt_nomina != null){
+            txt_nomina.removeAllItems();
+        }
         
     }
 
@@ -48,6 +51,8 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         txt_cargo = new rscomponentshade.RSTextFieldShade();
         jLabel11 = new javax.swing.JLabel();
         txt_departamento = new rojerusan.RSComboMetro();
+        txt_nomina = new rojerusan.RSComboMetro();
+        jLabel12 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(520, 560));
 
@@ -107,7 +112,7 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText(" Cargo: ");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 328, 50));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 328, 50));
 
         txt_nombres.setBgShadeHover(new java.awt.Color(121, 6, 6));
         txt_nombres.setPlaceholder("  Nombres...");
@@ -119,15 +124,20 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
 
         txt_apellidos.setBgShadeHover(new java.awt.Color(121, 6, 6));
         txt_apellidos.setPlaceholder("  Apellidos...");
+        txt_apellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_apellidosActionPerformed(evt);
+            }
+        });
         jPanel1.add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 330, -1));
 
         txt_cargo.setBgShadeHover(new java.awt.Color(121, 6, 6));
         txt_cargo.setPlaceholder("  Cargo...");
-        jPanel1.add(txt_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 328, -1));
+        jPanel1.add(txt_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 328, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel11.setText(" Departamento: ");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 328, 51));
+        jLabel11.setText(" Nómina: ");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 328, 51));
 
         txt_departamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar Departamentos...", "Departamento 1", "Departamento 2", "Departamento 3" }));
         txt_departamento.setColorArrow(new java.awt.Color(122, 0, 1));
@@ -135,6 +145,17 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         txt_departamento.setColorFondo(new java.awt.Color(122, 0, 1));
         txt_departamento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jPanel1.add(txt_departamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 330, 40));
+
+        txt_nomina.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar Tipo Nómina..." }));
+        txt_nomina.setColorArrow(new java.awt.Color(122, 0, 1));
+        txt_nomina.setColorBorde(new java.awt.Color(122, 0, 1));
+        txt_nomina.setColorFondo(new java.awt.Color(122, 0, 1));
+        txt_nomina.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jPanel1.add(txt_nomina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 330, 40));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setText(" Departamento: ");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 328, 51));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -165,6 +186,10 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         //startCamera();
     }//GEN-LAST:event_btn_activarYregistrarActionPerformed
 
+    private void txt_apellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_apellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_apellidosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel Panel_foto2;
@@ -172,6 +197,7 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
     public javax.swing.JLabel counterLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -186,5 +212,6 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
     public rscomponentshade.RSTextFieldShade txt_cedula;
     public rojerusan.RSComboMetro txt_departamento;
     public rscomponentshade.RSTextFieldShade txt_nombres;
+    public rojerusan.RSComboMetro txt_nomina;
     // End of variables declaration//GEN-END:variables
 }

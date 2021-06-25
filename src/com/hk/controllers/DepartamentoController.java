@@ -17,7 +17,6 @@ public class DepartamentoController implements ActionListener{
     Departamento departamento = new Departamento();
     List<Departamento> departamentos = new ArrayList<>();
     GestionDepartamentos gestionDepartamentos;
-    RegistrarEmpleado regEmpleado;
     Validaciones val = new Validaciones();
     public DepartamentoController() {
     }

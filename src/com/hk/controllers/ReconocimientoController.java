@@ -2,11 +2,13 @@ package com.hk.controllers;
 
 import com.hk.dao.DepartamentoDAO;
 import com.hk.dao.HoraDAO;
+import com.hk.dao.TipoNominaDAO;
 import com.hk.interfaces.IHora;
 import com.hk.models.Departamento;
 import com.hk.models.Empleado;
 import com.hk.models.EntrenamientoLBPH;
 import com.hk.models.Hora;
+import com.hk.models.TipoNomina;
 import com.hk.views.RegistrarHoraVista;
 import com.hk.views.componentes.panel.RegistrarEmpleado;
 import java.awt.Color;
@@ -21,8 +23,10 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.DoublePointer;
 import org.bytedeco.javacpp.IntPointer;
@@ -67,7 +71,9 @@ public class ReconocimientoController implements ActionListener{
     int counter = 0;
     
     List<Departamento> departamentos;
+    List<TipoNomina> nominas;
     DepartamentoDAO depDao = new DepartamentoDAO();
+    TipoNominaDAO nomDao = new TipoNominaDAO();
     
     public ReconocimientoController(RegistrarEmpleado panelRegistrar, PrincipalController pController) {
         this.eController = new EmpleadoController(panelRegistrar);
@@ -76,6 +82,7 @@ public class ReconocimientoController implements ActionListener{
         this.pController = pController;
         this.panelRegistrar.btn_activarYregistrar.addActionListener(this);
         cargarListaDepartamentos(panelRegistrar);
+        cargarListaNominas(panelRegistrar);
     }
     public ReconocimientoController(RegistrarHoraVista vistaRegistroHora,PrincipalController pController) {
         this.eController = new EmpleadoController(vistaRegistroHora);
@@ -103,6 +110,17 @@ public class ReconocimientoController implements ActionListener{
         }else{
             for (int i = 0; i < departamentos.size(); i++) {
                 empleadosPanel.txt_departamento.addItem(departamentos.get(i).getNombre_departamento());
+            }
+        }
+    }
+    
+    private void cargarListaNominas(RegistrarEmpleado empleadosPanel) {
+        nominas = nomDao.mostrar();
+        if(nominas == null ||nominas.isEmpty()){
+            System.out.println("No hay tipos de nomina registrados");
+        }else{
+            for (int i = 0; i < nominas.size(); i++) {
+                empleadosPanel.txt_nomina.addItem(nominas.get(i).getNombre_nomina());
             }
         }
     }
@@ -161,6 +179,10 @@ public class ReconocimientoController implements ActionListener{
     }
     
     void registrarHora(){
+        int TIME_VISIBLE = 4000;
+        String message = "";
+        
+        int resultado;
         IHora hdao = new HoraDAO();
         this.hora = new Hora();
         int id_hora = 0;
@@ -169,8 +191,31 @@ public class ReconocimientoController implements ActionListener{
             this.hora.setId_hora(id_hora);
         }
         
-        hdao.insertarHoras(this.hora, ci_identificada);
+        resultado = hdao.insertarHoras(this.hora, ci_identificada);
+        switch(resultado){
+            case 0: message = "Error al registrar";
+                break;
+            case 1: message = "Registrada Hora de Entrada";
+                break;
+            case 2: message = "Registrada Hora de Salida";
+                break;
+        }
         
+        JOptionPane pane = new JOptionPane(message,JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = pane.createDialog(null, "Registro de Hora");
+        dialog.setModal(false);
+        dialog.setVisible(true);
+        new Timer(TIME_VISIBLE, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            dialog.setVisible(false);
+        }
+        }).start();
+        try {
+            Thread.sleep(4000);
+        } catch (Exception e) {
+            System.out.println("Error Thread");
+        }
     }
     
     class DaemonThread implements Runnable {

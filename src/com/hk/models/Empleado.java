@@ -6,11 +6,20 @@ public class Empleado {
     private String apellidos;
     private int ci;
     private int id_departamento;
+    private int id_nomina;
     private String cargo;
     
     public Empleado() {
     }
-
+    public Empleado(Integer id_empleado, String nombres, String apellidos, int ci, int id_departamento,String cargo, int id_nomina) {
+        this.id_empleado = id_empleado;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.ci = ci;
+        this.id_departamento = id_departamento;
+        this.id_nomina = id_nomina;
+        this.cargo = cargo;
+    }
     public Empleado(Integer id_empleado, String nombres, String apellidos, int ci, int id_departamento, String cargo) {
         this.id_empleado = id_empleado;
         this.nombres = nombres;
@@ -66,5 +75,13 @@ public class Empleado {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+    
+    public int getId_nomina() {
+        return id_nomina;
+    }
+
+    public void setId_nomina(int id_nomina) {
+        this.id_nomina = id_nomina;
     }
 }

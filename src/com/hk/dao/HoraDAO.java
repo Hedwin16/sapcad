@@ -3,6 +3,8 @@ package com.hk.dao;
 import com.hk.connection.Conexion;
 import com.hk.interfaces.IHora;
 import com.hk.models.Hora;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 public class HoraDAO implements IHora{
     String sql = "";
@@ -76,7 +80,7 @@ public class HoraDAO implements IHora{
     }
 
     @Override
-    public boolean insertarHoras(Hora hora, int cedula) {
+    public int insertarHoras(Hora hora, int cedula) {
         sql = "INSERT INTO horas(hora_entrada, fecha) VALUES(CURRENT_TIME,CURRENT_DATE)";
         System.out.println("Id de la hora que entra en insertarHoras: "+hora.getId_hora());
         try {
@@ -84,8 +88,7 @@ public class HoraDAO implements IHora{
                 ps = Conexion.getInstance().getConnection().prepareStatement(sql);
                 if(ps.executeUpdate() > 0){
                     if(insertarEmpleadoHora(cedula)){
-                        JOptionPane.showMessageDialog(null, "Registrada Hora de Entrada");
-                        return true;
+                        return 1;
                     }
                 }
                 
@@ -98,15 +101,15 @@ public class HoraDAO implements IHora{
                 ps.setInt(1, hora.getId_hora());
                 //JOptionPane.showMessageDialog(null, "Registrada Hora de Salida");
                 if(ps.executeUpdate() > 0){
-                    JOptionPane.showMessageDialog(null, "Registrada Hora de Salida");
-                    return true;
+                    //JOptionPane.showMessageDialog(null, "Registrada Hora de Salida");
+                    return 2;
                 }
             }
             
         } catch (Exception e) {
             System.out.println("Exception insertando hora: "+e);
         }
-        return false;
+        return 0;
     }
     
     boolean insertarEmpleadoHora(int ced){

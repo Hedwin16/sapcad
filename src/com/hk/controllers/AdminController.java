@@ -122,7 +122,6 @@ public class AdminController implements ActionListener{
             if(validarCampos()){
                 JOptionPane.showMessageDialog(main, "LLene todos los campos");
             }else{
-                JOptionPane.showMessageDialog(main, "Ok los campos están llenos :O");
                 rs = adao.validarSesion(main.txt_usuario.getText(), main.txt_clave.getText());
                 if(!rs){
                     JOptionPane.showMessageDialog(main, "Combinación Usuario/Contraseña iválida.");
