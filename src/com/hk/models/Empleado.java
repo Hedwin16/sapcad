@@ -11,6 +11,15 @@ public class Empleado {
     
     public Empleado() {
     }
+
+    public Empleado(Integer id_empleado, String nombres, String apellidos, int ci) {
+        this.id_empleado = id_empleado;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.ci = ci;
+    }
+    
+    
     public Empleado(Integer id_empleado, String nombres, String apellidos, int ci, int id_departamento,String cargo, int id_nomina) {
         this.id_empleado = id_empleado;
         this.nombres = nombres;

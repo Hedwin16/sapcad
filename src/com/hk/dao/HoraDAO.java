@@ -174,4 +174,19 @@ public class HoraDAO implements IHora{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public boolean existeRegitroHoy() {
+        sql = "SELECT id_hora FROM horas WHERE fecha=CURRENT_DATE";
+        try {
+            ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                return true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error function existeRegistroHoy(): "+e);
+        }
+        return false;
+    }
+
 }

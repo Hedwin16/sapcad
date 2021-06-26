@@ -13,5 +13,6 @@ public interface IHora extends CRUD<Hora>{
     public void totalHorasDiarias(Hora hora, int ced);
     public String obtenerHora();
     public int idHoraRegistrada(int ced);
+    public boolean existeRegitroHoy();
     
 }

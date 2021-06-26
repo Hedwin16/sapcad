@@ -81,6 +81,11 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         jMenu2.setText("Reportes");
 
         jMenuItem3.setText("Reporte Diario");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("Reporte Mensual");
@@ -195,6 +200,10 @@ public class MenuAdministradorPrincipal extends JMenuBar{
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         pcontroller.setGestionTipoNomina();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        pcontroller.crearRegistroDiario();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

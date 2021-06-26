@@ -28,6 +28,7 @@ public class PrincipalController implements ActionListener{
     Login main;
     RegistroAdminPrincipal vistaRegistroAdmin;
     Admin admin;
+    PdfController pdfController = new PdfController();
     
     //Components
     DefaultPanel defaultPanel = new DefaultPanel();
@@ -112,6 +113,12 @@ public class PrincipalController implements ActionListener{
         gestionTipoNomina = new GestionTipoNomina();
         this.menu.contenedor.setViewportView(gestionTipoNomina);
     }
+    
+    public void crearRegistroDiario(){
+        pdfController.crearPdfDiario();
+    }
+    
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
