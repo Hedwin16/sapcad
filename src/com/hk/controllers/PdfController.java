@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -190,7 +191,20 @@ public class PdfController implements ActionListener {
     }
 
     private void generarReportePorNomina() {
-
+        String desde = getDesde().toString();
+        String hasta = getHasta().toString();
+        int index_nomina = gestionReportes.txt_nomina.getSelectedIndex();
+        int id_nomina = nominas.get(index_nomina).getId_nomina();
+        String nomina_nombre = nominas.get(index_nomina).getNombre_nomina();
+        //this.horasBD = horaDao.
+        HashMap<Empleado,List<Hora>> hash = pdf.listarPorNomina(id_nomina, desde, hasta);
+        if(hash == null || hash.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
+        }else{
+            pdf.crearPDFporNomina(nomina_nombre, hash, desde, hasta);
+            //Abrir en el visor interno
+        }
+        
     }
 
     private void generarReportePorDepartamento() {
