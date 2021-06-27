@@ -147,7 +147,7 @@ public class PdfController implements ActionListener {
         java.sql.Date fecha_desde;
         fecha_desde = new java.sql.Date(inicializador.getTime());
         if (desde == null) {
-            JOptionPane.showMessageDialog(gestionReportes, "Seleccione una fecha válida (Desde)");
+            //JOptionPane.showMessageDialog(gestionReportes, "Seleccione una fecha válida (Desde)");
         } else {
             long d = desde.getTime();
             fecha_desde = new java.sql.Date(d);
@@ -162,7 +162,8 @@ public class PdfController implements ActionListener {
         java.sql.Date fecha_hasta;
         fecha_hasta = new java.sql.Date(inicializador.getTime());
         if (hasta == null) {
-            JOptionPane.showMessageDialog(gestionReportes, "Seleccione una fecha válida (Hasta)");
+            //JOptionPane.showMessageDialog(gestionReportes, "Seleccione una fecha válida (Hasta)");
+            System.out.println("getHasta = Null");
         } else {
             long h = hasta.getTime();
             fecha_hasta = new java.sql.Date(h);
@@ -208,11 +209,51 @@ public class PdfController implements ActionListener {
     }
 
     private void generarReportePorDepartamento() {
-
+        
+        String desde = getDesde().toString();
+        String hasta = getHasta().toString();
+        int index_departamento = gestionReportes.txt_departamento.getSelectedIndex();
+        int id_departamento = departamentos.get(index_departamento).getId_departamento();
+        String departamento_nombre = departamentos.get(index_departamento).getNombre_departamento();
+        HashMap<Empleado,List<Hora>> hash = pdf.listarPorDepartamento(id_departamento, desde, hasta, 0);
+        if(hash == null || hash.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
+        }else{
+            pdf.crearPDFporDepartamento(departamento_nombre, hash, desde, hasta);
+            //Abrir en el visor interno
+        }
     }
 
     private void generarReporteNominaDepartamento() {
-
+        String desde = getDesde().toString();
+        String hasta = getHasta().toString();
+        //Departamentos
+        int index_departamento = gestionReportes.txt_departamento.getSelectedIndex();
+        int id_departamento = departamentos.get(index_departamento).getId_departamento();
+        String departamento_nombre = departamentos.get(index_departamento).getNombre_departamento();
+        //Nominas
+        int index_nomina = gestionReportes.txt_nomina.getSelectedIndex();
+        int id_nomina = nominas.get(index_nomina).getId_nomina();
+        String nomina_nombre = nominas.get(index_nomina).getNombre_nomina();
+        HashMap<Empleado,List<Hora>> hash = pdf.listarPorDepartamento(id_departamento, desde, hasta, id_nomina);
+        if(hash == null || hash.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
+        }else{
+            pdf.crearPDFporDepartamentoYNomina(departamento_nombre, nomina_nombre, hash, desde, hasta);
+            //Abrir en el visor interno
+        }
+    }
+    
+    private void generarReporteDeTodoslosEmpleados(){
+        String desde = getDesde().toString();
+        String hasta = getHasta().toString();
+        HashMap<Empleado,List<Hora>> hash = pdf.listarTodos(desde, hasta);
+        if(hash == null || hash.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
+        }else{
+            pdf.crearPDFporCadaEmpleado(hash, desde, hasta);
+            //Abrir en el visor interno
+        }
     }
 
     @Override
@@ -223,15 +264,26 @@ public class PdfController implements ActionListener {
 
         if (gestionReportes.btn_generar == e.getSource()) {
             System.out.println("Click....");
-            if (gestionReportes.TABLE.isEnabled()) {
-                generarReporteIndividual();
-            } else if (gestionReportes.txt_nomina.isEnabled() && !gestionReportes.txt_departamento.isEnabled()) {
-                generarReportePorNomina();
-            } else if (!gestionReportes.txt_nomina.isEnabled() && gestionReportes.txt_departamento.isEnabled()) {
-                generarReportePorDepartamento();
-            } else if (gestionReportes.txt_nomina.isEnabled() && gestionReportes.txt_departamento.isEnabled()) {
-                generarReporteNominaDepartamento();
+            if (gestionReportes.txt_desde.getDate() == null || gestionReportes.txt_hasta.getDate() == null) {
+                JOptionPane.showMessageDialog(gestionReportes, "Seleccione una fecha válida");
+            } else {
+                if (gestionReportes.TABLE.isEnabled()) {
+                    generarReporteIndividual();
+                } else if (gestionReportes.txt_nomina.isEnabled() && !gestionReportes.txt_departamento.isEnabled()) {
+                    generarReportePorNomina();
+                } else if (!gestionReportes.txt_nomina.isEnabled() && gestionReportes.txt_departamento.isEnabled()) {
+                    generarReportePorDepartamento();
+                } else if (gestionReportes.txt_nomina.isEnabled() && gestionReportes.txt_departamento.isEnabled()) {
+                    generarReporteNominaDepartamento();
+                } else {
+                    int dialogue = JOptionPane.YES_NO_OPTION;
+                    int result = JOptionPane.showConfirmDialog(null, "¿Desea generar el reporte de todos los empleados?", "Confirmación", dialogue);
+                    if (result == 0) {
+                        generarReporteDeTodoslosEmpleados();
+                    }
+                }
             }
+
         }
     }
 }
