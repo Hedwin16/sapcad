@@ -1,8 +1,7 @@
 package com.hk.views;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class SelectorPDF extends javax.swing.JFrame {
 
@@ -10,12 +9,19 @@ public class SelectorPDF extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("com/hk/img/logo.png"));
+        return retValue;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Seleccionar Reporte");
+        setIconImage(getIconImage());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

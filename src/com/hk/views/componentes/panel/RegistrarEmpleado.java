@@ -45,14 +45,14 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txt_nombres = new rscomponentshade.RSTextFieldShade();
-        txt_cedula = new rscomponentshade.RSTextFieldShade();
-        txt_apellidos = new rscomponentshade.RSTextFieldShade();
-        txt_cargo = new rscomponentshade.RSTextFieldShade();
         jLabel11 = new javax.swing.JLabel();
         txt_departamento = new rojerusan.RSComboMetro();
         txt_nomina = new rojerusan.RSComboMetro();
         jLabel12 = new javax.swing.JLabel();
+        txt_nombres = new javax.swing.JTextField();
+        txt_apellidos = new javax.swing.JTextField();
+        txt_cedula = new javax.swing.JTextField();
+        txt_cargo = new javax.swing.JTextField();
 
         setMinimumSize(new java.awt.Dimension(520, 560));
 
@@ -114,27 +114,6 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         jLabel10.setText(" Cargo: ");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 328, 50));
 
-        txt_nombres.setBgShadeHover(new java.awt.Color(121, 6, 6));
-        txt_nombres.setPlaceholder("  Nombres...");
-        jPanel1.add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 330, -1));
-
-        txt_cedula.setBgShadeHover(new java.awt.Color(121, 6, 6));
-        txt_cedula.setPlaceholder("  Cédula...");
-        jPanel1.add(txt_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 328, -1));
-
-        txt_apellidos.setBgShadeHover(new java.awt.Color(121, 6, 6));
-        txt_apellidos.setPlaceholder("  Apellidos...");
-        txt_apellidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_apellidosActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 330, -1));
-
-        txt_cargo.setBgShadeHover(new java.awt.Color(121, 6, 6));
-        txt_cargo.setPlaceholder("  Cargo...");
-        jPanel1.add(txt_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 328, -1));
-
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText(" Nómina: ");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 328, 51));
@@ -156,6 +135,18 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setText(" Departamento: ");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 328, 51));
+
+        txt_nombres.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txt_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 330, 40));
+
+        txt_apellidos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txt_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 330, 40));
+
+        txt_cedula.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txt_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 330, 40));
+
+        txt_cargo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txt_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 330, 40));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -186,10 +177,6 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         //startCamera();
     }//GEN-LAST:event_btn_activarYregistrarActionPerformed
 
-    private void txt_apellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_apellidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_apellidosActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel Panel_foto2;
@@ -207,11 +194,11 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel recuadro_cam;
-    public rscomponentshade.RSTextFieldShade txt_apellidos;
-    public rscomponentshade.RSTextFieldShade txt_cargo;
-    public rscomponentshade.RSTextFieldShade txt_cedula;
+    public javax.swing.JTextField txt_apellidos;
+    public javax.swing.JTextField txt_cargo;
+    public javax.swing.JTextField txt_cedula;
     public rojerusan.RSComboMetro txt_departamento;
-    public rscomponentshade.RSTextFieldShade txt_nombres;
+    public javax.swing.JTextField txt_nombres;
     public rojerusan.RSComboMetro txt_nomina;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,13 +35,13 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         Background = new javax.swing.JPanel();
         Formulario = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txt_usuario = new rscomponentshade.RSTextFieldShade();
-        txt_clave = new rscomponentshade.RSPassFieldShade();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btn_registrar = new rojerusan.RSButtonMetro();
-        txt_clave_confirmar = new rscomponentshade.RSPassFieldShade();
         jLabel7 = new javax.swing.JLabel();
+        txt_usuario = new javax.swing.JTextField();
+        txt_clave = new javax.swing.JPasswordField();
+        txt_clave_confirmar = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro de Administrador Principal");
@@ -59,19 +59,6 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("       Confirmar Contraseña: ");
         Formulario.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 420, 39));
-
-        txt_usuario.setBgShadeHover(new java.awt.Color(121, 6, 6));
-        txt_usuario.setPlaceholder("   Nombre: ");
-        txt_usuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_usuarioActionPerformed(evt);
-            }
-        });
-        Formulario.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 340, -1));
-
-        txt_clave.setBgShadeHover(new java.awt.Color(121, 6, 6));
-        txt_clave.setPlaceholder("   *****");
-        Formulario.add(txt_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 340, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -91,16 +78,26 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
                 btn_registrarActionPerformed(evt);
             }
         });
-        Formulario.add(btn_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 339, 53));
-
-        txt_clave_confirmar.setBgShadeHover(new java.awt.Color(121, 6, 6));
-        txt_clave_confirmar.setPlaceholder("   *****");
-        Formulario.add(txt_clave_confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 340, -1));
+        Formulario.add(btn_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 339, 53));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("       Contraseña: ");
         Formulario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 420, 39));
+
+        txt_usuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_usuarioActionPerformed(evt);
+            }
+        });
+        Formulario.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 340, 40));
+
+        txt_clave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Formulario.add(txt_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 340, 40));
+
+        txt_clave_confirmar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Formulario.add(txt_clave_confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 340, 40));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -124,13 +121,13 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_usuarioActionPerformed
-
     private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_registrarActionPerformed
+
+    private void txt_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_usuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,8 +141,8 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    public rscomponentshade.RSPassFieldShade txt_clave;
-    public rscomponentshade.RSPassFieldShade txt_clave_confirmar;
-    public rscomponentshade.RSTextFieldShade txt_usuario;
+    public javax.swing.JPasswordField txt_clave;
+    public javax.swing.JPasswordField txt_clave_confirmar;
+    public javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

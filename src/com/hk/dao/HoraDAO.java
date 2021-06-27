@@ -3,18 +3,12 @@ package com.hk.dao;
 import com.hk.connection.Conexion;
 import com.hk.interfaces.IHora;
 import com.hk.models.Hora;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
 
 public class HoraDAO implements IHora{
     String sql = "";
@@ -23,7 +17,28 @@ public class HoraDAO implements IHora{
 
     @Override
     public List<Hora> recuperarHorasEmpleado(int ced, String desde, String hasta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Hora> listaHoras = new ArrayList<>();
+        sql = "SELECT h.id_hora, h.hora_entrada, h.hora_salida, h.fecha, h.t_horas FROM horas AS h, empleados_horas as eh "
+                + "WHERE eh.ci_empleado = ? AND eh.id_hora = h.id_hora AND h.fecha BETWEEN ? AND ?";
+        try {
+            ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+            ps.setInt(1, ced);
+            ps.setString(2, desde);
+            ps.setString(3, hasta);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                listaHoras.add(new Hora(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5)
+                ));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error recuperando Horas de Empleado: "+e);
+        }
+        return listaHoras;
     }
 
     @Override

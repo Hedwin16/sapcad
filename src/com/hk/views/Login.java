@@ -78,9 +78,9 @@ public class Login extends javax.swing.JFrame {
         btn_ingresar.setBackground(new java.awt.Color(122, 0, 1));
         btn_ingresar.setText("INGRESAR");
 
-        txt_usuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_usuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        txt_clave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_clave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

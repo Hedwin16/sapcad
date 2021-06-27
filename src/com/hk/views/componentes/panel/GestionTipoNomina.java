@@ -41,8 +41,8 @@ public class GestionTipoNomina extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btn_guardar = new rojerusan.RSButtonMetro();
         jPanel2 = new javax.swing.JPanel();
-        txt_nomina = new rscomponentshade.RSTextFieldShade();
         jLabel2 = new javax.swing.JLabel();
+        txt_nomina = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TABLE = new javax.swing.JTable();
         btn_eliminar = new rojerusan.RSButtonMetro();
@@ -70,17 +70,11 @@ public class GestionTipoNomina extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Tipo de Nómina", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        txt_nomina.setBgShadeHover(new java.awt.Color(121, 6, 6));
-        txt_nomina.setPlaceholder("  Nómina...");
-        txt_nomina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nominaActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Nombre Nómina:");
+
+        txt_nomina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -89,9 +83,9 @@ public class GestionTipoNomina extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(160, 160, 160)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txt_nomina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_nomina, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,8 +93,8 @@ public class GestionTipoNomina extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_nomina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(txt_nomina, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 61, 790, 110));
@@ -196,10 +190,6 @@ public class GestionTipoNomina extends javax.swing.JPanel {
     private void btn_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_nuevoActionPerformed
-
-    private void txt_nominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nominaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nominaActionPerformed
     
     public void desabilitarYVaciarCampos(){
         vaciarCampos();
@@ -227,6 +217,6 @@ public class GestionTipoNomina extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    public rscomponentshade.RSTextFieldShade txt_nomina;
+    public javax.swing.JTextField txt_nomina;
     // End of variables declaration//GEN-END:variables
 }

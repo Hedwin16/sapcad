@@ -3,10 +3,13 @@ package com.hk.controllers;
 import com.hk.dao.AdminDAO;
 import com.hk.interfaces.IAdmin;
 import com.hk.models.Admin;
+import com.hk.models.LogicaPDF;
+import com.hk.views.GestionReportes;
 import com.hk.views.RegistrarHoraVista;
 import com.hk.views.Login;
 import com.hk.views.MenuPrincipal;
 import com.hk.views.RegistroAdminPrincipal;
+import com.hk.views.SelectorPDF;
 import com.hk.views.componentes.menu.MenuAdministrador1;
 import com.hk.views.componentes.menu.MenuAdministrador2;
 import com.hk.views.componentes.menu.MenuAdministrador3;
@@ -29,6 +32,7 @@ public class PrincipalController implements ActionListener{
     RegistroAdminPrincipal vistaRegistroAdmin;
     Admin admin;
     PdfController pdfController = new PdfController();
+    LogicaPDF logicaPDF;
     
     //Components
     DefaultPanel defaultPanel = new DefaultPanel();
@@ -39,6 +43,8 @@ public class PrincipalController implements ActionListener{
     ReconocimientoController rcController;
     GestionDepartamentos gestionDepartamentos;
     GestionTipoNomina gestionTipoNomina;
+    GestionReportes gestionReportes;
+    SelectorPDF selectorPDF;
    
     public PrincipalController() {
     }
@@ -118,7 +124,15 @@ public class PrincipalController implements ActionListener{
         pdfController.crearPdfDiario();
     }
     
-    
+    public void setVentanaGestionReportes(){
+        gestionReportes = new GestionReportes();
+        logicaPDF = new LogicaPDF();
+        pdfController = new PdfController(gestionReportes,logicaPDF);
+    }
+    public void setVentanaSelectorPDF(){
+        selectorPDF = new SelectorPDF();
+        selectorPDF.setVisible(true);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

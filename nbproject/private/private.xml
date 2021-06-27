@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/PrincipalController.java</file>
+            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/views/componentes/menu/MenuAdministradorPrincipal.java</file>
             <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/views/GestionReportes.java</file>
+            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/EmpleadoController.java</file>
             <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/PdfController.java</file>
             <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/models/LogicaPDF.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/views/MenuPrincipal.java</file>
+            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/dao/HoraDAO.java</file>
         </group>
     </open-files>
 </project-private>
