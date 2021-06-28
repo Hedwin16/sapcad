@@ -24,19 +24,25 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class LogicaPDF {
-
+    String archivo = "Error";
+    String nombre = "Archivo 1";
+    String[] infoArchivo = {archivo, nombre};
     String sql = "";
     PreparedStatement ps;
     ResultSet rs;
 
-    public void crearPDFDiario() {
+    public String[] crearPDFDiario() {
         try {
             Calendar fecha = Calendar.getInstance();
             String formato_fecha = "" + fecha.get(Calendar.DAY_OF_MONTH) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.YEAR);
             Document documento = new Document();
 
             //System.out.println(lista.get(0).getFecha());
-            FileOutputStream ficheroPDF = new FileOutputStream("recursos\\reportes\\Diario\\Registro_" + formato_fecha + "_.pdf");
+            nombre = "Registro_" + formato_fecha + "_.pdf";
+            archivo = "recursos\\reportes\\Diario\\"+ nombre;
+            infoArchivo[0] = archivo;
+            infoArchivo[1] = nombre;
+            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
             PdfWriter.getInstance(documento, ficheroPDF);
 
             documento.open();
@@ -85,7 +91,7 @@ public class LogicaPDF {
             while (iterador.hasNext()) {
                 //String total_horas = "00:00:00";
                 Empleado key = iterador.next();
-                Paragraph parrafoPorEmpleado = new Paragraph("Nombres: " + key.getNombres() + " " + key.getApellidos() + "\n",
+                Paragraph parrafoPorEmpleado = new Paragraph("Nombres: " + key.getNombres() + " " + key.getApellidos() + "\nCédula: " + key.getCi()+ "\n",
                         FontFactory.getFont("Montserrat",
                                 12,
                                 Font.BOLD,
@@ -105,7 +111,7 @@ public class LogicaPDF {
                     String total_horas = hashDatos.get(key).get(i).getT_horas();
                     int[] t_horas = separarValores(total_horas);
                     horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
-
+                    parrafoPorEmpleadoDatos.setAlignment(Element.ALIGN_CENTER);
                     documento.add(parrafoPorEmpleadoDatos);
                 }
                 String resultado_total = generarTotalHoras(horas_en_segundos);
@@ -131,6 +137,8 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF) " + e);
         }
+        
+        return infoArchivo;
 
     }
 
@@ -176,11 +184,15 @@ public class LogicaPDF {
         return hash;
     }
 
-    public void crearPDFIndividual(Empleado empleado, List<Hora> horas) {
+    public String[] crearPDFIndividual(Empleado empleado, List<Hora> horas) {
         try {
             Calendar fecha = Calendar.getInstance();
             Document documento = new Document();
-            FileOutputStream ficheroPDF = new FileOutputStream("recursos\\reportes\\Individual\\_" + empleado.getNombres() + " " + empleado.getApellidos() + "_.pdf");
+            nombre = "_" + empleado.getNombres() + " " + empleado.getApellidos() + "_.pdf";
+            archivo = "recursos\\reportes\\Individual\\"+nombre;
+            infoArchivo[0] = archivo;
+            infoArchivo[1] = nombre;
+            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
             PdfWriter.getInstance(documento, ficheroPDF);
             documento.open();
             Paragraph line = new Paragraph("____________________________________________________________________________\n",
@@ -272,16 +284,22 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error CrearPDFIndividual: " + e);
         }
+        
+        return infoArchivo;
 
     }
     
-    public void crearPDFporNomina(String nomina, HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
+    public String[] crearPDFporNomina(String nomina, HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
         try {
             //Calendar fecha = Calendar.getInstance();
             Document documento = new Document();
 
             //System.out.println(lista.get(0).getFecha());
-            FileOutputStream ficheroPDF = new FileOutputStream("recursos\\reportes\\Por_Nomina\\Tipo_Nomina_" + nomina + "_.pdf");
+            nombre = "Tipo_Nomina_" + nomina + "_.pdf";
+            archivo = "recursos\\reportes\\Por_Nomina\\"+nombre;
+            infoArchivo[0] = archivo;
+            infoArchivo[1] = nombre;
+            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
             PdfWriter.getInstance(documento, ficheroPDF);
 
             documento.open();
@@ -335,7 +353,7 @@ public class LogicaPDF {
             while (iterador.hasNext()) {
                 //String total_horas = "00:00:00";
                 Empleado key = iterador.next();
-                Paragraph parrafoPorEmpleado = new Paragraph("Nombres: " + key.getNombres() + " " + key.getApellidos() + "\n\n",
+                Paragraph parrafoPorEmpleado = new Paragraph("Nombres: " + key.getNombres() + " " + key.getApellidos() + "\nCédula: " + key.getCi()+ "\n\n",
                         FontFactory.getFont("Montserrat",
                                 12,
                                 Font.BOLD,
@@ -389,15 +407,141 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, Nómina) " + e);
         }
+        
+        return infoArchivo;
     }
     
-    public void crearPDFporDepartamento(String departamento, HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
+    public String[] crearPDFporDepartamento(String departamento, HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
+        try {
+            //Calendar fecha = Calendar.getInstance();
+            Document documento = new Document();
+            //System.out.println(lista.get(0).getFecha());
+            nombre = "Departamento_" + departamento + "_.pdf";
+            archivo = "recursos\\reportes\\Por_Departamento\\"+nombre;
+            infoArchivo[0] = archivo;
+            infoArchivo[1] = nombre;
+            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
+            PdfWriter.getInstance(documento, ficheroPDF);
+
+            documento.open();
+            Paragraph line = new Paragraph("____________________________________________________________________________\n",
+                    FontFactory.getFont("Montserrat",
+                            12,
+                            Font.BOLD,
+                            BaseColor.BLACK
+                    )
+            );
+
+            documento.add(line);
+
+            Paragraph titulo = new Paragraph("CONTROL DE ASISTENCIA\nREPORTE DE ASISTENCIA DEL PERSONAL\n",
+                    FontFactory.getFont("Montserrat",
+                            12,
+                            Font.BOLD,
+                            BaseColor.BLACK
+                    )
+            );
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            documento.add(titulo);
+
+            Paragraph datos = new Paragraph("Registro Correspondiente a la fechas: " + desde + " - "+ hasta,
+                    FontFactory.getFont("Montserrat",
+                            12,
+                            Font.BOLD,
+                            BaseColor.BLACK
+                    )
+            );
+
+            documento.add(datos);
+
+            Paragraph line2 = new Paragraph("____________________________________________________________________________\n",
+                    FontFactory.getFont("Montserrat",
+                            12,
+                            Font.BOLD,
+                            BaseColor.BLACK
+                    )
+            );
+            Paragraph parrafoNomina = new Paragraph("Departamento: " + departamento,
+                        FontFactory.getFont("Montserrat",
+                                12,
+                                Font.BOLD,
+                                BaseColor.BLACK
+                        ));
+                documento.add(parrafoNomina);
+            documento.add(line2);
+            //HashMap<Empleado, HashMap<List<Hora>,String>> hashDatoss;
+            Iterator<Empleado> iterador = hashDatos.keySet().iterator();
+            while (iterador.hasNext()) {
+                //String total_horas = "00:00:00";
+                Empleado key = iterador.next();
+                Paragraph parrafoPorEmpleado = new Paragraph("Nombres: " + key.getNombres() + " " + key.getApellidos() + "\nCédula: " + key.getCi()+ "\n\n",
+                        FontFactory.getFont("Montserrat",
+                                12,
+                                Font.BOLD,
+                                BaseColor.BLACK
+                        ));
+                documento.add(parrafoPorEmpleado);
+                PdfPTable tabla = new PdfPTable(4);
+                PdfPCell c1 = new PdfPCell(new Phrase("Fecha"));
+                PdfPCell c2 = new PdfPCell(new Phrase("Hora de Entrada"));
+                PdfPCell c3 = new PdfPCell(new Phrase("Hora de Salida"));
+                PdfPCell c4 = new PdfPCell(new Phrase("Total de Horas Trabajadas"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c3.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c4.setHorizontalAlignment(Element.ALIGN_CENTER);
+                tabla.addCell(c1);
+                tabla.addCell(c2);
+                tabla.addCell(c3);
+                tabla.addCell(c4);
+                //Acumulador de Horas
+                int horas_en_segundos = 0;
+                for (int i = 0; i < hashDatos.get(key).size(); i++) {
+                    tabla.addCell(hashDatos.get(key).get(i).getFecha());
+                    tabla.addCell(hashDatos.get(key).get(i).getHora_entrada());
+                    tabla.addCell(hashDatos.get(key).get(i).getHora_salida());
+                    tabla.addCell(hashDatos.get(key).get(i).getT_horas());
+                    String total_horas = hashDatos.get(key).get(i).getT_horas();
+                    int[] t_horas = separarValores(total_horas);
+                    horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
+                }
+                String resultado_total = generarTotalHoras(horas_en_segundos);
+                documento.add(tabla);
+                Paragraph totalParrafo = new Paragraph("Total de horas: " + resultado_total + " ",
+                        FontFactory.getFont("Montserrat",
+                                12,
+                                Font.PLAIN,
+                                BaseColor.BLACK
+                        )
+                );
+                documento.add(totalParrafo);
+                Paragraph parrafoSeparador = new Paragraph("\n",
+                        FontFactory.getFont("Montserrat",
+                                12,
+                                Font.BOLD,
+                                BaseColor.BLACK
+                        ));
+                documento.add(parrafoSeparador);
+            }
+
+            documento.close();
+        } catch (FileNotFoundException | DocumentException e) {
+            JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, Departamentos) " + e);
+        }
+        
+        return infoArchivo;
+    }
+    
+    public String[] crearPDFporDepartamentoYNomina(String departamento, String nomina,HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
         try {
             //Calendar fecha = Calendar.getInstance();
             Document documento = new Document();
 
-            //System.out.println(lista.get(0).getFecha());
-            FileOutputStream ficheroPDF = new FileOutputStream("recursos\\reportes\\Por_Departamento\\Departamento_" + departamento + "_.pdf");
+            nombre = "Departamento_" + departamento + "_" + nomina +  "_.pdf";
+            archivo = "recursos\\reportes\\Departamento_Y_Nomina\\"+nombre;
+            infoArchivo[0] = archivo;
+            infoArchivo[1] = nombre;
+            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
             PdfWriter.getInstance(documento, ficheroPDF);
 
             documento.open();
@@ -505,131 +649,19 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, Departamentos) " + e);
         }
+        return infoArchivo;
     }
-    
-    public void crearPDFporDepartamentoYNomina(String departamento, String nomina,HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
+
+    public String[] crearPDFporCadaEmpleado(HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta){
         try {
             //Calendar fecha = Calendar.getInstance();
             Document documento = new Document();
 
-            //System.out.println(lista.get(0).getFecha());
-            FileOutputStream ficheroPDF = new FileOutputStream("recursos\\reportes\\Departamento_Y_Nomina\\Departamento_" + departamento + "_" + nomina +  "_.pdf");
-            PdfWriter.getInstance(documento, ficheroPDF);
-
-            documento.open();
-            Paragraph line = new Paragraph("____________________________________________________________________________\n",
-                    FontFactory.getFont("Montserrat",
-                            12,
-                            Font.BOLD,
-                            BaseColor.BLACK
-                    )
-            );
-
-            documento.add(line);
-
-            Paragraph titulo = new Paragraph("                                                    CONTROL DE ASISTENCIA \n                                     REPORTE DE ASISTENCIA DEL PERSONAL \n",
-                    FontFactory.getFont("Montserrat",
-                            12,
-                            Font.BOLD,
-                            BaseColor.BLACK
-                    )
-            );
-
-            documento.add(titulo);
-
-            Paragraph datos = new Paragraph("Registro Correspondiente a la fechas: " + desde + " - "+ hasta,
-                    FontFactory.getFont("Montserrat",
-                            12,
-                            Font.BOLD,
-                            BaseColor.BLACK
-                    )
-            );
-
-            documento.add(datos);
-
-            Paragraph line2 = new Paragraph("____________________________________________________________________________\n",
-                    FontFactory.getFont("Montserrat",
-                            12,
-                            Font.BOLD,
-                            BaseColor.BLACK
-                    )
-            );
-            Paragraph parrafoNomina = new Paragraph("Departamento: " + departamento,
-                        FontFactory.getFont("Montserrat",
-                                12,
-                                Font.BOLD,
-                                BaseColor.BLACK
-                        ));
-                documento.add(parrafoNomina);
-            documento.add(line2);
-            //HashMap<Empleado, HashMap<List<Hora>,String>> hashDatoss;
-            Iterator<Empleado> iterador = hashDatos.keySet().iterator();
-            while (iterador.hasNext()) {
-                //String total_horas = "00:00:00";
-                Empleado key = iterador.next();
-                Paragraph parrafoPorEmpleado = new Paragraph("Nombres: " + key.getNombres() + " " + key.getApellidos() + "\n\n",
-                        FontFactory.getFont("Montserrat",
-                                12,
-                                Font.BOLD,
-                                BaseColor.BLACK
-                        ));
-                documento.add(parrafoPorEmpleado);
-                PdfPTable tabla = new PdfPTable(4);
-                PdfPCell c1 = new PdfPCell(new Phrase("Fecha"));
-                PdfPCell c2 = new PdfPCell(new Phrase("Hora de Entrada"));
-                PdfPCell c3 = new PdfPCell(new Phrase("Hora de Salida"));
-                PdfPCell c4 = new PdfPCell(new Phrase("Total de Horas Trabajadas"));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c2.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c3.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c4.setHorizontalAlignment(Element.ALIGN_CENTER);
-                tabla.addCell(c1);
-                tabla.addCell(c2);
-                tabla.addCell(c3);
-                tabla.addCell(c4);
-                //Acumulador de Horas
-                int horas_en_segundos = 0;
-                for (int i = 0; i < hashDatos.get(key).size(); i++) {
-                    tabla.addCell(hashDatos.get(key).get(i).getFecha());
-                    tabla.addCell(hashDatos.get(key).get(i).getHora_entrada());
-                    tabla.addCell(hashDatos.get(key).get(i).getHora_salida());
-                    tabla.addCell(hashDatos.get(key).get(i).getT_horas());
-                    String total_horas = hashDatos.get(key).get(i).getT_horas();
-                    int[] t_horas = separarValores(total_horas);
-                    horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
-                }
-                String resultado_total = generarTotalHoras(horas_en_segundos);
-                documento.add(tabla);
-                Paragraph totalParrafo = new Paragraph("Total de horas: " + resultado_total + " ",
-                        FontFactory.getFont("Montserrat",
-                                12,
-                                Font.PLAIN,
-                                BaseColor.BLACK
-                        )
-                );
-                documento.add(totalParrafo);
-                Paragraph parrafoSeparador = new Paragraph("\n",
-                        FontFactory.getFont("Montserrat",
-                                12,
-                                Font.BOLD,
-                                BaseColor.BLACK
-                        ));
-                documento.add(parrafoSeparador);
-            }
-
-            documento.close();
-        } catch (FileNotFoundException | DocumentException e) {
-            JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, Departamentos) " + e);
-        }
-    }
-
-    public void crearPDFporCadaEmpleado(HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta){
-        try {
-            //Calendar fecha = Calendar.getInstance();
-            Document documento = new Document();
-
-            //System.out.println(lista.get(0).getFecha());
-            FileOutputStream ficheroPDF = new FileOutputStream("recursos\\reportes\\General\\" + desde + " " + hasta + "_.pdf");
+            nombre = desde + " " + hasta + "_.pdf";
+            archivo = "recursos\\reportes\\General\\"+nombre;
+            infoArchivo[0] = archivo;
+            infoArchivo[1] = nombre;
+            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
             PdfWriter.getInstance(documento, ficheroPDF);
 
             documento.open();
@@ -736,6 +768,7 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, PorTodosLosEmpleados) " + e);
         }
+        return infoArchivo;
     }
     
     public String generarTotalHoras(int s) {

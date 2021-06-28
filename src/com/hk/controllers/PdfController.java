@@ -13,6 +13,7 @@ import com.hk.models.Hora;
 import com.hk.models.LogicaPDF;
 import com.hk.models.TipoNomina;
 import com.hk.views.GestionReportes;
+import com.hk.views.VisorPDF;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class PdfController implements ActionListener {
     List<Departamento> departamentos;
     List<Hora> horasBD;
     GestionReportes gestionReportes = new GestionReportes();
+    VisorPDF visorPDF = new VisorPDF();
 
     public PdfController(GestionReportes gestionReportes, LogicaPDF logica) {
         this.pdf = logica; //Puede que me de un null exception
@@ -55,10 +57,13 @@ public class PdfController implements ActionListener {
             JOptionPane.showMessageDialog(null, "No existen registros del día de hoy");
         } else {
             JOptionPane.showMessageDialog(null, "Si ya existe un registro hoy, será reemplazado");
-            pdf.crearPDFDiario();
+            String[] infoArchivo = pdf.crearPDFDiario();
             System.out.println("Creando PDF....");
             System.out.println("PDF Creado");
             //Abri pdf en el visor interno
+            visorPDF.abrirReporte(infoArchivo[0]);
+            visorPDF.setTitle(infoArchivo[1]+" - SAPCAD Reporte");
+            visorPDF.setVisible(true);
         }
 
     }
@@ -183,8 +188,13 @@ public class PdfController implements ActionListener {
             if(this.horasBD == null || this.horasBD.isEmpty()){
                 JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
             }else{
-                pdf.crearPDFIndividual(empleado, horasBD);
-                //Abrir en el visor interno
+                
+                String[] infoArchivo = pdf.crearPDFIndividual(empleado, horasBD);
+                System.out.println("Creando PDF....");
+                System.out.println("PDF Creado");
+                visorPDF.abrirReporte(infoArchivo[0]);
+                visorPDF.setTitle(infoArchivo[1]+" - SAPCAD Reporte");
+                visorPDF.setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Por favor seleccione una fila.");
@@ -202,8 +212,14 @@ public class PdfController implements ActionListener {
         if(hash == null || hash.isEmpty()){
             JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
         }else{
-            pdf.crearPDFporNomina(nomina_nombre, hash, desde, hasta);
+            
             //Abrir en el visor interno
+            String[] infoArchivo = pdf.crearPDFporNomina(nomina_nombre, hash, desde, hasta);;
+            System.out.println("Creando PDF....");
+            System.out.println("PDF Creado");
+            visorPDF.abrirReporte(infoArchivo[0]);
+            visorPDF.setTitle(infoArchivo[1]+" - SAPCAD Reporte");
+            visorPDF.setVisible(true);
         }
         
     }
@@ -219,8 +235,14 @@ public class PdfController implements ActionListener {
         if(hash == null || hash.isEmpty()){
             JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
         }else{
-            pdf.crearPDFporDepartamento(departamento_nombre, hash, desde, hasta);
+            
             //Abrir en el visor interno
+            String[] infoArchivo = pdf.crearPDFporDepartamento(departamento_nombre, hash, desde, hasta);
+            System.out.println("Creando PDF....");
+            System.out.println("PDF Creado");
+            visorPDF.abrirReporte(infoArchivo[0]);
+            visorPDF.setTitle(infoArchivo[1]+" - SAPCAD Reporte");
+            visorPDF.setVisible(true);
         }
     }
 
@@ -239,8 +261,14 @@ public class PdfController implements ActionListener {
         if(hash == null || hash.isEmpty()){
             JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
         }else{
-            pdf.crearPDFporDepartamentoYNomina(departamento_nombre, nomina_nombre, hash, desde, hasta);
+            
             //Abrir en el visor interno
+            String[] infoArchivo = pdf.crearPDFporDepartamentoYNomina(departamento_nombre, nomina_nombre, hash, desde, hasta);
+            System.out.println("Creando PDF....");
+            System.out.println("PDF Creado");
+            visorPDF.abrirReporte(infoArchivo[0]);
+            visorPDF.setTitle(infoArchivo[1]+" - SAPCAD Reporte");
+            visorPDF.setVisible(true);
         }
     }
     
@@ -251,8 +279,14 @@ public class PdfController implements ActionListener {
         if(hash == null || hash.isEmpty()){
             JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
         }else{
-            pdf.crearPDFporCadaEmpleado(hash, desde, hasta);
+            
             //Abrir en el visor interno
+            String[] infoArchivo = pdf.crearPDFporCadaEmpleado(hash, desde, hasta);
+            System.out.println("Creando PDF....");
+            System.out.println("PDF Creado");
+            visorPDF.abrirReporte(infoArchivo[0]);
+            visorPDF.setTitle(infoArchivo[1]+" - SAPCAD Reporte");
+            visorPDF.setVisible(true);
         }
     }
 
