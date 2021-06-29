@@ -60,7 +60,7 @@ public class TipoNominaDAO implements CRUD<TipoNomina>{
 
     @Override
     public boolean eliminar(int id) {
-        sql = "DELETE FROM nomina WHERE id_nomina=?";
+        sql = "DELETE FROM tipo_nomina WHERE id_nomina=?";
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             ps.setInt(1, id);

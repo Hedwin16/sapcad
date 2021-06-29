@@ -30,11 +30,12 @@ public class LogicaPDF {
     String sql = "";
     PreparedStatement ps;
     ResultSet rs;
-
+    Calendar fecha = Calendar.getInstance();
+    int mes = fecha.get(Calendar.MONTH)+1;
+    String formato_fecha = "" + fecha.get(Calendar.DAY_OF_MONTH) + "-" + mes + "-" + fecha.get(Calendar.YEAR);
     public String[] crearPDFDiario() {
         try {
-            Calendar fecha = Calendar.getInstance();
-            String formato_fecha = "" + fecha.get(Calendar.DAY_OF_MONTH) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.YEAR);
+            
             Document documento = new Document();
 
             //System.out.println(lista.get(0).getFecha());
@@ -270,7 +271,7 @@ public class LogicaPDF {
             documento.add(totalParrafo);
 
             Paragraph fechaPie = new Paragraph("Reporte generado a los " + fecha.get(Calendar.DAY_OF_MONTH) + " días del mes "
-                    + fecha.get(Calendar.MONTH) + " de " + fecha.get(Calendar.YEAR),
+                    + mes + " de " + fecha.get(Calendar.YEAR),
                     FontFactory.getFont("Montserrat",
                             12,
                             Font.PLAIN,

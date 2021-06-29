@@ -6,7 +6,14 @@
 package com.hk.views.componentes.menu;
 
 import com.hk.controllers.PrincipalController;
+import com.hk.views.VisorPDF;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -15,9 +22,13 @@ import javax.swing.JMenuBar;
 public class MenuAdministradorPrincipal extends JMenuBar{
 
     PrincipalController pcontroller;
+    JFileChooser jFileChooser1= new JFileChooser();
+    VisorPDF visorPDF = new VisorPDF();
     public MenuAdministradorPrincipal(PrincipalController pcontroller) {
         initComponents();
         this.pcontroller = pcontroller;
+        File dir = new File("recursos\\reportes");
+        jFileChooser1.setCurrentDirectory(dir);
     }
 
     @SuppressWarnings("unchecked")
@@ -160,6 +171,11 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         jMenu5.setText("Seguridad");
 
         jMenuItem10.setText("Respaldo de Base de Datos");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem10);
         jMenu5.add(jSeparator2);
 
@@ -222,8 +238,45 @@ public class MenuAdministradorPrincipal extends JMenuBar{
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        pcontroller.setVentanaSelectorPDF();
+        //pcontroller.setVentanaSelectorPDF();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.PDF", "pdf");
+        jFileChooser1.setFileFilter(filtro);
+        
+        if(jFileChooser1.showOpenDialog(this) == jFileChooser1.APPROVE_OPTION){    
+            File reporte = jFileChooser1.getSelectedFile();
+            try {
+                System.out.println("Reporte: "+reporte.toString());
+                visorPDF.abrirReporte(reporte.toString());
+                visorPDF.setTitle("Reporte SAPCAD - Control de Asistencia");
+                visorPDF.setVisible(true);
+               
+            } catch (Exception e) {
+            }
+        }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        
+        try {
+            String rutaMySql =  "C:\\wamp\\bin\\mysql\\mysql5.7.31\\bin\\mysqldump";
+            Process p = Runtime.getRuntime().exec(rutaMySql+" -u root bd_sapcad");
+            
+            InputStream is = p.getInputStream();//Pedimos la entrada
+            FileOutputStream fos = new FileOutputStream("backup_bd_sapcad.sql"); //creamos el archivo para le respaldo
+            byte[] buffer = new byte[1000]; //Creamos una variable de tipo byte para el buffer
+
+            int leido = is.read(buffer); //Devuelve el número de bytes leídos o -1 si se alcanzó el final del stream.
+            while (leido > 0) {
+                fos.write(buffer, 0, leido);//Buffer de caracteres, Desplazamiento de partida para empezar a escribir caracteres, Número de caracteres para escribir
+                leido = is.read(buffer);
+            }
+            fos.close();//Cierra respaldo
+            
+        } catch (Exception e) {
+            System.out.println("Exception Respaldo: "+e);
+        }
+
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

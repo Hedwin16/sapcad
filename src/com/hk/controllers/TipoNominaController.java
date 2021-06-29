@@ -80,7 +80,7 @@ public class TipoNominaController implements ActionListener{
         int fila_seleccionada = vistaNominas.TABLE.getSelectedRow();
             if(fila_seleccionada >= 0){
                 this.tipo = this.nominas.get(fila_seleccionada);
-                int decision = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar este departamento?", "Confirmación", JOptionPane.YES_NO_OPTION);            
+                int decision = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar esta nómina?", "Confirmación", JOptionPane.YES_NO_OPTION);            
                 if(decision == 0){
                     if(nomdao.eliminar(tipo.getId_nomina())){
                         vistaNominas.desabilitarYVaciarCampos();
