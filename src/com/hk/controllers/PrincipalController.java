@@ -4,11 +4,13 @@ import com.hk.dao.AdminDAO;
 import com.hk.interfaces.IAdmin;
 import com.hk.models.Admin;
 import com.hk.models.LogicaPDF;
+import com.hk.models.RegistroPorCILogica;
 import com.hk.views.GestionReportes;
 import com.hk.views.RegistrarHoraVista;
 import com.hk.views.Login;
 import com.hk.views.MenuPrincipal;
 import com.hk.views.RegistroAdminPrincipal;
+import com.hk.views.RegistroPorCI;
 import com.hk.views.SelectorPDF;
 import com.hk.views.componentes.menu.MenuAdministrador1;
 import com.hk.views.componentes.menu.MenuAdministrador2;
@@ -45,6 +47,9 @@ public class PrincipalController implements ActionListener{
     GestionTipoNomina gestionTipoNomina;
     GestionReportes gestionReportes;
     SelectorPDF selectorPDF;
+    RegistroPorCI vistaBackdoor;
+    RegistroPorCIController registroPorCiController;
+    RegistroPorCILogica registroPorCILogica;
    
     public PrincipalController() {
     }
@@ -132,6 +137,13 @@ public class PrincipalController implements ActionListener{
     public void setVentanaSelectorPDF(){
         selectorPDF = new SelectorPDF();
         selectorPDF.setVisible(true);
+    }
+    
+    public void setRegistroPorCI(){
+        vistaBackdoor = new RegistroPorCI();
+        registroPorCILogica = new RegistroPorCILogica();
+        registroPorCiController = new RegistroPorCIController(vistaBackdoor, registroPorCILogica);
+        System.out.println("setRegistroPorCI");
     }
 
     @Override

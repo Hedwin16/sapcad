@@ -101,17 +101,35 @@ public class LogicaPDF {
                 documento.add(parrafoPorEmpleado);
                 int horas_en_segundos = 0;
                 for (int i = 0; i < hashDatos.get(key).size(); i++) {
+                    String hora_salida;
+                    String total_ = null;
+                    if(hashDatos.get(key).get(i).getHora_salida() == null || hashDatos.get(key).get(i).getHora_salida().isEmpty()){
+                        hora_salida = "Default";
+                    }else{
+                        hora_salida = hashDatos.get(key).get(i).getHora_salida();
+                    }
+                    if(hashDatos.get(key).get(i).getT_horas() == null){
+                        total_ = "Default";
+                    }else{
+                       total_ = hashDatos.get(key).get(i).getT_horas(); 
+                    }
                     Paragraph parrafoPorEmpleadoDatos = new Paragraph("Hora de Entrada: " + hashDatos.get(key).get(i).getHora_entrada()
-                            + " Hora de Salida: " + hashDatos.get(key).get(i).getHora_salida() + " "
-                            + " Total de Horas: " + hashDatos.get(key).get(i).getT_horas(),
+                            + " Hora de Salida: " + hora_salida + " "
+                            + " Total de Horas: " + total_,
                             FontFactory.getFont("Montserrat",
                                     12,
                                     Font.PLAIN,
                                     BaseColor.BLACK
                             ));
                     String total_horas = hashDatos.get(key).get(i).getT_horas();
-                    int[] t_horas = separarValores(total_horas);
-                    horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
+                    if(total_horas==null || total_horas.isEmpty()){
+                        
+                    }else{
+                        int[] t_horas = separarValores(total_horas);
+                        horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
+                    }
+                    
+                    
                     parrafoPorEmpleadoDatos.setAlignment(Element.ALIGN_CENTER);
                     documento.add(parrafoPorEmpleadoDatos);
                 }
@@ -152,10 +170,21 @@ public class LogicaPDF {
             rs = ps.executeQuery();
             while (rs.next()) {
                 //cedula = rs.getInt(4); 
+                String hora_entrada,hora_salida;
+                if(rs.getString(2) != null || !rs.getString(2).isEmpty()){
+                    hora_entrada = rs.getString(2);
+                }else{
+                    hora_entrada = "0";
+                }
+                if(rs.getString(3) != null || !rs.getString(3).isEmpty()){
+                    hora_salida = rs.getString(3);
+                }else{
+                    hora_salida = "0";
+                }
                 Empleado emp = new Empleado(
                         rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
+                        hora_entrada,
+                        hora_salida,
                         rs.getInt(4)
                 );
                 List<Hora> listaHoras = new ArrayList<>();
@@ -782,12 +811,17 @@ public class LogicaPDF {
 
     public int[] separarValores(String entrada) {
         int[] array = {0, 0, 0};
-        int a = -3;
-        int b = -1;
-        for (int i = 0; i < 3; i++) {
-            array[i] = Integer.parseInt(entrada.substring(a += 3, b += 3));
+        if (entrada == null || entrada.isEmpty()) {
+            for (int i = 0; i < 3; i++) {
+                array[i] = 0;
+            }
+        } else {
+            int a = -3;
+            int b = -1;
+            for (int i = 0; i < 3; i++) {
+                array[i] = Integer.parseInt(entrada.substring(a += 3, b += 3));
+            }
         }
-
         return array;
     }
 

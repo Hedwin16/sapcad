@@ -12,8 +12,6 @@ public class SelectorPDF extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         File dir = new File("recursos\\reportes");
         jFileChooser1.setCurrentDirectory(dir);
-        
-        
     }
     
     public Image getIconImage(){

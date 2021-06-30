@@ -10,6 +10,7 @@ import com.hk.models.EntrenamientoLBPH;
 import com.hk.models.Hora;
 import com.hk.models.TipoNomina;
 import com.hk.views.RegistrarHoraVista;
+import com.hk.views.RegistroPorCI;
 import com.hk.views.componentes.panel.RegistrarEmpleado;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -64,7 +65,7 @@ public class ReconocimientoController implements ActionListener{
     
     private Hora hora;
     private Empleado empleado;
-    int ci_identificada = 0;
+    public int ci_identificada = 0;
     int cont_ = 0;
     int idUltimoEmpleado = 0;
     int captureId = 0;
@@ -101,6 +102,10 @@ public class ReconocimientoController implements ActionListener{
             
         }
  });
+    }
+
+    public ReconocimientoController(RegistroPorCI vista) {
+        
     }
     
     public void cargarListaDepartamentos(RegistrarEmpleado empleadosPanel) {
@@ -168,20 +173,14 @@ public class ReconocimientoController implements ActionListener{
             
         }
         if(this.vistaRegistroHora != null && this.vistaRegistroHora.btn_backdoor == e.getSource()){
-            if(vistaRegistroHora.label_nombreEmpleado.getText().equals("No Identificado") || vistaRegistroHora.label_nombreEmpleado.getText().equalsIgnoreCase("Empleado")){
-                System.out.println("No puedo registrar");
-                
-            }else{
-                System.out.println("Si puedo registrar");
-                registrarHora();
-            }
+            vistaRegistroHora.dispose();
+            pController.setRegistroPorCI();
         }
     }
     
-    void registrarHora(){
+    public void registrarHora(){
         int TIME_VISIBLE = 4000;
         String message = "";
-        
         int resultado;
         IHora hdao = new HoraDAO();
         this.hora = new Hora();
@@ -200,7 +199,6 @@ public class ReconocimientoController implements ActionListener{
             case 2: message = "Registrada Hora de Salida";
                 break;
         }
-        
         JOptionPane pane = new JOptionPane(message,JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog = pane.createDialog(null, "Registro de Hora");
         dialog.setModal(false);
