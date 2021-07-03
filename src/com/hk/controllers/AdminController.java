@@ -9,6 +9,8 @@ import com.hk.views.RegistroAdminPrincipal;
 import com.hk.views.componentes.panel.GestionAdmin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -38,8 +40,14 @@ public class AdminController implements ActionListener{
         this.vistaRegistroAdmin.btn_registrar.addActionListener(this);
         this.main = null;
         this.admin = new Admin();
+        vista.addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.out.println("Estoy cerrando ventana");
+            new Login().setVisible(true);
+           }
+        });
     }
-    
     public AdminController(GestionAdmin gestionAdmin){
         this.gestionAdmin = gestionAdmin;
         this.gestionAdmin.btn_nuevo.addActionListener(this);
@@ -87,9 +95,8 @@ public class AdminController implements ActionListener{
         admin.setTipo(4);     
         if(adao.insertar(this.admin)){
             JOptionPane.showMessageDialog(vistaRegistroAdmin, "Registrado con Éxito");
-            MenuPrincipal m = new MenuPrincipal(4);
-            m.setVisible(true);
             vistaRegistroAdmin.dispose();
+            new Login().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(vistaRegistroAdmin, "No se ha podido registrar");
         }
@@ -271,7 +278,6 @@ public class AdminController implements ActionListener{
         if(adao.actualizar(this.admin)){
             JOptionPane.showMessageDialog(vistaRegistroAdmin, "Registrado con Éxito");
             vistaRegistroAdmin.dispose();
-            new Login().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(vistaRegistroAdmin, "No se ha podido registrar");
         }

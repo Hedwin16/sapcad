@@ -12,12 +12,14 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 
-public class MenuAdministradorPrincipal extends JMenuBar{
+public class MenuAdministradorPrincipal extends JMenuBar {
 
     PrincipalController pcontroller;
-    JFileChooser jFileChooser1= new JFileChooser();
+    JFileChooser jFileChooser1 = new JFileChooser();
     VisorPDF visorPDF = new VisorPDF();
+
     public MenuAdministradorPrincipal(PrincipalController pcontroller) {
         initComponents();
         this.pcontroller = pcontroller;
@@ -193,11 +195,11 @@ public class MenuAdministradorPrincipal extends JMenuBar{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-         pcontroller.confirmarSalir();
+        pcontroller.confirmarSalir();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-         pcontroller.confirmarSalir();
+        pcontroller.confirmarSalir();
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
@@ -240,42 +242,63 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         //pcontroller.setVentanaSelectorPDF();
         pcontroller.setVerReporte();
         /*
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.PDF", "pdf");
-        jFileChooser1.setFileFilter(filtro);
+         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.PDF", "pdf");
+         jFileChooser1.setFileFilter(filtro);
         
-        if(jFileChooser1.showOpenDialog(this) == jFileChooser1.APPROVE_OPTION){    
-            File reporte = jFileChooser1.getSelectedFile();
-            try {
-                System.out.println("Reporte: "+reporte.toString());
-                visorPDF.abrirReporte(reporte.toString());
-                visorPDF.setTitle("Reporte SAPCAD - Control de Asistencia");
-                visorPDF.setVisible(true);
+         if(jFileChooser1.showOpenDialog(this) == jFileChooser1.APPROVE_OPTION){    
+         File reporte = jFileChooser1.getSelectedFile();
+         try {
+         System.out.println("Reporte: "+reporte.toString());
+         visorPDF.abrirReporte(reporte.toString());
+         visorPDF.setTitle("Reporte SAPCAD - Control de Asistencia");
+         visorPDF.setVisible(true);
                
-            } catch (Exception e) {
-            }
-        }*/
+         } catch (Exception e) {
+         }
+         }*/
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        
-        try {
-            String rutaMySql =  "C:\\wamp\\bin\\mysql\\mysql5.7.31\\bin\\mysqldump";
-            Process p = Runtime.getRuntime().exec(rutaMySql+" -u root bd_sapcad");
-            
-            InputStream is = p.getInputStream();//Pedimos la entrada
-            FileOutputStream fos = new FileOutputStream("backup_bd_sapcad.sql"); //creamos el archivo para le respaldo
-            byte[] buffer = new byte[1000]; //Creamos una variable de tipo byte para el buffer
 
-            int leido = is.read(buffer); //Devuelve el número de bytes leídos o -1 si se alcanzó el final del stream.
-            while (leido > 0) {
-                fos.write(buffer, 0, leido);//Buffer de caracteres, Desplazamiento de partida para empezar a escribir caracteres, Número de caracteres para escribir
-                leido = is.read(buffer);
+        try {
+            String rutaMySql = "C:\\wamp\\bin\\mysql\\mysql5.7.31\\bin\\mysqldump";
+            Process p = Runtime.getRuntime().exec(rutaMySql + " -u root bd_sapcad");
+
+            InputStream is = p.getInputStream();//Pedimos la entrada
+            JFileChooser jfc = new JFileChooser();
+            jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            jfc.setDialogTitle("Seleccione carpeta para guardar Respaldo");
+
+            if (jfc.showOpenDialog(jMenu1) == jfc.APPROVE_OPTION) {
+                File ruta = jfc.getSelectedFile();
+                System.out.println("ruta: " + ruta + File.separator + "backup_bd_sapcad.sql");
+
+                FileOutputStream fos = new FileOutputStream(ruta + File.separator + "backup_bd_sapcad.sql"); //creamos el archivo para le respaldo
+                byte[] buffer = new byte[1000]; //Creamos una variable de tipo byte para el buffer
+
+                int leido = is.read(buffer); //Devuelve el número de bytes leídos o -1 si se alcanzó el final del stream.
+                while (leido > 0) {
+                    fos.write(buffer, 0, leido);//Buffer de caracteres, Desplazamiento de partida para empezar a escribir caracteres, Número de caracteres para escribir
+                    leido = is.read(buffer);
+                }
+                fos.close();//Cierra respaldo
+                String fuente = "recursos\\";
+                File dir = new File(fuente);
+
+                String destino = ruta+File.separator;
+                File destDir = new File(destino);
+                try {
+                    org.apache.commons.io.FileUtils.copyDirectory(dir, destDir);
+                } catch (Exception e) {
+                    System.out.println("Exeception Respaldando imagenes: " + e);
+                }
+                JOptionPane.showMessageDialog(null, "Base de Datos Respaldada en "+ruta);
             }
-            fos.close();//Cierra respaldo
-            
+
         } catch (Exception e) {
-            System.out.println("Exception Respaldo: "+e);
+            System.out.println("Exception Respaldo: " + e);
         }
+
 
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
@@ -310,5 +333,4 @@ public class MenuAdministradorPrincipal extends JMenuBar{
     private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 
-   
 }
