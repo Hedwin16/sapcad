@@ -23,6 +23,16 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         acontroller = new AdminController(this);
     }
 
+    public RegistroAdminPrincipal(boolean editar) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        acontroller = new AdminController(this);
+        acontroller.setEditable(editar);
+    }
+    
+    
+
     public Image getIconImage(){
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("com/hk/img/logo.png"));
         return retValue;

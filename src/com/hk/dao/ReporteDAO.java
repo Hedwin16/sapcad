@@ -95,7 +95,7 @@ public class ReporteDAO implements IReporte {
     @Override
     public List<Reporte> mostrar() {
         List<Reporte> lista = new ArrayList<>();
-        sql = "SELECT r.id_reporte, r.nombre, r.reporte, r.id_tipo_reporte FROM reportes AS r ORDER BY r.id_tipo_reporte";
+        sql = "SELECT r.id_reporte, r.nombre,r.id_tipo_reporte, r.fecha FROM reportes AS r ORDER BY r.id_reporte";
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             rs = ps.executeQuery();
@@ -103,7 +103,8 @@ public class ReporteDAO implements IReporte {
                 lista.add(new Reporte(
                         rs.getInt(1),
                         rs.getString(2),
-                        rs.getInt(3)
+                        rs.getInt(3),
+                        rs.getString(4)
                 ));
             }
         } catch (Exception e) {
@@ -131,9 +132,10 @@ public class ReporteDAO implements IReporte {
     }
 
     @Override
-    public void leerReporte(Reporte reporte) {
-        sql = "SELECT reporte FROM reportes WHERE id_reporte = ? ";
+    public Reporte leerReporte(Reporte reporte) {
+        sql = "SELECT id_reporte, nombre, reporte, id_tipo_reporte, fecha FROM reportes WHERE id_reporte = ? ";
         FileOutputStream output = null;
+        Reporte r = new Reporte();
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             ps.setInt(1, reporte.getId_reporte());
@@ -149,6 +151,10 @@ public class ReporteDAO implements IReporte {
                     output.write(buffer);
                 }
                 System.out.println("Archivo Guardado....");
+                r.setId_reporte(rs.getInt(1));
+                r.setNombre(rs.getString(2));
+                r.setTipo(rs.getInt(4));
+                r.setFecha(rs.getString(5));
             }
         } catch (SQLException | IOException e) {
             System.out.println("Error leerReporte(): " + e);
@@ -167,6 +173,7 @@ public class ReporteDAO implements IReporte {
                 System.out.println("Error cerrando archivos o conexiones leerReporte... : " + e);
             }
         }
+        return r;
     }
 
     @Override
@@ -197,5 +204,27 @@ public class ReporteDAO implements IReporte {
             System.out.println("ExisteReporteHoy(): " + e);
         }
         return 0;
+    }
+
+    @Override
+    public List<Reporte> buscarReporte(int id) {
+        sql = "SELECT id_reporte, nombre, id_tipo_reporte, fecha FROM reportes WHERE id_tipo_reporte = ?";
+        List<Reporte> lista = new ArrayList<>();
+        try {
+            ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                lista.add(new Reporte(rs.getInt(1), 
+                                      rs.getString(2),
+                                      rs.getInt(3),
+                                      rs.getString(4)
+                                        ));
+            }
+            return lista;
+        } catch (Exception e) {
+            System.out.println("buscarReportes exception: "+e);
+        }
+        return lista;
     }
 }

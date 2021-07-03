@@ -78,10 +78,10 @@ public class PdfController implements ActionListener {
             JOptionPane.showMessageDialog(null, "No existen registros del día de hoy");
         } else {
             JOptionPane.showMessageDialog(null, "Si ya existe un registro hoy, será reemplazado");
-            String[] infoArchivo = pdf.crearPDFDiario();
+            pdf.crearPDFDiario();
             System.out.println("Creando PDF....");
             System.out.println("PDF Creado");
-            extraerArchivoTemporal(infoArchivo);
+            extraerArchivoTemporal();
 
         }
 
@@ -207,10 +207,10 @@ public class PdfController implements ActionListener {
             if (this.horasBD == null || this.horasBD.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
             } else {
-                String[] infoArchivo = pdf.crearPDFIndividual(empleado, horasBD);
+                pdf.crearPDFIndividual(empleado, horasBD);
                 System.out.println("Creando PDF....");
                 System.out.println("PDF Creado");
-                extraerArchivoTemporal(infoArchivo);
+                extraerArchivoTemporal();
 
             }
         } else {
@@ -229,8 +229,8 @@ public class PdfController implements ActionListener {
         if (hash == null || hash.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
         } else {
-            String[] infoArchivo = pdf.crearPDFporNomina(nomina_nombre, hash, desde, hasta);
-            extraerArchivoTemporal(infoArchivo);
+            pdf.crearPDFporNomina(nomina_nombre, hash, desde, hasta);
+            extraerArchivoTemporal();
 
         }
 
@@ -247,8 +247,8 @@ public class PdfController implements ActionListener {
         if (hash == null || hash.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
         } else {
-            String[] infoArchivo = pdf.crearPDFporDepartamento(departamento_nombre, hash, desde, hasta);
-            extraerArchivoTemporal(infoArchivo);
+            pdf.crearPDFporDepartamento(departamento_nombre, hash, desde, hasta);
+            extraerArchivoTemporal();
         }
     }
 
@@ -267,11 +267,11 @@ public class PdfController implements ActionListener {
         if (hash == null || hash.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
         } else {
+            pdf.crearPDFporDepartamentoYNomina(departamento_nombre, nomina_nombre, hash, desde, hasta);
             //Abrir en el visor interno
-            String[] infoArchivo = pdf.crearPDFporDepartamentoYNomina(departamento_nombre, nomina_nombre, hash, desde, hasta);
             System.out.println("Creando PDF....");
             System.out.println("PDF Creado");
-            extraerArchivoTemporal(infoArchivo);
+            extraerArchivoTemporal();
         }
     }
 
@@ -282,11 +282,11 @@ public class PdfController implements ActionListener {
         if (hash == null || hash.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
         } else {
+            pdf.crearPDFporCadaEmpleado(hash, desde, hasta);
             //Abrir en el visor interno
-            String[] infoArchivo = pdf.crearPDFporCadaEmpleado(hash, desde, hasta);
             System.out.println("Creando PDF....");
             System.out.println("PDF Creado");
-            extraerArchivoTemporal(infoArchivo);
+            extraerArchivoTemporal();
         }
     }
 
@@ -321,7 +321,7 @@ public class PdfController implements ActionListener {
         }
     }
 
-    private void extraerArchivoTemporal(String[] infoArchivo) {
+    private void extraerArchivoTemporal() {
         //Extrayendo PDF Temporal
         int id_reporte = rDAO.getIdUltimoReporte();
         System.out.println("id reporte: " + id_reporte);
@@ -330,13 +330,10 @@ public class PdfController implements ActionListener {
 
         } else {
             reporte.setId_reporte(id_reporte);
-            reporte.setNombre(infoArchivo[1]);
-            reporte.setTipo(4);
-            rDAO.leerReporte(reporte);
-            this.n_repo = infoArchivo[1];
+            reporte = rDAO.leerReporte(reporte);
             //Abri pdf en el visor interno
             visorPDF.abrirReporte("tmp_archivo.pdf");
-            visorPDF.setTitle(infoArchivo[1] + " - SAPCAD Reporte");
+            visorPDF.setTitle(reporte.getNombre() + " - SAPCAD Reporte");
             visorPDF.setVisible(true);
         }
     }

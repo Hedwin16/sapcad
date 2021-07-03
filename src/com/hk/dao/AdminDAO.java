@@ -61,14 +61,12 @@ public class AdminDAO implements IAdmin{
 
     @Override
     public boolean actualizar(Admin t) {
-        sql ="UPDATE administradores SET usuario=?, clave=?, tipo=? WHERE id_admin=?";
+        sql ="UPDATE administradores SET usuario=?, clave=?, tipo=? WHERE tipo=4";
         try {
             ps = Conexion.getInstance().getConnection().prepareCall(sql);
             ps.setString(1, t.getUsuario());
             ps.setString(2, t.getClave());
             ps.setInt(3, t.getTipo());
-            ps.setInt(4, t.getId_admin());
-            
             return ps.executeUpdate()>0;
             
         } catch (Exception e) {

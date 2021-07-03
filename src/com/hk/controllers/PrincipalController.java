@@ -52,7 +52,8 @@ public class PrincipalController implements ActionListener{
     RegistroPorCIController registroPorCiController;
     RegistroPorCILogica registroPorCILogica;
     AdministradorReporte adminReportes;
-   
+    AdminPDFVistaController adminPdfController;
+    
     public PrincipalController() {
     }
 
@@ -154,7 +155,8 @@ public class PrincipalController implements ActionListener{
     }
     
     public void setPerfiAdmin(){
-        vistaRegistroAdmin= new RegistroAdminPrincipal();
+        vistaRegistroAdmin= new RegistroAdminPrincipal(true);
+        this.menu.dispose();
         vistaRegistroAdmin.setVisible(true);
     }
     @Override

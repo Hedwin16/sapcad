@@ -3,18 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/dao/EmpleadoDAO.java</file>
+            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/models/TipoReporte.java</file>
             <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/PrincipalController.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/views/componentes/menu/MenuAdministradorPrincipal.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/AdminController.java</file>
             <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/EmpleadoController.java</file>
             <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/dao/ReporteDAO.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/views/SelectorPDF.java</file>
+            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/models/Reporte.java</file>
             <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/PdfController.java</file>
             <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/models/LogicaPDF.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/views/componentes/panel/AdministradorReporte.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/views/componentes/panel/GestionDepartamentos.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/dao/HoraDAO.java</file>
+            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/AdminPDFVistaController.java</file>
         </group>
     </open-files>
 </project-private>

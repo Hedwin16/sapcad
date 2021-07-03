@@ -30,7 +30,7 @@ public class TipoNominaDAO implements CRUD<TipoNomina>{
     @Override
     public List<TipoNomina> mostrar() {
         List<TipoNomina> lista = new ArrayList<>();
-        sql = "SELECT * FROM tipo_nomina ORDER BY id_nomina";
+        sql = "SELECT * FROM tipo_nomina";
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             rs = ps.executeQuery();

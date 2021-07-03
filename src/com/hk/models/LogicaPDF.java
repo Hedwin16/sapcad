@@ -38,18 +38,15 @@ public class LogicaPDF {
     Reporte reporte = new Reporte();
     CRUD rDAO = new ReporteDAO();
     
-    public String[] crearPDFDiario() {
+    public void crearPDFDiario() {
         try {
             
             Document documento = new Document();
-
             //System.out.println(lista.get(0).getFecha());
             nombre = "Registro_" + formato_fecha + "_.pdf";
             archivo = "recursos\\reportes\\Diario\\"+ nombre;
             reporte.setNombre(nombre);
             reporte.setTipo(1);
-            infoArchivo[0] = archivo;
-            infoArchivo[1] = nombre;
             FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
             PdfWriter.getInstance(documento, ficheroPDF);
 
@@ -169,8 +166,6 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF) " + e);
         }
-        
-        return infoArchivo;
 
     }
 
@@ -227,14 +222,12 @@ public class LogicaPDF {
         return hash;
     }
 
-    public String[] crearPDFIndividual(Empleado empleado, List<Hora> horas) {
+    public void crearPDFIndividual(Empleado empleado, List<Hora> horas) {
         try {
             Calendar fecha = Calendar.getInstance();
             Document documento = new Document();
             nombre = "_" + empleado.getNombres() + " " + empleado.getApellidos() + "_.pdf";
             archivo = "recursos\\reportes\\Individual\\"+nombre;
-            infoArchivo[0] = archivo;
-            infoArchivo[1] = nombre;
             reporte.setNombre(nombre);
             reporte.setTipo(3);
             FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
@@ -343,8 +336,6 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error CrearPDFIndividual: " + e);
         }
-        
-        return infoArchivo;
 
     }
     
@@ -356,8 +347,6 @@ public class LogicaPDF {
             //System.out.println(lista.get(0).getFecha());
             nombre = "Tipo_Nomina_" + nomina + "_.pdf";
             archivo = "recursos\\reportes\\Por_Nomina\\"+nombre;
-            infoArchivo[0] = archivo;
-            infoArchivo[1] = nombre;
             reporte.setNombre(nombre);
             reporte.setTipo(5);
             FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
@@ -485,15 +474,13 @@ public class LogicaPDF {
         return infoArchivo;
     }
     
-    public String[] crearPDFporDepartamento(String departamento, HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
+    public void crearPDFporDepartamento(String departamento, HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
         try {
             //Calendar fecha = Calendar.getInstance();
             Document documento = new Document();
             //System.out.println(lista.get(0).getFecha());
             nombre = "Departamento_" + departamento + "_.pdf";
             archivo = "recursos\\reportes\\Por_Departamento\\"+nombre;
-            infoArchivo[0] = archivo;
-            infoArchivo[1] = nombre;
             reporte.setNombre(nombre);
             reporte.setTipo(4);
             FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
@@ -618,19 +605,16 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, Departamentos) " + e);
         }
-        
-        return infoArchivo;
+      
     }
     
-    public String[] crearPDFporDepartamentoYNomina(String departamento, String nomina,HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
+    public void crearPDFporDepartamentoYNomina(String departamento, String nomina,HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta) {
         try {
             //Calendar fecha = Calendar.getInstance();
             Document documento = new Document();
 
             nombre = "Departamento_" + departamento + "_" + nomina +  "_.pdf";
             archivo = "recursos\\reportes\\Departamento_Y_Nomina\\"+nombre;
-            infoArchivo[0] = archivo;
-            infoArchivo[1] = nombre;
             reporte.setNombre(nombre);
             reporte.setTipo(6);
             FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
@@ -754,10 +738,9 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, Departamentos) " + e);
         }
-        return infoArchivo;
     }
 
-    public String[] crearPDFporCadaEmpleado(HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta){
+    public void crearPDFporCadaEmpleado(HashMap<Empleado, List<Hora>> hashDatos, String desde, String hasta){
         try {
             //Calendar fecha = Calendar.getInstance();
             Document documento = new Document();
@@ -888,7 +871,6 @@ public class LogicaPDF {
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, PorTodosLosEmpleados) " + e);
         }
-        return infoArchivo;
     }
     
     public String generarTotalHoras(int s) {

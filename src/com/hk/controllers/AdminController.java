@@ -21,6 +21,7 @@ public class AdminController implements ActionListener{
     GestionAdmin gestionAdmin;
     Validaciones val = new Validaciones();
     List<Admin> administradores;
+    boolean editable;
     
     public AdminController(Login main) {
         this.main = main;
@@ -139,8 +140,13 @@ public class AdminController implements ActionListener{
             if(validarCamposRegistro()){
                 JOptionPane.showMessageDialog(main, "LLene todos los campos");
             }else{
-                JOptionPane.showMessageDialog(main, "Ok los campos están llenos :O");
-                registrarAdministradorPrincipal();
+                //JOptionPane.showMessageDialog(main, "Ok los campos están llenos :O");
+                if(this.editable){
+                    actualizarAdministradorPrincipal();
+                }else{
+                    registrarAdministradorPrincipal();
+                }
+                
             }
         }
         
@@ -249,6 +255,26 @@ public class AdminController implements ActionListener{
         }
         
         return true;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
+    private void actualizarAdministradorPrincipal() {
+        String usuario = vistaRegistroAdmin.txt_usuario.getText();
+        String clave = vistaRegistroAdmin.txt_clave.getText();
+        
+        admin.setUsuario(usuario);
+        admin.setClave(clave);
+        admin.setTipo(4);     
+        if(adao.actualizar(this.admin)){
+            JOptionPane.showMessageDialog(vistaRegistroAdmin, "Registrado con Éxito");
+            vistaRegistroAdmin.dispose();
+            new Login().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(vistaRegistroAdmin, "No se ha podido registrar");
+        }
     }
     
     

@@ -198,6 +198,9 @@ public class ReconocimientoController implements ActionListener{
                 break;
             case 2: message = "Registrada Hora de Salida";
                 break;
+            case 3: message = "Ya existe una hora de salida registrada por el empleado hoy";
+                break;
+                    
         }
         JOptionPane pane = new JOptionPane(message,JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog = pane.createDialog(null, "Registro de Hora");

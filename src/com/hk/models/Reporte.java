@@ -4,11 +4,13 @@ public class Reporte {
     private int id_reporte;
     private String nombre;
     private int tipo;
+    private String fecha;
 
-    public Reporte(int id_reporte, String nombre, int tipo) {
+    public Reporte(int id_reporte, String nombre, int tipo, String fecha) {
         this.id_reporte = id_reporte;
         this.nombre = nombre;
         this.tipo = tipo;
+        this.fecha = fecha;
     }
 
     public Reporte() {
@@ -36,5 +38,13 @@ public class Reporte {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+    
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }

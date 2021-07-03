@@ -27,6 +27,8 @@ public class RegistroPorCILogica {
                 break;
             case 2: message = "Registrada Hora de Salida";
                 break;
+            case 3: message = "Ya existe una hora de salida registrada por el empleado hoy";
+                break;
         }
         JOptionPane.showMessageDialog(null, message);
     }
