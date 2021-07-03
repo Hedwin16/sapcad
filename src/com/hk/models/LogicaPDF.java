@@ -313,6 +313,14 @@ public class LogicaPDF {
                     )
             );
             documento.add(totalParrafo);
+            Paragraph totalAsistencia = new Paragraph("Asistencias: " + horas.size() + " ",
+                    FontFactory.getFont("Montserrat",
+                            12,
+                            Font.PLAIN,
+                            BaseColor.BLACK
+                    )
+            );
+            documento.add(totalAsistencia);
 
             Paragraph fechaPie = new Paragraph("Reporte generado a los " + fecha.get(Calendar.DAY_OF_MONTH) + " días del mes "
                     + mes + " de " + fecha.get(Calendar.YEAR),
@@ -350,7 +358,9 @@ public class LogicaPDF {
             archivo = "recursos\\reportes\\Por_Nomina\\"+nombre;
             infoArchivo[0] = archivo;
             infoArchivo[1] = nombre;
-            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
+            reporte.setNombre(nombre);
+            reporte.setTipo(5);
+            FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
             PdfWriter.getInstance(documento, ficheroPDF);
 
             documento.open();
@@ -445,6 +455,14 @@ public class LogicaPDF {
                         )
                 );
                 documento.add(totalParrafo);
+                Paragraph totalAsistencia = new Paragraph("Asistencias: " + hashDatos.get(key).size() + " ",
+                        FontFactory.getFont("Montserrat",
+                                12,
+                                Font.PLAIN,
+                                BaseColor.BLACK
+                        )
+                );
+                documento.add(totalAsistencia);
                 Paragraph parrafoSeparador = new Paragraph("\n",
                         FontFactory.getFont("Montserrat",
                                 12,
@@ -453,8 +471,13 @@ public class LogicaPDF {
                         ));
                 documento.add(parrafoSeparador);
             }
-
             documento.close();
+            //Insertando Reporte en la Base de Datos
+            if(rDAO.insertar(reporte)){
+               JOptionPane.showMessageDialog(null, "Reporte Agregado a la Base de Datos");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido agregar a la Base de Datos");
+            }
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, Nómina) " + e);
         }
@@ -471,7 +494,9 @@ public class LogicaPDF {
             archivo = "recursos\\reportes\\Por_Departamento\\"+nombre;
             infoArchivo[0] = archivo;
             infoArchivo[1] = nombre;
-            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
+            reporte.setNombre(nombre);
+            reporte.setTipo(4);
+            FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
             PdfWriter.getInstance(documento, ficheroPDF);
 
             documento.open();
@@ -566,6 +591,14 @@ public class LogicaPDF {
                         )
                 );
                 documento.add(totalParrafo);
+                Paragraph totalAsistencia = new Paragraph("Asistencias: " + hashDatos.get(key).size() + " ",
+                        FontFactory.getFont("Montserrat",
+                                12,
+                                Font.PLAIN,
+                                BaseColor.BLACK
+                        )
+                );
+                documento.add(totalAsistencia);
                 Paragraph parrafoSeparador = new Paragraph("\n",
                         FontFactory.getFont("Montserrat",
                                 12,
@@ -576,6 +609,12 @@ public class LogicaPDF {
             }
 
             documento.close();
+            //Insertando Reporte en la Base de Datos
+            if(rDAO.insertar(reporte)){
+               JOptionPane.showMessageDialog(null, "Reporte Agregado a la Base de Datos");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido agregar a la Base de Datos");
+            }
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, Departamentos) " + e);
         }
@@ -592,7 +631,9 @@ public class LogicaPDF {
             archivo = "recursos\\reportes\\Departamento_Y_Nomina\\"+nombre;
             infoArchivo[0] = archivo;
             infoArchivo[1] = nombre;
-            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
+            reporte.setNombre(nombre);
+            reporte.setTipo(6);
+            FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
             PdfWriter.getInstance(documento, ficheroPDF);
 
             documento.open();
@@ -687,6 +728,14 @@ public class LogicaPDF {
                         )
                 );
                 documento.add(totalParrafo);
+                Paragraph totalAsistencia = new Paragraph("Asistencias: " + hashDatos.get(key).size() + " ",
+                        FontFactory.getFont("Montserrat",
+                                12,
+                                Font.PLAIN,
+                                BaseColor.BLACK
+                        )
+                );
+                documento.add(totalAsistencia);
                 Paragraph parrafoSeparador = new Paragraph("\n",
                         FontFactory.getFont("Montserrat",
                                 12,
@@ -695,8 +744,13 @@ public class LogicaPDF {
                         ));
                 documento.add(parrafoSeparador);
             }
-
             documento.close();
+            //Insertando Reporte en la Base de Datos
+            if(rDAO.insertar(reporte)){
+               JOptionPane.showMessageDialog(null, "Reporte Agregado a la Base de Datos");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido agregar a la Base de Datos");
+            }
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, Departamentos) " + e);
         }
@@ -712,7 +766,9 @@ public class LogicaPDF {
             archivo = "recursos\\reportes\\General\\"+nombre;
             infoArchivo[0] = archivo;
             infoArchivo[1] = nombre;
-            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
+            reporte.setNombre(nombre);
+            reporte.setTipo(2);
+            FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
             PdfWriter.getInstance(documento, ficheroPDF);
 
             documento.open();
@@ -806,6 +862,14 @@ public class LogicaPDF {
                         )
                 );
                 documento.add(totalParrafo);
+                Paragraph totalAsistencia = new Paragraph("Asistencias: " + hashDatos.get(key).size() + " ",
+                        FontFactory.getFont("Montserrat",
+                                12,
+                                Font.PLAIN,
+                                BaseColor.BLACK
+                        )
+                );
+                documento.add(totalAsistencia);
                 Paragraph parrafoSeparador = new Paragraph("\n",
                         FontFactory.getFont("Montserrat",
                                 12,
@@ -814,8 +878,13 @@ public class LogicaPDF {
                         ));
                 documento.add(parrafoSeparador);
             }
-
             documento.close();
+            //Insertando Reporte en la Base de Datos
+            if(rDAO.insertar(reporte)){
+               JOptionPane.showMessageDialog(null, "Reporte Agregado a la Base de Datos");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido agregar a la Base de Datos");
+            }
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF, PorTodosLosEmpleados) " + e);
         }
