@@ -12,13 +12,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-/**
- *
- * @author pc
- */
 public class MenuAdministradorPrincipal extends JMenuBar{
 
     PrincipalController pcontroller;
@@ -180,6 +174,11 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         jMenu5.add(jSeparator2);
 
         jMenuItem11.setText("Perfil Administrador Principal");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem11);
 
         add(jMenu5);
@@ -239,6 +238,8 @@ public class MenuAdministradorPrincipal extends JMenuBar{
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         //pcontroller.setVentanaSelectorPDF();
+        pcontroller.setVerReporte();
+        /*
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.PDF", "pdf");
         jFileChooser1.setFileFilter(filtro);
         
@@ -252,7 +253,7 @@ public class MenuAdministradorPrincipal extends JMenuBar{
                
             } catch (Exception e) {
             }
-        }
+        }*/
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
@@ -277,6 +278,10 @@ public class MenuAdministradorPrincipal extends JMenuBar{
         }
 
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        pcontroller.setPerfiAdmin();
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

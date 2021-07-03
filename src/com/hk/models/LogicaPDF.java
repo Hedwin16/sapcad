@@ -1,6 +1,8 @@
 package com.hk.models;
 
 import com.hk.connection.Conexion;
+import com.hk.dao.ReporteDAO;
+import com.hk.interfaces.CRUD;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -33,6 +35,9 @@ public class LogicaPDF {
     Calendar fecha = Calendar.getInstance();
     int mes = fecha.get(Calendar.MONTH)+1;
     String formato_fecha = "" + fecha.get(Calendar.DAY_OF_MONTH) + "-" + mes + "-" + fecha.get(Calendar.YEAR);
+    Reporte reporte = new Reporte();
+    CRUD rDAO = new ReporteDAO();
+    
     public String[] crearPDFDiario() {
         try {
             
@@ -41,9 +46,11 @@ public class LogicaPDF {
             //System.out.println(lista.get(0).getFecha());
             nombre = "Registro_" + formato_fecha + "_.pdf";
             archivo = "recursos\\reportes\\Diario\\"+ nombre;
+            reporte.setNombre(nombre);
+            reporte.setTipo(1);
             infoArchivo[0] = archivo;
             infoArchivo[1] = nombre;
-            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
+            FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
             PdfWriter.getInstance(documento, ficheroPDF);
 
             documento.open();
@@ -57,14 +64,14 @@ public class LogicaPDF {
 
             documento.add(line);
 
-            Paragraph titulo = new Paragraph("                                                    CONTROL DE ASISTENCIA \n                              REPORTE DIARIO DE ASISTENCIA DEL PERSONAL \n",
+            Paragraph titulo = new Paragraph("CONTROL DE ASISTENCIA \nREPORTE DIARIO DE ASISTENCIA DEL PERSONAL \n",
                     FontFactory.getFont("Montserrat",
                             12,
                             Font.BOLD,
                             BaseColor.BLACK
                     )
             );
-
+            titulo.setAlignment(Element.ALIGN_CENTER);
             documento.add(titulo);
 
             Paragraph datos = new Paragraph("Registro Correspondiente a la fecha: " + formato_fecha,
@@ -151,8 +158,14 @@ public class LogicaPDF {
                         ));
                 documento.add(parrafoSeparador);
             }
-
             documento.close();
+            
+            //Insertando Reporte en la Base de Datos
+            if(rDAO.insertar(reporte)){
+               JOptionPane.showMessageDialog(null, "Reporte Agregado a la Base de Datos");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido agregar a la Base de Datos");
+            }
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error en la creación del PDF: (LógicaPDF) " + e);
         }
@@ -222,7 +235,9 @@ public class LogicaPDF {
             archivo = "recursos\\reportes\\Individual\\"+nombre;
             infoArchivo[0] = archivo;
             infoArchivo[1] = nombre;
-            FileOutputStream ficheroPDF = new FileOutputStream(archivo);
+            reporte.setNombre(nombre);
+            reporte.setTipo(3);
+            FileOutputStream ficheroPDF = new FileOutputStream("tmp_archivo.pdf");
             PdfWriter.getInstance(documento, ficheroPDF);
             documento.open();
             Paragraph line = new Paragraph("____________________________________________________________________________\n",
@@ -311,6 +326,12 @@ public class LogicaPDF {
             documento.add(fechaPie);
 
             documento.close();
+            //Insertando Reporte en la Base de Datos
+            if(rDAO.insertar(reporte)){
+               JOptionPane.showMessageDialog(null, "Reporte Agregado a la Base de Datos");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido agregar a la Base de Datos");
+            }
         } catch (FileNotFoundException | DocumentException e) {
             JOptionPane.showMessageDialog(null, "Error CrearPDFIndividual: " + e);
         }

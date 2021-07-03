@@ -14,5 +14,6 @@ public interface IHora extends CRUD<Hora>{
     public String obtenerHora();
     public int idHoraRegistrada(int ced);
     public boolean existeRegitroHoy();
+    public boolean eliminarPorCedula(int id_empleado);
     
 }

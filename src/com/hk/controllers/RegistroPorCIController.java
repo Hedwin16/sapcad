@@ -28,7 +28,6 @@ public class RegistroPorCIController implements ActionListener{
             System.out.println("datosSonValidos");
             logica.registarPorCedula(ci);
         }
-        
     }
     
     public boolean obtenerDatos(){

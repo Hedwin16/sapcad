@@ -2,8 +2,10 @@ package com.hk.controllers;
 
 import com.hk.dao.DepartamentoDAO;
 import com.hk.dao.EmpleadoDAO;
+import com.hk.dao.HoraDAO;
 import com.hk.dao.TipoNominaDAO;
 import com.hk.interfaces.IEmpleado;
+import com.hk.interfaces.IHora;
 import com.hk.models.Departamento;
 import com.hk.models.Empleado;
 import com.hk.models.TipoNomina;
@@ -30,6 +32,7 @@ public class EmpleadoController implements ActionListener{
     DepartamentoDAO depDao = new DepartamentoDAO();
     List<TipoNomina> nominas = new ArrayList<>();
     TipoNominaDAO nomDao = new TipoNominaDAO();
+    IHora horaDAO = new HoraDAO();
     
     public EmpleadoController(RegistrarEmpleado panelRegistro){
         this.panelRegistro = panelRegistro;
@@ -172,10 +175,19 @@ public class EmpleadoController implements ActionListener{
             int fila_seleccionada = empleadosPanel.TABLE.getSelectedRow();
             if(fila_seleccionada >= 0){
                 this.empleado = this.empleados.get(fila_seleccionada);
-                int decision = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar este empleado?", "Confirmación", JOptionPane.YES_NO_OPTION);            
+                int decision = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar este empleado?", "Confirmación", JOptionPane.YES_NO_OPTION);            
                 if(decision == 0){
                     if(edao.eliminar(empleado.getId_empleado())){
                         empleadosPanel.desabilitarYVaciarCampos();
+                        //JOptionPane.showMessageDialog(empleadosPanel, "Eliminado con éxito");
+                        //cargarListaEmpleados();
+                    }
+                    
+                }
+                int decision2 = JOptionPane.showConfirmDialog(null, "¿desea eliminar las horas registradas empleado?", "Confirmación", JOptionPane.YES_NO_OPTION);            
+                if(decision2 == 0){
+                    if(horaDAO.eliminarPorCedula(empleado.getCi())){
+                        
                         JOptionPane.showMessageDialog(empleadosPanel, "Eliminado con éxito");
                         cargarListaEmpleados();
                     }

@@ -43,7 +43,7 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         txt_clave = new javax.swing.JPasswordField();
         txt_clave_confirmar = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Administrador Principal");
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(600, 630));

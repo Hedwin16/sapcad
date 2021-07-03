@@ -3,19 +3,26 @@ package com.hk.controllers;
 import com.hk.dao.DepartamentoDAO;
 import com.hk.dao.EmpleadoDAO;
 import com.hk.dao.HoraDAO;
+import com.hk.dao.ReporteDAO;
 import com.hk.dao.TipoNominaDAO;
 import com.hk.interfaces.CRUD;
 import com.hk.interfaces.IEmpleado;
 import com.hk.interfaces.IHora;
+import com.hk.interfaces.IReporte;
 import com.hk.models.Departamento;
 import com.hk.models.Empleado;
 import com.hk.models.Hora;
 import com.hk.models.LogicaPDF;
+import com.hk.models.Reporte;
 import com.hk.models.TipoNomina;
 import com.hk.views.GestionReportes;
 import com.hk.views.VisorPDF;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,6 +44,8 @@ public class PdfController implements ActionListener {
     List<Hora> horasBD;
     GestionReportes gestionReportes = new GestionReportes();
     VisorPDF visorPDF = new VisorPDF();
+    IReporte rDAO = new ReporteDAO();
+    Reporte reporte = new Reporte();String n_repo= "";
 
     public PdfController(GestionReportes gestionReportes, LogicaPDF logica) {
         this.pdf = logica; //Puede que me de un null exception
@@ -47,9 +56,19 @@ public class PdfController implements ActionListener {
         this.gestionReportes.setVisible(true);
         this.gestionReportes.btn_buscar.addActionListener(this);
         this.gestionReportes.btn_generar.addActionListener(this);
+       
     }
 
     public PdfController() {
+    }
+    public void eliminarPorExtension() {
+        try {
+            File archivo = new File("\\"+"Registro_30-6-2021_");
+            System.out.println("Nombre Archivo: "+this.n_repo);
+            archivo.delete();
+        } catch (Exception e) {
+            System.out.println("Exception File: " + e);
+        }
     }
 
     public void crearPdfDiario() {
@@ -60,10 +79,22 @@ public class PdfController implements ActionListener {
             String[] infoArchivo = pdf.crearPDFDiario();
             System.out.println("Creando PDF....");
             System.out.println("PDF Creado");
-            //Abri pdf en el visor interno
-            visorPDF.abrirReporte(infoArchivo[0]);
-            visorPDF.setTitle(infoArchivo[1]+" - SAPCAD Reporte");
-            visorPDF.setVisible(true);
+            //Extrayendo PDF Temporal
+            int id_reporte = rDAO.getIdUltimoReporte();
+            if(id_reporte <= 0){
+                JOptionPane.showMessageDialog(null, "El id del reporte obtenido no es válido");
+            }else{
+                reporte.setId_reporte(id_reporte);
+                reporte.setNombre(infoArchivo[1]);
+                reporte.setTipo(1);
+                rDAO.leerReporte(reporte);
+                this.n_repo = infoArchivo[1];
+                //Abri pdf en el visor interno
+                visorPDF.abrirReporte("tmp_archivo.pdf");
+                visorPDF.setTitle(infoArchivo[1] + " - SAPCAD Reporte");
+                visorPDF.setVisible(true);
+            }
+            
         }
 
     }
@@ -188,11 +219,10 @@ public class PdfController implements ActionListener {
             if(this.horasBD == null || this.horasBD.isEmpty()){
                 JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
             }else{
-                
                 String[] infoArchivo = pdf.crearPDFIndividual(empleado, horasBD);
                 System.out.println("Creando PDF....");
                 System.out.println("PDF Creado");
-                visorPDF.abrirReporte(infoArchivo[0]);
+                visorPDF.abrirReporte("tmp_archivo.pdf");
                 visorPDF.setTitle(infoArchivo[1]+" - SAPCAD Reporte");
                 visorPDF.setVisible(true);
             }
@@ -212,14 +242,23 @@ public class PdfController implements ActionListener {
         if(hash == null || hash.isEmpty()){
             JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
         }else{
+            //Extrayendo PDF Temporal
+            int id_reporte = rDAO.getIdUltimoReporte();
+            if(id_reporte <= 0){
+                JOptionPane.showMessageDialog(null, "El id del reporte obtenido no es válido");
+            }else{
+                String[] infoArchivo = pdf.crearPDFporNomina(nomina_nombre, hash, desde, hasta);
+                reporte.setId_reporte(id_reporte);
+                reporte.setNombre(infoArchivo[1]);
+                reporte.setTipo(1);
+                rDAO.leerReporte(reporte);
+                this.n_repo = infoArchivo[1];
+                //Abri pdf en el visor interno
+                visorPDF.abrirReporte("tmp_archivo.pdf");
+                visorPDF.setTitle(infoArchivo[1] + " - SAPCAD Reporte");
+                visorPDF.setVisible(true);
+            }
             
-            //Abrir en el visor interno
-            String[] infoArchivo = pdf.crearPDFporNomina(nomina_nombre, hash, desde, hasta);;
-            System.out.println("Creando PDF....");
-            System.out.println("PDF Creado");
-            visorPDF.abrirReporte(infoArchivo[0]);
-            visorPDF.setTitle(infoArchivo[1]+" - SAPCAD Reporte");
-            visorPDF.setVisible(true);
         }
         
     }

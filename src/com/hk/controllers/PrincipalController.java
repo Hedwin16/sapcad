@@ -16,6 +16,7 @@ import com.hk.views.componentes.menu.MenuAdministrador1;
 import com.hk.views.componentes.menu.MenuAdministrador2;
 import com.hk.views.componentes.menu.MenuAdministrador3;
 import com.hk.views.componentes.menu.MenuAdministradorPrincipal;
+import com.hk.views.componentes.panel.AdministradorReporte;
 import com.hk.views.componentes.panel.DefaultPanel;
 import com.hk.views.componentes.panel.GestionAdmin;
 import com.hk.views.componentes.panel.GestionDepartamentos;
@@ -50,6 +51,7 @@ public class PrincipalController implements ActionListener{
     RegistroPorCI vistaBackdoor;
     RegistroPorCIController registroPorCiController;
     RegistroPorCILogica registroPorCILogica;
+    AdministradorReporte adminReportes;
    
     public PrincipalController() {
     }
@@ -125,6 +127,11 @@ public class PrincipalController implements ActionListener{
         this.menu.contenedor.setViewportView(gestionTipoNomina);
     }
     
+    public void setVerReporte(){
+        adminReportes = new AdministradorReporte();
+        this.menu.contenedor.setViewportView(adminReportes);
+    }
+    
     public void crearRegistroDiario(){
         pdfController.crearPdfDiario();
     }
@@ -145,7 +152,11 @@ public class PrincipalController implements ActionListener{
         registroPorCiController = new RegistroPorCIController(vistaBackdoor, registroPorCILogica);
         System.out.println("setRegistroPorCI");
     }
-
+    
+    public void setPerfiAdmin(){
+        vistaRegistroAdmin= new RegistroAdminPrincipal();
+        vistaRegistroAdmin.setVisible(true);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(this.menu != null && this.menu.capturarBtn == e.getSource()){

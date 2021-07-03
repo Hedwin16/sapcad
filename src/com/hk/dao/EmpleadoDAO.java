@@ -101,6 +101,7 @@ public class EmpleadoDAO implements IEmpleado{
                     photo.delete();
                     cont++;
                 }
+                sql = "";
                 //Entrenamiento
                 File clasificador = new File("recursos/fotos/clasificador.yml");
                 clasificador.delete();

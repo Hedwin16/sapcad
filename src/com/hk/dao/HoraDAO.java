@@ -91,7 +91,34 @@ public class HoraDAO implements IHora{
 
     @Override
     public boolean eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sql = "DELETE FROM";
+        return false;
+    }
+    @Override
+    public boolean eliminarPorCedula(int ci) {
+        sql = "SELECT * FROM empleados_horas WHERE ci_empleado=?";
+        try {
+            ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+            ps.setInt(1, ci);
+            rs = ps.executeQuery();
+            //Borrando las horas correspondientes a cada id
+            PreparedStatement ps2;
+            while(rs.next()){
+                int id = rs.getInt(1);
+                sql = "DELETE FROM horas WHERE id_hora=?";
+                ps2= Conexion.getInstance().getConnection().prepareStatement(sql);
+                ps2.setInt(1, id);
+                ps2.executeUpdate();
+            }
+            //Borrando las horas en la tabla de vinculación
+            sql = "DELETE FROM empleados_horas WHERE ci_empleado=?";
+            ps = Conexion.getInstance().getConnection().prepareStatement(sql);
+            ps.setInt(1, ci);
+            return ps.executeUpdate() == 1;
+        } catch (Exception e) {
+            System.out.println("Error eliminarPorCedula: "+e);
+        }
+        return false;
     }
 
     @Override
@@ -110,7 +137,7 @@ public class HoraDAO implements IHora{
             }else{
                 // Insertar Hora de Salida en la BD
                 System.out.println("Condicion 2.1 - Fecha = null -> Insertando Hora de Salida");
-                sql= "UPDATE horas SET hora_salida=CURRENT_TIME, t_horas=TIMEDIFF(CURRENT_TIME, hora_entrada) WHERE id_hora = ?";
+                sql= "UPDATE horas SET hora_salida=CURRENT_TIME, t_horas=TIMEDIFF(CURRENT_TIME, hora_entrada) WHERE id_hora = ? AND fecha=CURRENT_DATE";
                 ps = Conexion.getInstance().getConnection().prepareStatement(sql);
                 System.out.println("sql: "+sql);
                 ps.setInt(1, hora.getId_hora());
@@ -118,6 +145,8 @@ public class HoraDAO implements IHora{
                 if(ps.executeUpdate() > 0){
                     //JOptionPane.showMessageDialog(null, "Registrada Hora de Salida");
                     return 2;
+                }else{
+                    System.out.println("Hora no comenzada hoy..");
                 }
             }
             

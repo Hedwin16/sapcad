@@ -1,0 +1,1 @@
+INSERT INTO tipo_reporte(nombre) VALUES("Diario"),("General"),("Individual"),("Por Departamento"), ("Por Nómina"), ("Por Departamento y Nómina")

@@ -3,6 +3,10 @@ package com.hk.views;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileFilter;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.icepdf.ri.common.ComponentKeyBinding;
@@ -15,6 +19,7 @@ public class VisorPDF extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
+        
     }
     
     public void abrirReporte(String ruta){
@@ -39,6 +44,7 @@ public class VisorPDF extends javax.swing.JFrame {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("com/hk/img/logo.png"));
         return retValue;
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

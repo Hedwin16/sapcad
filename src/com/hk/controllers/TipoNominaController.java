@@ -4,7 +4,6 @@ import com.hk.dao.TipoNominaDAO;
 import com.hk.interfaces.CRUD;
 import com.hk.models.TipoNomina;
 import com.hk.views.componentes.panel.GestionTipoNomina;
-import com.hk.views.componentes.panel.RegistrarEmpleado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
