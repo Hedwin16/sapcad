@@ -6,6 +6,6 @@ import java.util.List;
 public interface IReporte extends CRUD<Reporte>{
     public Reporte leerReporte(Reporte reporte);
     public int getIdUltimoReporte();
-    public int idExisteReporteHoy();
+    public Reporte idExisteReporteHoy();
     public List<Reporte> buscarReporte(int id);
 }

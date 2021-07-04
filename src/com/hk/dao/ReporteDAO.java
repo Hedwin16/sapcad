@@ -25,7 +25,8 @@ public class ReporteDAO implements IReporte {
     @Override
     public boolean insertar(Reporte t) {
         if (t.getTipo() == 1) {
-            int id = idExisteReporteHoy();
+            Reporte r = idExisteReporteHoy();
+            int id = r.getId_reporte();
             if (id <= 0) {
                 sql = "INSERT INTO reportes(nombre, reporte, id_tipo_reporte, fecha) VALUES(?, ?, ?, CURRENT_DATE)";
                 try {
@@ -192,18 +193,25 @@ public class ReporteDAO implements IReporte {
     }
 
     @Override
-    public int idExisteReporteHoy() {
+    public Reporte idExisteReporteHoy() {
+        Reporte r = new Reporte();
+        r.setId_reporte(0);
         try {
-            sql = "SELECT r.id_reporte FROM reportes AS r WHERE id_tipo_reporte=1 AND fecha=CURRENT_DATE";
+            sql = "SELECT r.id_reporte, r.nombre, r.id_tipo_reporte, r.fecha FROM reportes AS r WHERE id_tipo_reporte=1 AND fecha=CURRENT_DATE";
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                return rs.getInt(1);
+                return new Reporte(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4)
+                );
             }
         } catch (Exception e) {
             System.out.println("ExisteReporteHoy(): " + e);
         }
-        return 0;
+        return r;
     }
 
     @Override
@@ -214,16 +222,16 @@ public class ReporteDAO implements IReporte {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            while(rs.next()){
-                lista.add(new Reporte(rs.getInt(1), 
-                                      rs.getString(2),
-                                      rs.getInt(3),
-                                      rs.getString(4)
-                                        ));
+            while (rs.next()) {
+                lista.add(new Reporte(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4)
+                ));
             }
             return lista;
         } catch (Exception e) {
-            System.out.println("buscarReportes exception: "+e);
+            System.out.println("buscarReportes exception: " + e);
         }
         return lista;
     }

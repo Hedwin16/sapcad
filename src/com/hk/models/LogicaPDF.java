@@ -138,11 +138,11 @@ public class LogicaPDF {
                             ));
                     String total_horas = hashDatos.get(key).get(i).getT_horas();
                     if (total_horas == null || total_horas.isEmpty()) {
-
-                    } else {
-                        int[] t_horas = separarValores(total_horas);
-                        horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
+                        total_horas = total_;
                     }
+                    int[] t_horas = separarValores(total_horas);
+                    horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
+                    
 
                     parrafoPorEmpleadoDatos.setAlignment(Element.ALIGN_CENTER);
                     documento.add(parrafoPorEmpleadoDatos);
@@ -495,9 +495,6 @@ public class LogicaPDF {
                     String total_horas = hashDatos.get(key).get(i).getT_horas();
                     if (total_horas == null || total_horas.isEmpty()) {
                         total_horas = total_;
-                    } else {
-                        int[] t_horas = separarValores(total_horas);
-                        horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
                     }
                     tabla.addCell(hashDatos.get(key).get(i).getFecha());
                     tabla.addCell(hashDatos.get(key).get(i).getHora_entrada());
@@ -670,10 +667,7 @@ public class LogicaPDF {
                     String total_horas = hashDatos.get(key).get(i).getT_horas();
                     if (total_horas == null || total_horas.isEmpty()) {
                         total_horas = total_;
-                    } else {
-                        int[] t_horas = separarValores(total_horas);
-                        horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
-                    }
+                    } 
                     tabla.addCell(hashDatos.get(key).get(i).getFecha());
                     tabla.addCell(hashDatos.get(key).get(i).getHora_entrada());
                     tabla.addCell(hora_salida);
@@ -844,9 +838,6 @@ public class LogicaPDF {
                     String total_horas = hashDatos.get(key).get(i).getT_horas();
                     if (total_horas == null || total_horas.isEmpty()) {
                         total_horas = total_;
-                    } else {
-                        int[] t_horas = separarValores(total_horas);
-                        horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
                     }
                     tabla.addCell(hashDatos.get(key).get(i).getFecha());
                     tabla.addCell(hashDatos.get(key).get(i).getHora_entrada());
@@ -1018,10 +1009,7 @@ public class LogicaPDF {
                     String total_horas = hashDatos.get(key).get(i).getT_horas();
                     if (total_horas == null || total_horas.isEmpty()) {
                         total_horas = total_;
-                    } else {
-                        int[] t_horas = separarValores(total_horas);
-                        horas_en_segundos = horas_en_segundos + sumarEnSegundos(t_horas);
-                    }
+                    } 
                     tabla.addCell(hashDatos.get(key).get(i).getFecha());
                     tabla.addCell(hashDatos.get(key).get(i).getHora_entrada());
                     tabla.addCell(hora_salida);
@@ -1288,11 +1276,15 @@ public class LogicaPDF {
     private String obtenerTotalTabla(HashMap<Empleado, List<Hora>> hashDatos, Empleado key, int i, String horaDefault) {
         String entrada = hashDatos.get(key).get(i).getHora_entrada();
         int[] ent = separarValores(entrada);
+        System.out.println("ent: "+ent);
         int[] sal = separarValores(horaDefault);
         int entSeg = sumarEnSegundos(ent);
+        System.out.println("entSeg = "+entSeg);
         int salSeg = sumarEnSegundos(sal);
         int res = salSeg - entSeg;
+        System.out.println("entSeg = "+entSeg);
         String horaa = convertirHoras(res);
+        System.out.println("ksjdk: "+horaa);
         return horaa;
     }
 

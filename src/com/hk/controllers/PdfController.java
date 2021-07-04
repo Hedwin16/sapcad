@@ -81,7 +81,7 @@ public class PdfController implements ActionListener {
             pdf.crearPDFDiario();
             System.out.println("Creando PDF....");
             System.out.println("PDF Creado");
-            extraerArchivoTemporal();
+            extraerArchivoTemporalDiario();
 
         }
 
@@ -330,6 +330,21 @@ public class PdfController implements ActionListener {
 
         } else {
             reporte.setId_reporte(id_reporte);
+            reporte = rDAO.leerReporte(reporte);
+            //Abri pdf en el visor interno
+            visorPDF.abrirReporte("tmp_archivo.pdf");
+            visorPDF.setTitle(reporte.getNombre() + " - SAPCAD Reporte");
+            visorPDF.setVisible(true);
+        }
+    }
+    private void extraerArchivoTemporalDiario() {
+        //Extrayendo PDF Temporal
+        this.reporte = rDAO.idExisteReporteHoy();
+        System.out.println("id reporte: " + reporte.getId_reporte());
+        if (reporte.getId_reporte() <= 0) {
+            JOptionPane.showMessageDialog(null, "El id del reporte obtenido no es válido");
+
+        } else {
             reporte = rDAO.leerReporte(reporte);
             //Abri pdf en el visor interno
             visorPDF.abrirReporte("tmp_archivo.pdf");
