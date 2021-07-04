@@ -92,7 +92,7 @@ public class HoraDAO implements IHora {
 
     @Override
     public boolean eliminar(int id) {
-        sql = "DELETE FROM";
+        sql = "";
         return false;
     }
 
@@ -139,6 +139,7 @@ public class HoraDAO implements IHora {
                     hs = rs.getString(1);
                 }
                 if (hs == null || hs.equals("")) {
+                    sql = "INSERT INTO horas(hora_entrada,fecha) VALUES(CURRENT_TIME, CURRENT_DATE)";
                     ps = Conexion.getInstance().getConnection().prepareStatement(sql);
                     if (ps.executeUpdate() > 0) {
                         if (insertarEmpleadoHora(cedula)) {

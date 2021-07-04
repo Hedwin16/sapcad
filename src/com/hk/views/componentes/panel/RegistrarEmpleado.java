@@ -89,7 +89,7 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         counterLabel1.setBackground(new java.awt.Color(255, 255, 255));
         counterLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         counterLabel1.setForeground(new java.awt.Color(121, 6, 6));
-        counterLabel1.setText("00/200");
+        counterLabel1.setText("00/100");
         counterLabel1.setOpaque(true);
         jPanel3.add(counterLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 50, 30));
 

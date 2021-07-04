@@ -65,6 +65,8 @@ public final class GestionEmpleados extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TABLE = new javax.swing.JTable();
@@ -88,6 +90,14 @@ public final class GestionEmpleados extends javax.swing.JPanel {
         txt_nombres = new javax.swing.JTextField();
         btn_eliminar = new rojerusan.RSButtonMetro();
         btn_editar = new rojerusan.RSButtonMetro();
+
+        jMenuItem1.setText("Reentrenar Rostro");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -115,6 +125,7 @@ public final class GestionEmpleados extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TABLE.setComponentPopupMenu(jPopupMenu1);
         TABLE.setSelectionBackground(new java.awt.Color(240, 240, 240));
         TABLE.setSelectionForeground(new java.awt.Color(51, 51, 51));
         jScrollPane1.setViewportView(TABLE);
@@ -265,6 +276,10 @@ public final class GestionEmpleados extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_buscarActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TABLE;
@@ -279,9 +294,11 @@ public final class GestionEmpleados extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    public javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextField txt_apellidos;
     public javax.swing.JTextField txt_buscar;

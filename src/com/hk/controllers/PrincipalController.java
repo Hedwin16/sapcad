@@ -9,6 +9,7 @@ import com.hk.views.GestionReportes;
 import com.hk.views.RegistrarHoraVista;
 import com.hk.views.Login;
 import com.hk.views.MenuPrincipal;
+import com.hk.views.Reentrenamiento;
 import com.hk.views.RegistroAdminPrincipal;
 import com.hk.views.RegistroPorCI;
 import com.hk.views.SelectorPDF;
@@ -53,6 +54,7 @@ public class PrincipalController implements ActionListener{
     RegistroPorCILogica registroPorCILogica;
     AdministradorReporte adminReportes;
     AdminPDFVistaController adminPdfController;
+    Reentrenamiento vistaReentrenamiento;
     
     public PrincipalController() {
     }
@@ -158,6 +160,12 @@ public class PrincipalController implements ActionListener{
         vistaRegistroAdmin= new RegistroAdminPrincipal(true);
         this.menu.dispose();
         vistaRegistroAdmin.setVisible(true);
+    }
+    public void setReentrenamientoEmpleado(int id){
+        vistaReentrenamiento = new Reentrenamiento();
+        rcController = new ReconocimientoController(vistaReentrenamiento, this);
+        rcController.idEmpleadoEditar = id;
+        rcController.editable = true;
     }
     @Override
     public void actionPerformed(ActionEvent e) {

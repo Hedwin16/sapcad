@@ -9,6 +9,7 @@ import com.hk.interfaces.IHora;
 import com.hk.models.Departamento;
 import com.hk.models.Empleado;
 import com.hk.models.TipoNomina;
+import com.hk.views.Reentrenamiento;
 import com.hk.views.RegistrarHoraVista;
 import com.hk.views.componentes.panel.GestionEmpleados;
 import com.hk.views.componentes.panel.RegistrarEmpleado;
@@ -33,6 +34,8 @@ public class EmpleadoController implements ActionListener{
     List<TipoNomina> nominas = new ArrayList<>();
     TipoNominaDAO nomDao = new TipoNominaDAO();
     IHora horaDAO = new HoraDAO();
+    Reentrenamiento vistaReentrenamiento;
+    PrincipalController pController = new PrincipalController();
     
     public EmpleadoController(RegistrarEmpleado panelRegistro){
         this.panelRegistro = panelRegistro;
@@ -41,6 +44,12 @@ public class EmpleadoController implements ActionListener{
     public EmpleadoController(RegistrarHoraVista vistaRegistroHora){
         this.vistaRegistroHora = vistaRegistroHora;
     }
+
+    public EmpleadoController(Reentrenamiento vistaReentrenamiento) {
+        this.vistaReentrenamiento = vistaReentrenamiento;
+    }
+    
+   
     
     public EmpleadoController(GestionEmpleados empleadosPanel){
         this.empleadosPanel = empleadosPanel;
@@ -48,6 +57,7 @@ public class EmpleadoController implements ActionListener{
         this.empleadosPanel.btn_editar.addActionListener(this);
         this.empleadosPanel.btn_eliminar.addActionListener(this);
         this.empleadosPanel.btn_guardar.addActionListener(this);
+        this.empleadosPanel.jMenuItem1.addActionListener(this);
         this.cargarListaEmpleados();
         this.cargarListaDepartamentos(empleadosPanel);
         this.cargarListaNominas(empleadosPanel);
@@ -259,6 +269,18 @@ public class EmpleadoController implements ActionListener{
                 
             }
             
+        }
+        //Reentrenar
+        if(empleadosPanel != null && this.empleadosPanel.jMenuItem1 == e.getSource()){
+            int fila_seleccionada = empleadosPanel.TABLE.getSelectedRow();
+            if(fila_seleccionada >= 0){
+                this.empleado = this.empleados.get(fila_seleccionada);
+                //
+                System.out.println("Q pao");
+                pController.setReentrenamientoEmpleado(this.empleado.getId_empleado());
+            }else{
+                JOptionPane.showMessageDialog(empleadosPanel, "Por favor seleccione una fila.");
+            }
         }
     }
 

@@ -29,11 +29,11 @@ public class RegistrarHoraVista extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         label_nombreEmpleado = new javax.swing.JLabel();
-        Panel_foto2 = new javax.swing.JPanel();
-        recuadro_cam = new javax.swing.JLabel();
         btn_desactivarCamara = new rojerusan.RSButtonMetro();
         btn_activarCamara = new rojerusan.RSButtonMetro();
         btn_backdoor = new rojerusan.RSButtonMetro();
+        Panel_foto2 = new javax.swing.JPanel();
+        recuadro_cam = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Asistencia - SAPCAD");
@@ -53,15 +53,6 @@ public class RegistrarHoraVista extends javax.swing.JFrame {
         label_nombreEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_nombreEmpleado.setText("Empleado");
         jPanel3.add(label_nombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 4, 780, 90));
-
-        Panel_foto2.setBackground(new java.awt.Color(122, 0, 1));
-        Panel_foto2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        recuadro_cam.setBackground(new java.awt.Color(255, 255, 255));
-        recuadro_cam.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 4, true));
-        Panel_foto2.add(recuadro_cam, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 300, 270));
-
-        jPanel3.add(Panel_foto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 320, 290));
 
         btn_desactivarCamara.setBackground(new java.awt.Color(122, 0, 1));
         btn_desactivarCamara.setText("Desactivar Cámara");
@@ -87,6 +78,29 @@ public class RegistrarHoraVista extends javax.swing.JFrame {
         btn_backdoor.setText("CI");
         jPanel3.add(btn_backdoor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, 40, 40));
 
+        Panel_foto2.setBackground(new java.awt.Color(122, 0, 1));
+
+        recuadro_cam.setBackground(new java.awt.Color(255, 255, 255));
+        recuadro_cam.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 4, true));
+
+        javax.swing.GroupLayout Panel_foto2Layout = new javax.swing.GroupLayout(Panel_foto2);
+        Panel_foto2.setLayout(Panel_foto2Layout);
+        Panel_foto2Layout.setHorizontalGroup(
+            Panel_foto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_foto2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(recuadro_cam, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        Panel_foto2Layout.setVerticalGroup(
+            Panel_foto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_foto2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(recuadro_cam, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(Panel_foto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 320, 270));
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -100,11 +114,11 @@ public class RegistrarHoraVista extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

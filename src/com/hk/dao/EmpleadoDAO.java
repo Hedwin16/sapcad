@@ -95,7 +95,7 @@ public class EmpleadoDAO implements IEmpleado{
             if(ps.executeUpdate()>0){
                 System.out.println("Borrando Fotos");
                 int cont = 1;
-                for (int i = 0; i < 200; i++) {
+                for (int i = 0; i < 100; i++) {
                     File photo = new File("recursos/fotos/persona."+id+"."+cont+".jpg");
                     System.out.println(photo.toString());
                     photo.delete();
