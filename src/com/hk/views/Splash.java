@@ -9,7 +9,7 @@ import com.hk.controllers.AdminController;
 import com.hk.controllers.PdfController;
 import com.hk.controllers.ReconocimientoController;
 import com.hk.views.componentes.panel.DefaultPanel;
-import com.hk.views.componentes.panel.GestionAdmin;
+import com.hk.views.componentes.panel.GestionUsuarios;
 import com.hk.views.componentes.panel.GestionDepartamentos;
 import com.hk.views.componentes.panel.GestionEmpleados;
 import com.hk.views.componentes.panel.RegistrarEmpleado;
@@ -50,7 +50,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
     void initWeightComponents(){
         //Components
         DefaultPanel defaultPanel = new DefaultPanel();
-        GestionAdmin adminPanel = new GestionAdmin();
+        GestionUsuarios adminPanel = new GestionUsuarios();
         GestionEmpleados empleadosPanel = new GestionEmpleados();
         RegistrarHoraVista vistaRegistroHora = new RegistrarHoraVista();
         RegistrarEmpleado regEmpleados = new RegistrarEmpleado();

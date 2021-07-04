@@ -42,7 +42,7 @@ public class AdminDAO implements IAdmin{
     public List<Admin> mostrar() {
         List<Admin> list = new ArrayList<>();
         
-        sql = "SELECT * FROM administradores WHERE tipo!=4 ORDER BY id_admin";
+        sql = "SELECT * FROM administradores WHERE tipo!=3 ORDER BY id_admin";
         
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
@@ -61,7 +61,7 @@ public class AdminDAO implements IAdmin{
 
     @Override
     public boolean actualizar(Admin t) {
-        sql ="UPDATE administradores SET usuario=?, clave=?, tipo=? WHERE tipo=4";
+        sql ="UPDATE administradores SET usuario=?, clave=?, tipo=? WHERE tipo=3";
         try {
             ps = Conexion.getInstance().getConnection().prepareCall(sql);
             ps.setString(1, t.getUsuario());
@@ -115,7 +115,7 @@ public class AdminDAO implements IAdmin{
 
     @Override
     public boolean existeAdministrador() {
-        sql = "SELECT * FROM administradores WHERE tipo=4";
+        sql = "SELECT * FROM administradores WHERE tipo=3";
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             rs = ps.executeQuery();

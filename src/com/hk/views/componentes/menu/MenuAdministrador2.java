@@ -5,8 +5,17 @@
  */
 package com.hk.views.componentes.menu;
 
+import com.google.gson.Gson;
 import com.hk.controllers.PrincipalController;
+import com.hk.models.AjusteBD;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.InputStream;
+import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,27 +39,38 @@ public class MenuAdministrador2 extends JMenuBar{
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenu6 = new javax.swing.JMenu();
 
         setBorder(null);
 
         jMenu1.setText("Archivo");
+        jMenu1.add(jSeparator1);
 
-        jMenuItem14.setText("Cerrar Sesion");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem12.setText("Cerrar Sesion");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                jMenuItem12ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem14);
+        jMenu1.add(jMenuItem12);
 
         jMenuItem2.setText("Salir");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -65,22 +85,85 @@ public class MenuAdministrador2 extends JMenuBar{
         jMenu2.setText("Reportes");
 
         jMenuItem3.setText("Reporte Diario");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
+        jMenu2.add(jSeparator4);
 
-        jMenuItem4.setText("Reporte Mensual");
+        jMenuItem14.setText("Reporte Por Fecha");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem14);
+
+        jMenuItem4.setText("Ver Reportes");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
-
-        jMenuItem5.setText("Reporte por Empleado");
-        jMenu2.add(jMenuItem5);
 
         add(jMenu2);
 
         jMenu3.setText("Empleados");
 
         jMenuItem7.setText("Editar/Eliminar Empleado");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
         add(jMenu3);
+
+        jMenu4.setText("Administradores");
+
+        jMenuItem8.setText("Gestión de Usuarios");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+        jMenu4.add(jSeparator3);
+
+        jMenuItem9.setText("Gestión de Departamentos");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem9);
+
+        jMenuItem13.setText("Gestión de Tipos de Nómina");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem13);
+
+        add(jMenu4);
+
+        jMenu5.setText("Seguridad");
+
+        jMenuItem10.setText("Respaldo de Base de Datos");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem10);
+        jMenu5.add(jSeparator2);
+
+        add(jMenu5);
 
         jMenu6.setText("Salir");
         jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -91,32 +174,145 @@ public class MenuAdministrador2 extends JMenuBar{
         add(jMenu6);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        pcontroller.cerrarSesion();
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-         pcontroller.confirmarSalir();
+        pcontroller.confirmarSalir();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-         pcontroller.confirmarSalir();
-    }//GEN-LAST:event_jMenu6MouseClicked
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        pcontroller.crearRegistroDiario();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        pcontroller.cerrarSesion();
+        pcontroller.setVentanaGestionReportes();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        //pcontroller.setVentanaSelectorPDF();
+        pcontroller.setVerReporte();
+        /*
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.PDF", "pdf");
+        jFileChooser1.setFileFilter(filtro);
+
+        if(jFileChooser1.showOpenDialog(this) == jFileChooser1.APPROVE_OPTION){
+            File reporte = jFileChooser1.getSelectedFile();
+            try {
+                System.out.println("Reporte: "+reporte.toString());
+                visorPDF.abrirReporte(reporte.toString());
+                visorPDF.setTitle("Reporte SAPCAD - Control de Asistencia");
+                visorPDF.setVisible(true);
+
+            } catch (Exception e) {
+            }
+        }*/
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        pcontroller.setGestionEmpleados();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        pcontroller.setGestionAdmin();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        pcontroller.setGestionDepartamentos();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        pcontroller.setGestionTipoNomina();
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+
+        try {
+            String json = "";
+            BufferedReader br = new BufferedReader(new FileReader("config.json"));
+            String linea = "";
+            while ((linea = br.readLine()) != null) {
+                json += linea;
+            }
+            Gson gson = new Gson();
+            AjusteBD config = gson.fromJson(json, AjusteBD.class);
+
+            String USER = config.getUsuario();
+            String PASS = config.getClave();
+            //----------------------------------------
+            Process p;
+            String rutaMySql = "C:\\wamp\\bin\\mysql\\mysql5.7.31\\bin\\mysqldump";
+            if(PASS == null || PASS.equals("")){
+                p = Runtime.getRuntime().exec(rutaMySql + " -u "+USER+" bd_sapcad");
+            }else{
+                p = Runtime.getRuntime().exec(rutaMySql + " -u "+USER+" p"+PASS+" bd_sapcad");
+            }
+            //p = Runtime.getRuntime().exec(rutaMySql + " -u root bd_sapcad");
+
+            InputStream is = p.getInputStream();//Pedimos la entrada
+            JFileChooser jfc = new JFileChooser();
+            jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            jfc.setDialogTitle("Seleccione carpeta para guardar Respaldo");
+
+            if (jfc.showOpenDialog(jMenu1) == jfc.APPROVE_OPTION) {
+                File ruta = jfc.getSelectedFile();
+                System.out.println("ruta: " + ruta + File.separator + "backup_bd_sapcad.sql");
+
+                FileOutputStream fos = new FileOutputStream(ruta + File.separator + "backup_bd_sapcad.sql"); //creamos el archivo para le respaldo
+                byte[] buffer = new byte[1000]; //Creamos una variable de tipo byte para el buffer
+
+                int leido = is.read(buffer); //Devuelve el número de bytes leídos o -1 si se alcanzó el final del stream.
+                while (leido > 0) {
+                    fos.write(buffer, 0, leido);//Buffer de caracteres, Desplazamiento de partida para empezar a escribir caracteres, Número de caracteres para escribir
+                    leido = is.read(buffer);
+                }
+                fos.close();//Cierra respaldo
+                String fuente = "recursos\\";
+                File dir = new File(fuente);
+
+                String destino = ruta + File.separator;
+                File destDir = new File(destino);
+                try {
+                    org.apache.commons.io.FileUtils.copyDirectory(dir, destDir);
+                } catch (Exception e) {
+                    System.out.println("Exeception Respaldando imagenes: " + e);
+                }
+                JOptionPane.showMessageDialog(null, "Base de Datos Respaldada en " + ruta);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception Respaldo: " + e);
+        }
+
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        pcontroller.confirmarSalir();
+    }//GEN-LAST:event_jMenu6MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 
 

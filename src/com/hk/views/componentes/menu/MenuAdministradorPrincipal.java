@@ -5,10 +5,14 @@
  */
 package com.hk.views.componentes.menu;
 
+import com.google.gson.Gson;
 import com.hk.controllers.PrincipalController;
+import com.hk.models.AjusteBD;
 import com.hk.views.VisorPDF;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
@@ -137,7 +141,7 @@ public class MenuAdministradorPrincipal extends JMenuBar {
 
         jMenu4.setText("Administradores");
 
-        jMenuItem8.setText("Gestión de Administradores");
+        jMenuItem8.setText("Gestión de Usuarios");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
@@ -261,8 +265,26 @@ public class MenuAdministradorPrincipal extends JMenuBar {
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
 
         try {
+            String json = "";
+            BufferedReader br = new BufferedReader(new FileReader("config.json"));
+            String linea = "";
+            while ((linea = br.readLine()) != null) {
+                json += linea;
+            }
+            Gson gson = new Gson();
+            AjusteBD config = gson.fromJson(json, AjusteBD.class);
+
+            String USER = config.getUsuario();
+            String PASS = config.getClave();
+            //----------------------------------------
+            Process p;
             String rutaMySql = "C:\\wamp\\bin\\mysql\\mysql5.7.31\\bin\\mysqldump";
-            Process p = Runtime.getRuntime().exec(rutaMySql + " -u root bd_sapcad");
+            if(PASS == null || PASS.equals("")){
+                p = Runtime.getRuntime().exec(rutaMySql + " -u "+USER+" bd_sapcad");
+            }else{
+                p = Runtime.getRuntime().exec(rutaMySql + " -u "+USER+" p"+PASS+" bd_sapcad");
+            }
+            //p = Runtime.getRuntime().exec(rutaMySql + " -u root bd_sapcad");
 
             InputStream is = p.getInputStream();//Pedimos la entrada
             JFileChooser jfc = new JFileChooser();
@@ -285,14 +307,14 @@ public class MenuAdministradorPrincipal extends JMenuBar {
                 String fuente = "recursos\\";
                 File dir = new File(fuente);
 
-                String destino = ruta+File.separator;
+                String destino = ruta + File.separator;
                 File destDir = new File(destino);
                 try {
                     org.apache.commons.io.FileUtils.copyDirectory(dir, destDir);
                 } catch (Exception e) {
                     System.out.println("Exeception Respaldando imagenes: " + e);
                 }
-                JOptionPane.showMessageDialog(null, "Base de Datos Respaldada en "+ruta);
+                JOptionPane.showMessageDialog(null, "Base de Datos Respaldada en " + ruta);
             }
 
         } catch (Exception e) {

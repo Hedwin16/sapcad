@@ -1,16 +1,17 @@
 package com.hk.controllers;
 
 import com.hk.dao.AdminDAO;
+import com.hk.dao.UsuarioDAO;
 import com.hk.interfaces.IAdmin;
+import com.hk.interfaces.IUsuario;
 import com.hk.models.Admin;
+import com.hk.models.Usuario;
 import com.hk.views.Login;
 import com.hk.views.MenuPrincipal;
 import com.hk.views.RegistroAdminPrincipal;
-import com.hk.views.componentes.panel.GestionAdmin;
+import com.hk.views.componentes.panel.GestionUsuarios;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,12 +19,14 @@ import javax.swing.table.DefaultTableModel;
 public class AdminController implements ActionListener {
 
     IAdmin adao = new AdminDAO();
+    IUsuario udao = new UsuarioDAO();
     Login main;
     RegistroAdminPrincipal vistaRegistroAdmin;
     Admin admin;
-    GestionAdmin gestionAdmin;
+    Usuario usuario;
+    GestionUsuarios gestionUsuario;
     Validaciones val = new Validaciones();
-    List<Admin> administradores;
+    List<Usuario> usuarios;
     boolean editable;
 
     public AdminController(Login main) {
@@ -41,19 +44,19 @@ public class AdminController implements ActionListener {
         this.vistaRegistroAdmin.btn_registrar.addActionListener(this);
         this.main = null;
         this.admin = new Admin();
-      
+
     }
 
-    public AdminController(GestionAdmin gestionAdmin) {
-        this.gestionAdmin = gestionAdmin;
-        this.gestionAdmin.btn_nuevo.addActionListener(this);
-        this.gestionAdmin.btn_editar.addActionListener(this);
-        this.gestionAdmin.btn_eliminar.addActionListener(this);
-        this.gestionAdmin.btn_guardar.addActionListener(this);
+    public AdminController(GestionUsuarios gestionAdmin) {
+        this.gestionUsuario = gestionAdmin;
+        this.gestionUsuario.btn_nuevo.addActionListener(this);
+        this.gestionUsuario.btn_editar.addActionListener(this);
+        this.gestionUsuario.btn_eliminar.addActionListener(this);
+        this.gestionUsuario.btn_guardar.addActionListener(this);
         this.main = null;
         this.vistaRegistroAdmin = null;
         this.admin = new Admin();
-        cargarListaAdministradores();
+        cargarListaUsuarios();
 
     }
 
@@ -100,17 +103,17 @@ public class AdminController implements ActionListener {
 
     }
 
-    public void cargarListaAdministradores() {
-        administradores = adao.mostrar();
-        if (administradores == null || administradores.isEmpty()) {
+    public void cargarListaUsuarios() {
+        usuarios = udao.mostrar();
+        if (usuarios == null || usuarios.isEmpty()) {
             System.out.println("No hay administradores secundarios registrados");
         } else {
-            DefaultTableModel dtm = (DefaultTableModel) this.gestionAdmin.TABLE.getModel();
+            DefaultTableModel dtm = (DefaultTableModel) this.gestionUsuario.TABLE.getModel();
             dtm.setRowCount(0);
 
-            administradores.forEach(administrador
+            usuarios.forEach(administrador
                     -> dtm.addRow(new Object[]{
-                        administrador.getId_admin(),
+                        administrador.getId_usuario(),
                         administrador.getUsuario(),
                         administrador.getClave(),
                         administrador.getTipo()
@@ -124,22 +127,25 @@ public class AdminController implements ActionListener {
         //Login
         if (this.main != null && this.main.btn_ingresar == e.getSource()) {
             boolean rs = false;
+            boolean rsUsuario = false;
             if (validarCampos()) {
                 JOptionPane.showMessageDialog(main, "LLene todos los campos");
             } else {
                 rs = adao.validarSesion(main.txt_usuario.getText(), main.txt_clave.getText());
+                rsUsuario = udao.validarSesion(main.txt_usuario.getText(), main.txt_clave.getText());
+
                 if (!rs) {
-                    JOptionPane.showMessageDialog(main, "Combinación Usuario/Contraseña iválida.");
+                    if (!rsUsuario) {
+                        JOptionPane.showMessageDialog(main, "Combinación Usuario/Contraseña iválida.");
+                    }else{
+                        iniciarSesion();
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(main, "Correcto!");
-                    int tipo = adao.getTipoAdmin();
-                    MenuPrincipal menu = new MenuPrincipal(tipo);
-                    menu.setVisible(true);
-                    this.main.dispose();
+                    iniciarSesion();
                 }
             }
         }
-        //Registro Admin
+        //Registro Usuario
         if (this.vistaRegistroAdmin != null && this.vistaRegistroAdmin.btn_registrar == e.getSource()) {
             if (validarCamposRegistro()) {
                 JOptionPane.showMessageDialog(main, "LLene todos los campos");
@@ -154,107 +160,107 @@ public class AdminController implements ActionListener {
             }
         }
 
-        //Gestión de Administradores
-        if (this.gestionAdmin != null && this.gestionAdmin.btn_nuevo == e.getSource()) {
-            gestionAdmin.habilitarCampos();
-            gestionAdmin.txt_usuario.requestFocus();
-            this.admin = new Admin();
+        //Gestión de Usuarios
+        if (this.gestionUsuario != null && this.gestionUsuario.btn_nuevo == e.getSource()) {
+            gestionUsuario.habilitarCampos();
+            gestionUsuario.txt_usuario.requestFocus();
+            this.usuario = new Usuario();
         }
 
-        if (this.gestionAdmin != null && this.gestionAdmin.btn_guardar == e.getSource() && this.gestionAdmin.txt_usuario.isEnabled()) {
+        if (this.gestionUsuario != null && this.gestionUsuario.btn_guardar == e.getSource() && this.gestionUsuario.txt_usuario.isEnabled()) {
             System.out.println("click en el boton guardar");
-            if (this.admin.getId_admin() == null) {
+            if (this.usuario.getId_usuario() == null) {
                 System.out.println("Id es nulo por lo tanto es nuevo");
-                agregarAdmin();
+                agregarUsuario();
             } else {
-                actualizarAdmin();
+                actualizarUsuario();
             }
         }
 
-        if (this.gestionAdmin != null && this.gestionAdmin.btn_editar == e.getSource()) {
+        if (this.gestionUsuario != null && this.gestionUsuario.btn_editar == e.getSource()) {
 
-            int fila_seleccionada = gestionAdmin.TABLE.getSelectedRow();
+            int fila_seleccionada = gestionUsuario.TABLE.getSelectedRow();
             if (fila_seleccionada >= 0) {
-                gestionAdmin.habilitarCampos();
-                this.admin = this.administradores.get(fila_seleccionada);
-                gestionAdmin.txt_usuario.setText(admin.getUsuario());
-                gestionAdmin.txt_clave.setText(admin.getClave());
-                gestionAdmin.txt_privilegios.setSelectedIndex(admin.getTipo() - 1);
+                gestionUsuario.habilitarCampos();
+                this.usuario = this.usuarios.get(fila_seleccionada);
+                gestionUsuario.txt_usuario.setText(usuario.getUsuario());
+                gestionUsuario.txt_clave.setText(usuario.getClave());
+                gestionUsuario.txt_privilegios.setSelectedIndex(usuario.getTipo() - 1);
             } else {
-                JOptionPane.showMessageDialog(gestionAdmin, "Por favor seleccione una fila.");
+                JOptionPane.showMessageDialog(gestionUsuario, "Por favor seleccione una fila.");
             }
 
         }
 
-        if (this.gestionAdmin != null && this.gestionAdmin.btn_eliminar == e.getSource()) {
-            int fila_seleccionada = gestionAdmin.TABLE.getSelectedRow();
+        if (this.gestionUsuario != null && this.gestionUsuario.btn_eliminar == e.getSource()) {
+            int fila_seleccionada = gestionUsuario.TABLE.getSelectedRow();
             if (fila_seleccionada >= 0) {
-                this.admin = this.administradores.get(fila_seleccionada);
-                int decision = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar este administrador?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                this.usuario = this.usuarios.get(fila_seleccionada);
+                int decision = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar este usuario?", "Confirmación", JOptionPane.YES_NO_OPTION);
                 if (decision == 0) {
-                    if (adao.eliminar(admin.getId_admin())) {
-                        gestionAdmin.desabilitarYVaciarCampos();
-                        JOptionPane.showMessageDialog(gestionAdmin, "Eliminado con éxito");
-                        cargarListaAdministradores();
+                    if (udao.eliminar(usuario.getId_usuario())) {
+                        gestionUsuario.desabilitarYVaciarCampos();
+                        JOptionPane.showMessageDialog(gestionUsuario, "Eliminado con éxito");
+                        cargarListaUsuarios();
                     }
 
                 }
             } else {
-                JOptionPane.showMessageDialog(gestionAdmin, "Por favor seleccione una fila.");
+                JOptionPane.showMessageDialog(gestionUsuario, "Por favor seleccione una fila.");
             }
 
         }
 
     }
 
-    private void agregarAdmin() {
-        String usuario, clave;
-        usuario = this.gestionAdmin.txt_usuario.getText();
-        clave = this.gestionAdmin.txt_clave.getText();
-        int tipo = this.gestionAdmin.txt_privilegios.getSelectedIndex() + 1;
-        if (validarCamposGA(usuario, clave, tipo)) {
-            admin.setUsuario(usuario);
-            admin.setClave(clave);
-            admin.setTipo(tipo);
-            if (adao.insertar(admin)) {
-                JOptionPane.showMessageDialog(gestionAdmin, "Registrado con éxito");
-                this.gestionAdmin.desabilitarYVaciarCampos();
-                this.cargarListaAdministradores();
+    private void agregarUsuario() {
+        String user, clave;
+        user = this.gestionUsuario.txt_usuario.getText();
+        clave = this.gestionUsuario.txt_clave.getText();
+        int tipo = this.gestionUsuario.txt_privilegios.getSelectedIndex() + 1;
+        if (validarCamposGA(user, clave, tipo)) {
+            usuario.setUsuario(user);
+            usuario.setClave(clave);
+            usuario.setTipo(tipo);
+            if (udao.insertar(usuario)) {
+                JOptionPane.showMessageDialog(gestionUsuario, "Registrado con éxito");
+                this.gestionUsuario.desabilitarYVaciarCampos();
+                this.cargarListaUsuarios();
             }
         }
 
     }
 
-    private void actualizarAdmin() {
+    private void actualizarUsuario() {
         //System.out.println("actualizando...");
-        String usuario, clave;
-        usuario = this.gestionAdmin.txt_usuario.getText();
-        clave = this.gestionAdmin.txt_clave.getText();
-        int tipo = this.gestionAdmin.txt_privilegios.getSelectedIndex() + 1;
-        if (validarCamposGA(usuario, clave, tipo)) {
+        String user, clave;
+        user = this.gestionUsuario.txt_usuario.getText();
+        clave = this.gestionUsuario.txt_clave.getText();
+        int tipo = this.gestionUsuario.txt_privilegios.getSelectedIndex() + 1;
+        if (validarCamposGA(user, clave, tipo)) {
             System.out.println("validarCampos es true");
-            admin.setUsuario(usuario);
-            admin.setClave(clave);
-            admin.setTipo(tipo);
-            if (adao.actualizar(admin)) {
-                JOptionPane.showMessageDialog(gestionAdmin, "Registrado con éxito");
-                this.gestionAdmin.desabilitarYVaciarCampos();
-                this.cargarListaAdministradores();
+            usuario.setUsuario(user);
+            usuario.setClave(clave);
+            usuario.setTipo(tipo);
+            if (udao.actualizar(usuario)) {
+                JOptionPane.showMessageDialog(gestionUsuario, "Registrado con éxito");
+                this.gestionUsuario.desabilitarYVaciarCampos();
+                this.cargarListaUsuarios();
             }
         }
     }
 
     private boolean validarCamposGA(String usuario, String clave, int tipo) {
         if (usuario.isEmpty() || val.contieneEspaciosOCaracteresEspeciales(usuario)) {
-            JOptionPane.showMessageDialog(gestionAdmin, "Ingrese el usuario correctamente. (Sin espacios ni caracteres especiales diferentes a: .'_-)");
+            JOptionPane.showMessageDialog(gestionUsuario, "Ingrese el usuario correctamente. (Sin espacios ni caracteres especiales diferentes a: .'_-)");
             return false;
         }
         if (clave.isEmpty() || val.contieneEspaciosOCaracteresEspeciales(clave)) {
-            JOptionPane.showMessageDialog(gestionAdmin, "Ingrese la clave correctamente. (Sin espacios ni caracteres especiales diferentes a: .'_-)");
+            JOptionPane.showMessageDialog(gestionUsuario, "Ingrese la clave correctamente. (Sin espacios ni caracteres especiales diferentes a: .'_-)");
             return false;
         }
         if (tipo <= 0) {
-            JOptionPane.showMessageDialog(gestionAdmin, "Seleccione los privilegios del Administrador");
+            JOptionPane.showMessageDialog(gestionUsuario, "Seleccione los privilegios del Administrador");
             return false;
         }
 
@@ -271,7 +277,7 @@ public class AdminController implements ActionListener {
         if (clave.equals(vistaRegistroAdmin.txt_clave_confirmar.getText())) {
             admin.setUsuario(usuario);
             admin.setClave(clave);
-            admin.setTipo(4);
+            admin.setTipo(3);
             if (adao.actualizar(this.admin)) {
                 JOptionPane.showMessageDialog(vistaRegistroAdmin, "Registrado con Éxito");
                 vistaRegistroAdmin.dispose();
@@ -283,6 +289,19 @@ public class AdminController implements ActionListener {
             JOptionPane.showMessageDialog(vistaRegistroAdmin, "Las contraseñas introducidas no coinciden");
         }
 
+    }
+
+    private void iniciarSesion() {
+        JOptionPane.showMessageDialog(main, "Correcto!");
+        int tipo = 0;
+        if (adao.getTipoAdmin() != 0) {
+            tipo = adao.getTipoAdmin();
+        } else {
+            tipo = udao.getTipoUsuario();
+        }
+        MenuPrincipal menu = new MenuPrincipal(tipo);
+        menu.setVisible(true);
+        this.main.dispose();
     }
 
 }

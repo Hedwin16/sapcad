@@ -30,17 +30,29 @@ public class MenuAdministrador1 extends JMenuBar{
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         setBorder(null);
 
         jMenu1.setText("Archivo");
+
+        jMenuItem1.setText("Registrar Hora");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+        jMenu1.add(jSeparator1);
 
         jMenuItem12.setText("Cerrar Sesion");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
@@ -63,13 +75,29 @@ public class MenuAdministrador1 extends JMenuBar{
         jMenu2.setText("Reportes");
 
         jMenuItem3.setText("Reporte Diario");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
+        jMenu2.add(jSeparator4);
 
-        jMenuItem4.setText("Reporte Mensual");
+        jMenuItem14.setText("Reporte Por Fecha");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem14);
+
+        jMenuItem4.setText("Ver Reportes");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
-
-        jMenuItem5.setText("Reporte por Empleado");
-        jMenu2.add(jMenuItem5);
 
         add(jMenu2);
 
@@ -82,28 +110,63 @@ public class MenuAdministrador1 extends JMenuBar{
         add(jMenu6);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-         pcontroller.confirmarSalir();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-         pcontroller.confirmarSalir();
-    }//GEN-LAST:event_jMenu6MouseClicked
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        pcontroller.showRegistrarYCapturarVista();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         pcontroller.cerrarSesion();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        pcontroller.confirmarSalir();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        pcontroller.crearRegistroDiario();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        pcontroller.setVentanaGestionReportes();
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        //pcontroller.setVentanaSelectorPDF();
+        pcontroller.setVerReporte();
+        /*
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.PDF", "pdf");
+        jFileChooser1.setFileFilter(filtro);
+
+        if(jFileChooser1.showOpenDialog(this) == jFileChooser1.APPROVE_OPTION){
+            File reporte = jFileChooser1.getSelectedFile();
+            try {
+                System.out.println("Reporte: "+reporte.toString());
+                visorPDF.abrirReporte(reporte.toString());
+                visorPDF.setTitle("Reporte SAPCAD - Control de Asistencia");
+                visorPDF.setVisible(true);
+
+            } catch (Exception e) {
+            }
+        }*/
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        pcontroller.confirmarSalir();
+    }//GEN-LAST:event_jMenu6MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 
    

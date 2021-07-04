@@ -119,7 +119,7 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Administradores"/>
+            <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Usuarios"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>

@@ -15,11 +15,10 @@ import com.hk.views.RegistroPorCI;
 import com.hk.views.SelectorPDF;
 import com.hk.views.componentes.menu.MenuAdministrador1;
 import com.hk.views.componentes.menu.MenuAdministrador2;
-import com.hk.views.componentes.menu.MenuAdministrador3;
 import com.hk.views.componentes.menu.MenuAdministradorPrincipal;
 import com.hk.views.componentes.panel.AdministradorReporte;
 import com.hk.views.componentes.panel.DefaultPanel;
-import com.hk.views.componentes.panel.GestionAdmin;
+import com.hk.views.componentes.panel.GestionUsuarios;
 import com.hk.views.componentes.panel.GestionDepartamentos;
 import com.hk.views.componentes.panel.GestionEmpleados;
 import com.hk.views.componentes.panel.GestionTipoNomina;
@@ -40,7 +39,7 @@ public class PrincipalController implements ActionListener{
     
     //Components
     DefaultPanel defaultPanel = new DefaultPanel();
-    GestionAdmin adminPanel;
+    GestionUsuarios adminPanel;
     GestionEmpleados empleadosPanel;
     RegistrarHoraVista vistaRegistroHora;
     RegistrarEmpleado regEmpleados;
@@ -78,8 +77,6 @@ public class PrincipalController implements ActionListener{
         }else if(tipo==2){
             this.menu.setJMenuBar(new MenuAdministrador2(this));
         }else if(tipo==3){
-            this.menu.setJMenuBar(new MenuAdministrador3(this));
-        }else if(tipo==4){
             this.menu.setJMenuBar(new MenuAdministradorPrincipal(this));
         }
     }
@@ -111,7 +108,7 @@ public class PrincipalController implements ActionListener{
     }
     
     public void setGestionAdmin(){
-        adminPanel = new GestionAdmin();
+        adminPanel = new GestionUsuarios();
         this.menu.contenedor.setViewportView(adminPanel);
     }
     
