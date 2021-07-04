@@ -12,11 +12,12 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(Integer id_empleado, String nombres, String apellidos, int ci) {
+    public Empleado(Integer id_empleado, String nombres, String apellidos, int ci, int id_departamento) {
         this.id_empleado = id_empleado;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.ci = ci;
+        this.id_departamento = id_departamento;
     }
     
     

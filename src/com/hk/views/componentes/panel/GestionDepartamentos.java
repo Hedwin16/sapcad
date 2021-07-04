@@ -43,7 +43,7 @@ public class GestionDepartamentos extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txt_departamento = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txt_departamento1 = new javax.swing.JTextField();
+        txt_horaSalida = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TABLE = new javax.swing.JTable();
@@ -82,7 +82,7 @@ public class GestionDepartamentos extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Hora de Salida por Defecto:");
 
-        txt_departamento1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_horaSalida.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -102,7 +102,7 @@ public class GestionDepartamentos extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_departamento1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_horaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
@@ -111,13 +111,12 @@ public class GestionDepartamentos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txt_departamento1)
+                        .addComponent(txt_horaSalida)
                         .addGap(1, 1, 1))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txt_departamento, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -133,11 +132,11 @@ public class GestionDepartamentos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#Id", "Nombre Departamento"
+                "#Id", "Nombre Departamento", "Hora de Salida"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -219,15 +218,18 @@ public class GestionDepartamentos extends javax.swing.JPanel {
     public void desabilitarYVaciarCampos(){
         vaciarCampos();
         this.txt_departamento.setEnabled(false);
+        this.txt_horaSalida.setEnabled(false);
     }
     
     public void habilitarCampos(){
         vaciarCampos();
         this.txt_departamento.setEnabled(true);
+        this.txt_horaSalida.setEnabled(true);
     }
     
     void vaciarCampos(){
         this.txt_departamento.setText("");
+        this.txt_horaSalida.setText("");
 
     }
 
@@ -245,6 +247,6 @@ public class GestionDepartamentos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextField txt_departamento;
-    public javax.swing.JTextField txt_departamento1;
+    public javax.swing.JTextField txt_horaSalida;
     // End of variables declaration//GEN-END:variables
 }

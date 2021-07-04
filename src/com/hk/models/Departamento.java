@@ -3,10 +3,17 @@ package com.hk.models;
 public class Departamento {
     private Integer id_departamento;
     private String nombre_departamento;
+    private String salidaDefault;
 
     public Departamento(Integer id_departamento, String nombre_departamento) {
         this.id_departamento = id_departamento;
         this.nombre_departamento = nombre_departamento;
+    }
+
+    public Departamento(Integer id_departamento, String nombre_departamento, String salidaDefault) {
+        this.id_departamento = id_departamento;
+        this.nombre_departamento = nombre_departamento;
+        this.salidaDefault = salidaDefault;
     }
 
     public Departamento() {
@@ -27,5 +34,14 @@ public class Departamento {
     public void setNombre_departamento(String nombre_departamento) {
         this.nombre_departamento = nombre_departamento;
     }
+
+    public String getSalidaDefault() {
+        return salidaDefault;
+    }
+
+    public void setSalidaDefault(String salidaDefault) {
+        this.salidaDefault = salidaDefault;
+    }
+    
     
 }

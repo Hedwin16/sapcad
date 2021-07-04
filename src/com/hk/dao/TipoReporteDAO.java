@@ -2,7 +2,6 @@ package com.hk.dao;
 
 import com.hk.connection.Conexion;
 import com.hk.interfaces.CRUD;
-import com.hk.models.TipoNomina;
 import com.hk.models.TipoReporte;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

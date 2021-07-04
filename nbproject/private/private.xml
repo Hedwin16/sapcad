@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/dao/EmpleadoDAO.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/views/componentes/menu/MenuAdministradorPrincipal.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/AdminController.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/views/RegistroAdminPrincipal.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/PdfController.java</file>
+            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/dao/TipoReporteDAO.java</file>
+            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/models/Empleado.java</file>
             <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/models/LogicaPDF.java</file>
-            <file>file:/C:/Users/HJDS/Documents/Netbeans%20Projects/SAPCAD/src/com/hk/controllers/ReconocimientoController.java</file>
         </group>
     </open-files>
 </project-private>
