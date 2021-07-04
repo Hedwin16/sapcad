@@ -29,8 +29,8 @@ public class AdministradorReporte extends javax.swing.JPanel {
         for (int i = 0; i < TABLE.getModel().getColumnCount(); i++) {
             TABLE.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
         }
-        TABLE.getColumnModel().getColumn(0).setPreferredWidth(8);
-        TABLE.getColumnModel().getColumn(1).setPreferredWidth(200);
+        TABLE.getColumnModel().getColumn(0).setPreferredWidth(20);
+        TABLE.getColumnModel().getColumn(1).setPreferredWidth(30);
         TABLE.getColumnModel().getColumn(2).setPreferredWidth(10);
         TABLE.getColumnModel().getColumn(3).setPreferredWidth(50);
         TABLE.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);

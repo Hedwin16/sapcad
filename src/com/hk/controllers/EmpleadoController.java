@@ -58,9 +58,9 @@ public class EmpleadoController implements ActionListener{
         this.empleadosPanel.btn_eliminar.addActionListener(this);
         this.empleadosPanel.btn_guardar.addActionListener(this);
         this.empleadosPanel.jMenuItem1.addActionListener(this);
-        this.cargarListaEmpleados();
         this.cargarListaDepartamentos(empleadosPanel);
         this.cargarListaNominas(empleadosPanel);
+        this.cargarListaEmpleados();
         System.out.println("No entra aquí");
         
     }
@@ -299,9 +299,9 @@ public class EmpleadoController implements ActionListener{
                     emp.getNombres(),
                     emp.getApellidos(),
                     emp.getCi(),
-                    emp.getId_departamento(),
+                    departamentos.get(emp.getId_departamento()-1).getNombre_departamento(),
                     emp.getCargo(),
-                    emp.getId_nomina()
+                    nominas.get(emp.getId_nomina()-1).getNombre_nomina()
                 })        
             );
         }

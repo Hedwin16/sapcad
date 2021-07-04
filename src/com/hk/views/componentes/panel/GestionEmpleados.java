@@ -8,6 +8,7 @@ package com.hk.views.componentes.panel;
 import com.hk.controllers.EmpleadoController;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
@@ -38,6 +39,13 @@ public final class GestionEmpleados extends javax.swing.JPanel {
         for (int i = 0; i < TABLE.getModel().getColumnCount(); i++) {
             TABLE.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
         }
+        TABLE.getColumnModel().getColumn(0).setPreferredWidth(80);
+        TABLE.getColumnModel().getColumn(1).setPreferredWidth(80);
+        TABLE.getColumnModel().getColumn(2).setPreferredWidth(25);
+        TABLE.getColumnModel().getColumn(3).setPreferredWidth(40);
+        TABLE.getColumnModel().getColumn(4).setPreferredWidth(10);
+        TABLE.getColumnModel().getColumn(5).setPreferredWidth(50);
+        TABLE.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
     
     public void desabilitarYVaciarCampos(){
