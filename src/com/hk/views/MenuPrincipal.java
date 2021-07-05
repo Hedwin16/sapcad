@@ -51,8 +51,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         fondo = new javax.swing.JPanel();
         SideBar = new javax.swing.JPanel();
-        capturarBtn = new rojerusan.RSButtonMetro();
         jLabel2 = new javax.swing.JLabel();
+        capturarBtn = new javax.swing.JButton();
         contenedor = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,29 +64,33 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         SideBar.setBackground(new java.awt.Color(122, 0, 1));
 
-        capturarBtn.setBackground(new java.awt.Color(122, 0, 1));
-        capturarBtn.setText("Registrar Hora de Asistencia");
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/logo_small.png"))); // NOI18N
+
+        capturarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/reg_off.png"))); // NOI18N
+        capturarBtn.setMnemonic('b');
+        capturarBtn.setBorderPainted(false);
+        capturarBtn.setContentAreaFilled(false);
+        capturarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        capturarBtn.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/reg.png"))); // NOI18N
 
         javax.swing.GroupLayout SideBarLayout = new javax.swing.GroupLayout(SideBar);
         SideBar.setLayout(SideBarLayout);
         SideBarLayout.setHorizontalGroup(
             SideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(capturarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(SideBarLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jLabel2)
                 .addContainerGap(71, Short.MAX_VALUE))
+            .addComponent(capturarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         SideBarLayout.setVerticalGroup(
             SideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SideBarLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2)
-                .addGap(26, 26, 26)
-                .addComponent(capturarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(capturarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(344, Short.MAX_VALUE))
         );
 
         contenedor.setBackground(new java.awt.Color(255, 255, 255));
@@ -111,9 +115,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +132,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SideBar;
-    public rojerusan.RSButtonMetro capturarBtn;
+    public javax.swing.JButton capturarBtn;
     public javax.swing.JScrollPane contenedor;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel2;

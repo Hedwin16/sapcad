@@ -79,10 +79,10 @@ public final class GestionEmpleados extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TABLE = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        btn_buscar = new rojerusan.RSButtonMetro();
         txt_buscar = new javax.swing.JTextField();
+        btn_buscar = new javax.swing.JButton();
+        btn_editar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btn_guardar = new rojerusan.RSButtonMetro();
         jPanel2 = new javax.swing.JPanel();
         txt_departamento = new rojerusan.RSComboMetro();
         jLabel2 = new javax.swing.JLabel();
@@ -96,8 +96,9 @@ public final class GestionEmpleados extends javax.swing.JPanel {
         txt_cedula = new javax.swing.JTextField();
         txt_cargo = new javax.swing.JTextField();
         txt_nombres = new javax.swing.JTextField();
-        btn_eliminar = new rojerusan.RSButtonMetro();
-        btn_editar = new rojerusan.RSButtonMetro();
+        btn_editar = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
+        btn_eliminar = new javax.swing.JButton();
 
         jMenuItem1.setText("Reentrenar Rostro");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -144,17 +145,24 @@ public final class GestionEmpleados extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Búsqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_buscar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_buscar.setText("Buscar");
-        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 90, 40));
-
         txt_buscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel3.add(txt_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 40));
+
+        btn_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/buscar_off.png"))); // NOI18N
+        btn_buscar.setMnemonic('b');
+        btn_buscar.setBorderPainted(false);
+        btn_buscar.setContentAreaFilled(false);
+        btn_buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_buscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/buscar_on.png"))); // NOI18N
+        jPanel3.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 90, 40));
+
+        btn_editar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/editar_off.png"))); // NOI18N
+        btn_editar1.setMnemonic('b');
+        btn_editar1.setBorderPainted(false);
+        btn_editar1.setContentAreaFilled(false);
+        btn_editar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_editar1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/editar_on.png"))); // NOI18N
+        jPanel3.add(btn_editar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 90, 80));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 780, 80));
 
@@ -162,15 +170,6 @@ public final class GestionEmpleados extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gestión de Empleados");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 805, 51));
-
-        btn_guardar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_guardar.setText("Guardar Cambios");
-        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_guardarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 620, 140, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -236,23 +235,29 @@ public final class GestionEmpleados extends javax.swing.JPanel {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 790, 220));
 
-        btn_eliminar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_eliminar.setText("Eliminar");
-        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_eliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, 100, 30));
+        btn_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/editar_off.png"))); // NOI18N
+        btn_editar.setMnemonic('b');
+        btn_editar.setBorderPainted(false);
+        btn_editar.setContentAreaFilled(false);
+        btn_editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_editar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/editar_on.png"))); // NOI18N
+        jPanel1.add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 90, 30));
 
-        btn_editar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_editar.setText("Editar");
-        btn_editar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 100, 30));
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/btn_guardar_off.png"))); // NOI18N
+        btn_guardar.setMnemonic('b');
+        btn_guardar.setBorderPainted(false);
+        btn_guardar.setContentAreaFilled(false);
+        btn_guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_guardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/btn_guardar_on.png"))); // NOI18N
+        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 620, 140, 30));
+
+        btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/eliminar_off.png"))); // NOI18N
+        btn_eliminar.setMnemonic('b');
+        btn_eliminar.setBorderPainted(false);
+        btn_eliminar.setContentAreaFilled(false);
+        btn_eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_eliminar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/eliminar_on.png"))); // NOI18N
+        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, 90, 30));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -264,25 +269,9 @@ public final class GestionEmpleados extends javax.swing.JPanel {
         add(jPanel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        //startCamera();
-    }//GEN-LAST:event_btn_guardarActionPerformed
-
-    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_eliminarActionPerformed
-
-    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_editarActionPerformed
-
     private void txt_usuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usuario2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_usuario2ActionPerformed
-
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -291,10 +280,11 @@ public final class GestionEmpleados extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TABLE;
-    public rojerusan.RSButtonMetro btn_buscar;
-    public rojerusan.RSButtonMetro btn_editar;
-    public rojerusan.RSButtonMetro btn_eliminar;
-    public rojerusan.RSButtonMetro btn_guardar;
+    public javax.swing.JButton btn_buscar;
+    public javax.swing.JButton btn_editar;
+    public javax.swing.JButton btn_editar1;
+    public javax.swing.JButton btn_eliminar;
+    public javax.swing.JButton btn_guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -37,7 +37,6 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         Panel_foto2 = new javax.swing.JPanel();
         recuadro_cam = new javax.swing.JLabel();
-        btn_activarYregistrar = new rojerusan.RSButtonMetro();
         counterLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -53,6 +52,7 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         txt_apellidos = new javax.swing.JTextField();
         txt_cedula = new javax.swing.JTextField();
         txt_cargo = new javax.swing.JTextField();
+        btn_activarYregistrar = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(520, 560));
 
@@ -76,15 +76,6 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         Panel_foto2.add(recuadro_cam, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 300, 270));
 
         jPanel3.add(Panel_foto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 320, 290));
-
-        btn_activarYregistrar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_activarYregistrar.setText("Activar Cámara y Guardar Datos");
-        btn_activarYregistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_activarYregistrarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btn_activarYregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 320, 40));
 
         counterLabel1.setBackground(new java.awt.Color(255, 255, 255));
         counterLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -152,6 +143,14 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 390, 410));
 
+        btn_activarYregistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/activar_off.png"))); // NOI18N
+        btn_activarYregistrar.setMnemonic('b');
+        btn_activarYregistrar.setBorderPainted(false);
+        btn_activarYregistrar.setContentAreaFilled(false);
+        btn_activarYregistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_activarYregistrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/activar_on.png"))); // NOI18N
+        jPanel3.add(btn_activarYregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, 320, 40));
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -173,14 +172,10 @@ public final class RegistrarEmpleado extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_activarYregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_activarYregistrarActionPerformed
-        //startCamera();
-    }//GEN-LAST:event_btn_activarYregistrarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel Panel_foto2;
-    public rojerusan.RSButtonMetro btn_activarYregistrar;
+    public javax.swing.JButton btn_activarYregistrar;
     public javax.swing.JLabel counterLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -42,21 +42,42 @@ public class AdministradorReporte extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        btn_abrir = new javax.swing.JButton();
+        btn_eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TABLE = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        btn_buscar = new rojerusan.RSButtonMetro();
+        btn_buscar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txt_tipo_reporte = new rojerusan.RSComboMetro();
         jLabel1 = new javax.swing.JLabel();
-        btn_eliminar = new rojerusan.RSButtonMetro();
-        btn_abrir = new rojerusan.RSButtonMetro();
 
         setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(122, 0, 1), 4));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_abrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/abrir_off.png"))); // NOI18N
+        btn_abrir.setMnemonic('b');
+        btn_abrir.setBorderPainted(false);
+        btn_abrir.setContentAreaFilled(false);
+        btn_abrir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_abrir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/abrir_on.png"))); // NOI18N
+        jPanel1.add(btn_abrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 90, 30));
+
+        btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/eliminar_off.png"))); // NOI18N
+        btn_eliminar.setMnemonic('b');
+        btn_eliminar.setBorderPainted(false);
+        btn_eliminar.setContentAreaFilled(false);
+        btn_eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_eliminar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/eliminar_on.png"))); // NOI18N
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 90, 30));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Reporte", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -91,13 +112,12 @@ public class AdministradorReporte extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Búsqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_buscar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_buscar.setText("Buscar");
-        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarActionPerformed(evt);
-            }
-        });
+        btn_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/buscar_off.png"))); // NOI18N
+        btn_buscar.setMnemonic('b');
+        btn_buscar.setBorderPainted(false);
+        btn_buscar.setContentAreaFilled(false);
+        btn_buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_buscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/buscar_on.png"))); // NOI18N
         jPanel3.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 90, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -115,7 +135,7 @@ public class AdministradorReporte extends javax.swing.JPanel {
                 txt_tipo_reporteActionPerformed(evt);
             }
         });
-        jPanel3.add(txt_tipo_reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        jPanel3.add(txt_tipo_reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 780, 80));
 
@@ -123,24 +143,6 @@ public class AdministradorReporte extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Reportes");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 805, 51));
-
-        btn_eliminar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_eliminar.setText("Eliminar");
-        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_eliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 100, 30));
-
-        btn_abrir.setBackground(new java.awt.Color(122, 0, 1));
-        btn_abrir.setText("Abrir");
-        btn_abrir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_abrirActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_abrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 100, 30));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -151,28 +153,20 @@ public class AdministradorReporte extends javax.swing.JPanel {
         add(jPanel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+    private void txt_tipo_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tipo_reporteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_buscarActionPerformed
+    }//GEN-LAST:event_txt_tipo_reporteActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
-    private void btn_abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abrirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_abrirActionPerformed
-
-    private void txt_tipo_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tipo_reporteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_tipo_reporteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TABLE;
-    public rojerusan.RSButtonMetro btn_abrir;
-    public rojerusan.RSButtonMetro btn_buscar;
-    public rojerusan.RSButtonMetro btn_eliminar;
+    public javax.swing.JButton btn_abrir;
+    public javax.swing.JButton btn_buscar;
+    public javax.swing.JButton btn_eliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

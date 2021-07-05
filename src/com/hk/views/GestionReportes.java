@@ -63,11 +63,10 @@ public final class GestionReportes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TABLE = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        btn_buscar = new rojerusan.RSButtonMetro();
         txt_buscar = new javax.swing.JTextField();
-        btn_activar = new rojerusan.RSButtonMetro();
+        btn_buscar = new javax.swing.JButton();
+        btn_activar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btn_generar = new rojerusan.RSButtonMetro();
         jPanel2 = new javax.swing.JPanel();
         txt_departamento = new rojerusan.RSComboMetro();
         jLabel4 = new javax.swing.JLabel();
@@ -77,6 +76,7 @@ public final class GestionReportes extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txt_desde = new com.toedter.calendar.JDateChooser();
         txt_hasta = new com.toedter.calendar.JDateChooser();
+        btn_generar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de Reportes");
@@ -126,26 +126,29 @@ public final class GestionReportes extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Búsqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_buscar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_buscar.setText("Buscar");
-        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 90, 40));
-
         txt_buscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel3.add(txt_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 40));
 
-        btn_activar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_activar.setText("Activar Selección Individual");
+        btn_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/buscar_off.png"))); // NOI18N
+        btn_buscar.setMnemonic('b');
+        btn_buscar.setBorderPainted(false);
+        btn_buscar.setContentAreaFilled(false);
+        btn_buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_buscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/buscar_on.png"))); // NOI18N
+        jPanel3.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 90, 40));
+
+        btn_activar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/seleccion_off.png"))); // NOI18N
+        btn_activar.setMnemonic('b');
+        btn_activar.setBorderPainted(false);
+        btn_activar.setContentAreaFilled(false);
+        btn_activar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_activar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/seleccion_on.png"))); // NOI18N
         btn_activar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_activarActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_activar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 230, 40));
+        jPanel3.add(btn_activar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 250, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 780, 80));
 
@@ -153,15 +156,6 @@ public final class GestionReportes extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gestión de Reportes");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 4, 810, 51));
-
-        btn_generar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_generar.setText("Generar Reporte");
-        btn_generar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_generarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 490, 140, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -254,6 +248,14 @@ public final class GestionReportes extends javax.swing.JFrame {
         jPanel1.add(txt_desde, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 130, 30));
         jPanel1.add(txt_hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 140, 30));
 
+        btn_generar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/generar_off.png"))); // NOI18N
+        btn_generar.setMnemonic('b');
+        btn_generar.setBorderPainted(false);
+        btn_generar.setContentAreaFilled(false);
+        btn_generar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_generar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/generar_on.png"))); // NOI18N
+        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 490, 150, 30));
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -276,14 +278,6 @@ public final class GestionReportes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_buscarActionPerformed
-
-    private void btn_generarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generarActionPerformed
-        //startCamera();
-    }//GEN-LAST:event_btn_generarActionPerformed
 
     private void TABLEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABLEMouseClicked
         
@@ -318,16 +312,13 @@ public final class GestionReportes extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void btn_activarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_activarActionPerformed
-        if (!TABLE.isEnabled()){
+        if (!TABLE.isEnabled()) {
             TABLE.setEnabled(true);
-            txt_buscar.setEnabled(true);
-            btn_buscar.setEnabled(true);
-            btn_activar.setText("Desactivar");
-        }else{
+            btn_activar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/des.png")));
+        } else {
             TABLE.setEnabled(false);
-            txt_buscar.setEnabled(false);
-            btn_buscar.setEnabled(false);
-            btn_activar.setText("Activar Selección Individual");
+            btn_activar.setIcon(null);
+            btn_activar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/seleccion_off.png")));
         }
     }//GEN-LAST:event_btn_activarActionPerformed
 
@@ -335,9 +326,9 @@ public final class GestionReportes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TABLE;
-    public rojerusan.RSButtonMetro btn_activar;
-    public rojerusan.RSButtonMetro btn_buscar;
-    public rojerusan.RSButtonMetro btn_generar;
+    public javax.swing.JButton btn_activar;
+    public javax.swing.JButton btn_buscar;
+    public javax.swing.JButton btn_generar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

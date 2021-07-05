@@ -37,8 +37,8 @@ public class Reentrenamiento extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         Panel_foto2 = new javax.swing.JPanel();
         recuadro_cam = new javax.swing.JLabel();
-        btn_activarYregistrar = new rojerusan.RSButtonMetro();
         counterLabel1 = new javax.swing.JLabel();
+        btn_activarYregistrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reentrenamiento Empleado");
@@ -66,21 +66,20 @@ public class Reentrenamiento extends javax.swing.JFrame {
 
         jPanel3.add(Panel_foto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 320, 290));
 
-        btn_activarYregistrar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_activarYregistrar.setText("Activar Cámara y Guardar Datos");
-        btn_activarYregistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_activarYregistrarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btn_activarYregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 500, 320, 40));
-
         counterLabel1.setBackground(new java.awt.Color(255, 255, 255));
         counterLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         counterLabel1.setForeground(new java.awt.Color(121, 6, 6));
         counterLabel1.setText("00/100");
         counterLabel1.setOpaque(true);
         jPanel3.add(counterLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, 50, 30));
+
+        btn_activarYregistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/activar_off.png"))); // NOI18N
+        btn_activarYregistrar.setMnemonic('b');
+        btn_activarYregistrar.setBorderPainted(false);
+        btn_activarYregistrar.setContentAreaFilled(false);
+        btn_activarYregistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_activarYregistrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/activar_on.png"))); // NOI18N
+        jPanel3.add(btn_activarYregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 320, 40));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -101,17 +100,11 @@ public class Reentrenamiento extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_activarYregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_activarYregistrarActionPerformed
-        //startCamera();
-    }//GEN-LAST:event_btn_activarYregistrarActionPerformed
 
    public Image getIconImage(){
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("com/hk/img/logo.png"));
@@ -120,7 +113,7 @@ public class Reentrenamiento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel Panel_foto2;
-    public rojerusan.RSButtonMetro btn_activarYregistrar;
+    public javax.swing.JButton btn_activarYregistrar;
     public javax.swing.JLabel counterLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;

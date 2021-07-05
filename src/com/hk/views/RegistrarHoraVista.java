@@ -28,10 +28,10 @@ public class RegistrarHoraVista extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        btn_backdoor = new javax.swing.JButton();
+        btn_desactivarCamara = new javax.swing.JButton();
+        btn_activarCamara = new javax.swing.JButton();
         label_nombreEmpleado = new javax.swing.JLabel();
-        btn_desactivarCamara = new rojerusan.RSButtonMetro();
-        btn_activarCamara = new rojerusan.RSButtonMetro();
-        btn_backdoor = new rojerusan.RSButtonMetro();
         Panel_foto2 = new javax.swing.JPanel();
         recuadro_cam = new javax.swing.JLabel();
 
@@ -49,34 +49,44 @@ public class RegistrarHoraVista extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(122, 0, 1), 4));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        label_nombreEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        label_nombreEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_nombreEmpleado.setText("Empleado");
-        jPanel3.add(label_nombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 4, 780, 90));
+        btn_backdoor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/ci_off.png"))); // NOI18N
+        btn_backdoor.setMnemonic('b');
+        btn_backdoor.setBorderPainted(false);
+        btn_backdoor.setContentAreaFilled(false);
+        btn_backdoor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_backdoor.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/ci_on.png"))); // NOI18N
+        jPanel3.add(btn_backdoor, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 410, 40, 40));
 
-        btn_desactivarCamara.setBackground(new java.awt.Color(122, 0, 1));
-        btn_desactivarCamara.setText("Desactivar Cámara");
-        btn_desactivarCamara.setPreferredSize(new java.awt.Dimension(150, 40));
+        btn_desactivarCamara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/desactivar_off.png"))); // NOI18N
+        btn_desactivarCamara.setMnemonic('b');
+        btn_desactivarCamara.setBorderPainted(false);
+        btn_desactivarCamara.setContentAreaFilled(false);
+        btn_desactivarCamara.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_desactivarCamara.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/desactivar_on.png"))); // NOI18N
         btn_desactivarCamara.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_desactivarCamaraActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_desactivarCamara, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 160, 40));
+        jPanel3.add(btn_desactivarCamara, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 150, 40));
 
-        btn_activarCamara.setBackground(new java.awt.Color(122, 0, 1));
-        btn_activarCamara.setText("Activar Cámara");
-        btn_activarCamara.setPreferredSize(new java.awt.Dimension(150, 40));
+        btn_activarCamara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/activar_cam_off.png"))); // NOI18N
+        btn_activarCamara.setMnemonic('b');
+        btn_activarCamara.setBorderPainted(false);
+        btn_activarCamara.setContentAreaFilled(false);
+        btn_activarCamara.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_activarCamara.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/activar_cam_on.png"))); // NOI18N
         btn_activarCamara.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_activarCamaraActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_activarCamara, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, -1, 40));
+        jPanel3.add(btn_activarCamara, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, 150, 40));
 
-        btn_backdoor.setBackground(new java.awt.Color(122, 0, 1));
-        btn_backdoor.setText("CI");
-        jPanel3.add(btn_backdoor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, 40, 40));
+        label_nombreEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        label_nombreEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_nombreEmpleado.setText("Empleado");
+        jPanel3.add(label_nombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 4, 780, 90));
 
         Panel_foto2.setBackground(new java.awt.Color(122, 0, 1));
 
@@ -135,20 +145,20 @@ public class RegistrarHoraVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_desactivarCamaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_desactivarCamaraActionPerformed
-        //startCamera();
-    }//GEN-LAST:event_btn_desactivarCamaraActionPerformed
-
     private void btn_activarCamaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_activarCamaraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_activarCamaraActionPerformed
 
+    private void btn_desactivarCamaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_desactivarCamaraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_desactivarCamaraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel Panel_foto2;
-    public rojerusan.RSButtonMetro btn_activarCamara;
-    public rojerusan.RSButtonMetro btn_backdoor;
-    public rojerusan.RSButtonMetro btn_desactivarCamara;
+    public javax.swing.JButton btn_activarCamara;
+    public javax.swing.JButton btn_backdoor;
+    public javax.swing.JButton btn_desactivarCamara;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

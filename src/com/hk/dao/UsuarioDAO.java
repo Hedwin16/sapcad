@@ -61,22 +61,20 @@ public class UsuarioDAO implements IUsuario {
 
     @Override
     public boolean actualizar(Usuario t) {
-        if (!existeUsuario(t.getUsuario())) {
-            sql = "UPDATE usuarios SET usuario=?, clave=?, tipo=? WHERE id_usuario = ?";
-            try {
-                ps = Conexion.getInstance().getConnection().prepareCall(sql);
-                ps.setString(1, t.getUsuario());
-                ps.setString(2, t.getClave());
-                ps.setInt(3, t.getTipo());
-                ps.setInt(4, t.getId_usuario());
-                return ps.executeUpdate() > 0;
 
-            } catch (Exception e) {
-                System.out.println("Update usuario: " + e);
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre");
+        sql = "UPDATE usuarios SET usuario=?, clave=?, tipo=? WHERE id_usuario = ?";
+        try {
+            ps = Conexion.getInstance().getConnection().prepareCall(sql);
+            ps.setString(1, t.getUsuario());
+            ps.setString(2, t.getClave());
+            ps.setInt(3, t.getTipo());
+            ps.setInt(4, t.getId_usuario());
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            System.out.println("Update usuario: " + e);
         }
+
         return false;
     }
 

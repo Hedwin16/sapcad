@@ -39,15 +39,15 @@ public class GestionTipoNomina extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btn_guardar = new rojerusan.RSButtonMetro();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_nomina = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TABLE = new javax.swing.JTable();
-        btn_eliminar = new rojerusan.RSButtonMetro();
-        btn_editar = new rojerusan.RSButtonMetro();
-        btn_nuevo = new rojerusan.RSButtonMetro();
+        btn_nuevo = new javax.swing.JButton();
+        btn_editar = new javax.swing.JButton();
+        btn_eliminar = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(122, 0, 1), 4));
@@ -57,15 +57,6 @@ public class GestionTipoNomina extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gestión de Tipos de Nóminas");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 805, 51));
-
-        btn_guardar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_guardar.setText("Guardar Cambios");
-        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_guardarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, 140, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Tipo de Nómina", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -125,33 +116,37 @@ public class GestionTipoNomina extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 780, 310));
 
-        btn_eliminar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_eliminar.setText("Eliminar");
-        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_eliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 500, 100, 30));
+        btn_nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/nuevo_off.png"))); // NOI18N
+        btn_nuevo.setMnemonic('b');
+        btn_nuevo.setBorderPainted(false);
+        btn_nuevo.setContentAreaFilled(false);
+        btn_nuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_nuevo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/nuevo_on.png"))); // NOI18N
+        jPanel1.add(btn_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 100, 30));
 
-        btn_editar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_editar.setText("Editar");
-        btn_editar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, 100, 30));
+        btn_editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/editar_off.png"))); // NOI18N
+        btn_editar.setMnemonic('b');
+        btn_editar.setBorderPainted(false);
+        btn_editar.setContentAreaFilled(false);
+        btn_editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_editar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/editar_on.png"))); // NOI18N
+        jPanel1.add(btn_editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, 90, 30));
 
-        btn_nuevo.setBackground(new java.awt.Color(122, 0, 1));
-        btn_nuevo.setMnemonic('n');
-        btn_nuevo.setText("Nuevo");
-        btn_nuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_nuevoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 110, 30));
+        btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/eliminar_off.png"))); // NOI18N
+        btn_eliminar.setMnemonic('b');
+        btn_eliminar.setBorderPainted(false);
+        btn_eliminar.setContentAreaFilled(false);
+        btn_eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_eliminar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/eliminar_on.png"))); // NOI18N
+        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, 90, 30));
+
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/btn_guardar_off.png"))); // NOI18N
+        btn_guardar.setMnemonic('b');
+        btn_guardar.setBorderPainted(false);
+        btn_guardar.setContentAreaFilled(false);
+        btn_guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_guardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/btn_guardar_on.png"))); // NOI18N
+        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, 140, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -174,22 +169,6 @@ public class GestionTipoNomina extends javax.swing.JPanel {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        //startCamera();
-    }//GEN-LAST:event_btn_guardarActionPerformed
-
-    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_eliminarActionPerformed
-
-    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_editarActionPerformed
-
-    private void btn_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_nuevoActionPerformed
     
     public void desabilitarYVaciarCampos(){
         vaciarCampos();
@@ -208,10 +187,10 @@ public class GestionTipoNomina extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TABLE;
-    public rojerusan.RSButtonMetro btn_editar;
-    public rojerusan.RSButtonMetro btn_eliminar;
-    public rojerusan.RSButtonMetro btn_guardar;
-    public rojerusan.RSButtonMetro btn_nuevo;
+    public javax.swing.JButton btn_editar;
+    public javax.swing.JButton btn_eliminar;
+    public javax.swing.JButton btn_guardar;
+    public javax.swing.JButton btn_nuevo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

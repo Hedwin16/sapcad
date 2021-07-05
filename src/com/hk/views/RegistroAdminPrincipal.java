@@ -47,11 +47,11 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btn_registrar = new rojerusan.RSButtonMetro();
         jLabel7 = new javax.swing.JLabel();
         txt_usuario = new javax.swing.JTextField();
         txt_clave = new javax.swing.JPasswordField();
         txt_clave_confirmar = new javax.swing.JPasswordField();
+        btn_registrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Administrador Principal");
@@ -81,15 +81,6 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Formulario.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 420, 39));
 
-        btn_registrar.setBackground(new java.awt.Color(122, 0, 1));
-        btn_registrar.setText("REGISTRAR");
-        btn_registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_registrarActionPerformed(evt);
-            }
-        });
-        Formulario.add(btn_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 339, 53));
-
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("       Contraseña: ");
@@ -108,6 +99,14 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
 
         txt_clave_confirmar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Formulario.add(txt_clave_confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 340, 40));
+
+        btn_registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/registrar_off.png"))); // NOI18N
+        btn_registrar.setMnemonic('b');
+        btn_registrar.setBorderPainted(false);
+        btn_registrar.setContentAreaFilled(false);
+        btn_registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_registrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/registrar_on.png"))); // NOI18N
+        Formulario.add(btn_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 340, 50));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -131,10 +130,6 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_registrarActionPerformed
-
     private void txt_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_usuarioActionPerformed
@@ -146,7 +141,7 @@ public class RegistroAdminPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
     private javax.swing.JPanel Formulario;
-    public rojerusan.RSButtonMetro btn_registrar;
+    public javax.swing.JButton btn_registrar;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

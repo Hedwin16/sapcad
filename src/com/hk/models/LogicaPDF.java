@@ -137,6 +137,7 @@ public class LogicaPDF {
                                     BaseColor.BLACK
                             ));
                     String total_horas = hashDatos.get(key).get(i).getT_horas();
+                    System.out.println("total_horas: "+total_horas);
                     if (total_horas == null || total_horas.isEmpty()) {
                         total_horas = total_;
                     }
@@ -1269,7 +1270,11 @@ public class LogicaPDF {
         int entSeg = sumarEnSegundos(ent);
         int salSeg = sumarEnSegundos(sal);
         int res = salSeg - entSeg;
-        String horaa = generarTotalHoras(res);
+        String horaa = convertirHoras(res);
+         System.out.println("ent: "+ent);
+         System.out.println("entSeg = "+entSeg);
+         System.out.println("salSeg = "+salSeg);
+         System.out.println("ksjdk: "+horaa);
         return horaa;
     }
 
@@ -1282,7 +1287,7 @@ public class LogicaPDF {
         System.out.println("entSeg = "+entSeg);
         int salSeg = sumarEnSegundos(sal);
         int res = salSeg - entSeg;
-        System.out.println("entSeg = "+entSeg);
+        System.out.println("salSeg = "+salSeg);
         String horaa = convertirHoras(res);
         System.out.println("ksjdk: "+horaa);
         return horaa;
