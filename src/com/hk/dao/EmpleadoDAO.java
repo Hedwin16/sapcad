@@ -41,9 +41,7 @@ public class EmpleadoDAO implements IEmpleado{
     @Override
     public List<Empleado> mostrar() {
         List<Empleado> list = new ArrayList<>();
-        
         sql = "SELECT * FROM empleados ORDER BY id_empleado";
-        
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             rs = ps.executeQuery();

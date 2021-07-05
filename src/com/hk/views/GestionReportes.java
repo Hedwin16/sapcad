@@ -142,7 +142,6 @@ public final class GestionReportes extends javax.swing.JFrame {
         btn_activar.setBorderPainted(false);
         btn_activar.setContentAreaFilled(false);
         btn_activar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_activar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/seleccion_on.png"))); // NOI18N
         btn_activar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_activarActionPerformed(evt);
@@ -314,10 +313,13 @@ public final class GestionReportes extends javax.swing.JFrame {
     private void btn_activarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_activarActionPerformed
         if (!TABLE.isEnabled()) {
             TABLE.setEnabled(true);
+            txt_buscar.setEnabled(true);
+            btn_buscar.setEnabled(true);
             btn_activar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/des.png")));
         } else {
             TABLE.setEnabled(false);
-            btn_activar.setIcon(null);
+            txt_buscar.setEnabled(false);
+            btn_buscar.setEnabled(false);
             btn_activar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/hk/img/seleccion_off.png")));
         }
     }//GEN-LAST:event_btn_activarActionPerformed

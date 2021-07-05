@@ -113,6 +113,10 @@ public class EmpleadoController implements ActionListener{
         return edao.existeCedula(cedula);
     }
     
+    boolean existeCedula(int ced){
+        return edao.existeCedula(ced);
+    }
+    
     public int getIdEmpleado(){
        return edao.getIdNuevoEmpleado();
     }

@@ -207,7 +207,7 @@ public class ReconocimientoController implements ActionListener {
         if (id_hora > 0) {
             this.hora.setId_hora(id_hora);
         }
-
+        
         resultado = hdao.insertarHoras(this.hora, ci_identificada);
         switch (resultado) {
             case 0:
