@@ -207,7 +207,7 @@ public class PdfController implements ActionListener {
             if (this.horasBD == null || this.horasBD.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No se han encontrado registros en la fecha especificada");
             } else {
-                pdf.crearPDFIndividual(empleado, horasBD);
+                pdf.crearPDFIndividual(empleado, horasBD, desde, hasta);
                 System.out.println("Creando PDF....");
                 System.out.println("PDF Creado");
                 extraerArchivoTemporal();

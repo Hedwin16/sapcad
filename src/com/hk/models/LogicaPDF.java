@@ -234,7 +234,7 @@ public class LogicaPDF {
         return hash;
     }
 
-    public void crearPDFIndividual(Empleado empleado, List<Hora> horas) {
+    public void crearPDFIndividual(Empleado empleado, List<Hora> horas, String desde, String hasta) {
         try {
             Calendar fecha = Calendar.getInstance();
             Document documento = new Document();
@@ -274,6 +274,16 @@ public class LogicaPDF {
             );
 
             documento.add(datos);
+            
+            Paragraph datos2 = new Paragraph("Registro Correspondiente a la fechas: " + desde + " - " + hasta,
+                    FontFactory.getFont("Montserrat",
+                            12,
+                            Font.BOLD,
+                            BaseColor.BLACK
+                    )
+            );
+
+            documento.add(datos2);
             Paragraph line2 = new Paragraph("____________________________________________________________________________\n\n",
                     FontFactory.getFont("Montserrat",
                             12,

@@ -61,7 +61,6 @@ public class AdminController implements ActionListener {
     }
 
     public void verificarAdmin() {
-
         if (adao.existeAdministrador()) {
             new Login().setVisible(true);
         } else {
@@ -88,10 +87,10 @@ public class AdminController implements ActionListener {
     public void registrarAdministradorPrincipal() {
         String usuario = vistaRegistroAdmin.txt_usuario.getText();
         String clave = vistaRegistroAdmin.txt_clave.getText();
-        if (clave.equals(vistaRegistroAdmin.txt_clave.getText())) {
+        if (clave.equals(vistaRegistroAdmin.txt_clave_confirmar.getText())) {
             admin.setUsuario(usuario);
             admin.setClave(clave);
-            admin.setTipo(4);
+            admin.setTipo(3);
             if (adao.insertar(this.admin)) {
                 JOptionPane.showMessageDialog(vistaRegistroAdmin, "Registrado con Éxito");
                 vistaRegistroAdmin.dispose();
@@ -99,7 +98,10 @@ public class AdminController implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(vistaRegistroAdmin, "No se ha podido registrar");
             }
+        }else{
+            JOptionPane.showMessageDialog(vistaRegistroAdmin, "Las contraseñas introducidas no coinciden");
         }
+
 
     }
 
@@ -137,7 +139,7 @@ public class AdminController implements ActionListener {
                 if (!rs) {
                     if (!rsUsuario) {
                         JOptionPane.showMessageDialog(main, "Combinación Usuario/Contraseña iválida.");
-                    }else{
+                    } else {
                         iniciarSesion();
                     }
                 } else {

@@ -96,7 +96,7 @@ public class ReporteDAO implements IReporte {
     @Override
     public List<Reporte> mostrar() {
         List<Reporte> lista = new ArrayList<>();
-        sql = "SELECT r.id_reporte, r.nombre,r.id_tipo_reporte, r.fecha FROM reportes AS r ORDER BY r.id_reporte";
+        sql = "SELECT r.id_reporte, r.nombre,r.id_tipo_reporte, r.fecha FROM reportes AS r ORDER BY r.fecha DESC";
         try {
             ps = Conexion.getInstance().getConnection().prepareStatement(sql);
             rs = ps.executeQuery();
