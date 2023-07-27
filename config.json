@@ -1,5 +1,5 @@
 {
-    "hostIP": "localhost",
+    "hostIP": "localhost,8082",
     "usuario": "root",
     "clave": "",
     "puerto": "3306"

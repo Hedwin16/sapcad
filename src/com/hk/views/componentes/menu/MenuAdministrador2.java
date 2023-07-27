@@ -232,7 +232,7 @@ public class MenuAdministrador2 extends JMenuBar{
             String PASS = config.getClave();
             //----------------------------------------
             Process p;
-            String rutaMySql = "C:\\wamp\\bin\\mysql\\mysql5.7.31\\bin\\mysqldump";
+            String rutaMySql = "C:\\wamp\\bin\\mysql\\mysql5.5.16\\bin\\mysqldump";
             if(PASS == null || PASS.equals("")){
                 p = Runtime.getRuntime().exec(rutaMySql + " -u "+USER+" bd_sapcad");
             }else{
